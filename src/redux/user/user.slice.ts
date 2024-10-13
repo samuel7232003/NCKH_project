@@ -3,8 +3,10 @@ import { User, UserListModel } from "./user.state";
 
 const initialUserState:UserListModel = {
     user: {
-        id: 0,
-        name: ""
+        id: '',
+        email: '',
+        password: '',
+        name:''
     },
     userList: []
 }
@@ -15,6 +17,9 @@ export const userSlice = createSlice({
     reducers: {
         setUser(state, action: PayloadAction<User>){
             state.user = action.payload;
+        },
+        setUserList(state, action: PayloadAction<User[]>){
+            state.userList = action.payload;
         }
     }
 })

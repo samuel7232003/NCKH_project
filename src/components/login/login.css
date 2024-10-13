@@ -1,0 +1,97 @@
+.login{
+    position: relative;
+    width: 55%;
+    display: flex;
+    justify-content: center;
+}
+
+.login h2{
+    position: absolute;
+    color: white;
+    background-color: #16C0E8;
+    height: 90px;
+    width: 382px;
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 90px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.login .form{
+    width: 444px;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 45px;
+    padding:70px 35px 35px 35px;
+}
+
+.login .form fieldset{
+    height: 51px;
+    margin-bottom: 25px;
+}
+
+.login fieldset input{
+    height: 100%;
+    width: 100%;
+    padding: 0 20px;
+    border: #c7ccd0 solid 1px;
+    border-radius: 8px;
+}
+
+.login fieldset input.error{
+    border: #c92121 solid 1px;
+}
+
+.login .remember-login{
+    display: flex;
+    gap: 15px;
+    color: #7B809A;
+    font-size: 14px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.login .form > button{
+    height: 48px;
+    width: 100%;
+    color: white;
+    line-height: 48px;
+    align-items: center;
+    background-color: #16C0E8;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: background-color ease-in-out 0.25s;
+}
+
+.login .form > button:hover{
+    background-color: #0092b3;
+}
+
+.login .form > p{
+    text-align: center;
+    color: #7B809A;
+    font-size: 14px;
+}
+
+.login .form > p a{
+    color: #4CAF50;
+    font-weight: bold;
+    transition: color ease-in-out 0.25s
+}
+
+.login .form > p a:hover{
+    color: #108214;
+}
+
+.login .form p.error{
+    text-align: left;
+    color: #dd3f3f;
+    font-style: italic;
+    position: absolute;
+    top: 245px;
+    font-size: 12px;
+    font-weight: bold;
+}

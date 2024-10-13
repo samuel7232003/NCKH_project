@@ -7,7 +7,7 @@ export default function Welcome(){
     <>
         <div className="bg-welcome-bg w-[100vw] h-[100vh] bg-cover fixed z-[-1]"></div>
         <main className="h-[100vh] flex justify-center items-center px-3">
-            <div className="h-[380px] w-[1200px] flex">
+            <div className="min-h-h-[380px] w-[1200px] flex">
                 <div className="w-[45%] text-[#fff] pr-[32px]">
                     <h1 className="text-[42px] font-bold">Chào mừng bạn đến <br/> với...</h1>
                     <p>Một website quan tâm đến sức khỏe tâm thần của bạn ...</p>
