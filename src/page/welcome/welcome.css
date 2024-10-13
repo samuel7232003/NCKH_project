@@ -1,0 +1,16 @@
+@keyframes scroll-down{
+    from {
+        bottom: 8px;
+    }
+    to {
+        bottom: 16px;
+    }
+}
+
+main .scroll-down{
+    animation-name: scroll-down;
+    animation-iteration-count: infinite;
+    animation-duration: 0.25s;
+    animation-direction: alternate-reverse;
+    animation-delay: 1s;
+}

@@ -1,0 +1,20 @@
+header ul li a::after{
+    content: "";
+    height: 2px;
+    width: 0%;
+    background-color: rgb(22,192,232);
+    display: block;
+    transition: width ease-in-out 0.25s;
+}
+
+header ul li:hover a::after{
+    width: 100%;
+}
+
+header .login-btn{
+    transition: background-color ease-in-out 0.25s;
+}
+
+header .login-btn:hover{
+    background-color: rgb(22,192,232);
+}
