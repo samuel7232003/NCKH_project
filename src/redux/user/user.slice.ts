@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserListModel } from "./user.state";
 
-const initialUserState:UserListModel = {
+export const initialUserState:UserListModel = {
     user: {
         id: '',
         email: '',
         password: '',
-        name:''
+        first_name:'',
+        last_name: ''
     },
     userList: []
 }

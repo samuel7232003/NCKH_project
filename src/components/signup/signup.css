@@ -1,0 +1,106 @@
+.signup{
+    position: relative;
+    width: 55%;
+    display: flex;
+    justify-content: center;
+}
+
+.signup h2{
+    position: absolute;
+    color: white;
+    background-color: #16C0E8;
+    height: 90px;
+    width: 382px;
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 90px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.signup .form{
+    width: 444px;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 45px;
+    padding:70px 35px 35px 35px;
+}
+
+.signup .form fieldset{
+    height: 51px;
+    margin-bottom: 15px;
+}
+
+.signup fieldset input{
+    height: 100%;
+    width: 100%;
+    padding: 0 20px;
+    border: #c7ccd0 solid 1px;
+    border-radius: 8px;
+}
+
+.signup fieldset:last-of-type{
+    margin-bottom: 30px;
+}
+
+.signup fieldset.name{
+    display: flex;
+    gap: 20px
+}
+
+.signup fieldset input.error{
+    border: #c92121 solid 1px;
+}
+
+.signup .remember-login{
+    display: flex;
+    gap: 15px;
+    color: #7B809A;
+    font-size: 14px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.signup .form > button{
+    height: 48px;
+    width: 100%;
+    color: white;
+    line-height: 48px;
+    align-items: center;
+    background-color: #16C0E8;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: background-color ease-in-out 0.25s;
+}
+
+.signup .form > button:hover{
+    background-color: #0092b3;
+}
+
+.signup .form > p{
+    text-align: center;
+    color: #7B809A;
+    font-size: 14px;
+}
+
+.signup .form > p a{
+    color: #4CAF50;
+    font-weight: bold;
+    transition: color ease-in-out 0.25s
+}
+
+.signup .form > p a:hover{
+    color: #108214;
+}
+
+.signup .form p.error{
+    text-align: left;
+    color: #dd3f3f;
+    font-style: italic;
+    position: absolute;
+    top: 370px;
+    font-size: 12px;
+    font-weight: bold;
+}
