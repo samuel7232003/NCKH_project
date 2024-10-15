@@ -3,7 +3,7 @@ import './headerPre.css'
 
 export default function HeaderPre(){
     return(
-        <header className="h-[80px] flex bg-[rgba(0,0,0,0.4)] items-center px-[35px] text-[#fff] fixed top-0 right-0 left-0">
+        <header className="pre h-[80px] flex bg-[rgba(0,0,0,0.4)] items-center px-[35px] text-[#fff] fixed top-0 right-0 left-0">
             <figure><img className="h-max" src="/logo.png" alt=""/></figure>
             <nav className="flex-grow px-[150px]">
                 <ul className="flex gap-[32px] *:font-bold">

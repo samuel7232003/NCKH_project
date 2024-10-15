@@ -7,7 +7,8 @@ export const initialUserState:UserListModel = {
         email: '',
         password: '',
         first_name:'',
-        last_name: ''
+        last_name: '',
+        avatar: ''
     },
     userList: []
 }

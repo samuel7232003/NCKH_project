@@ -2,7 +2,7 @@ import { Switch } from 'antd'
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { login } from '../../service/accountService';
+import { accountLogin, login } from '../../service/accountService';
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -28,6 +28,8 @@ export default function Login(){
     const checklogin = async() =>{
         try {
             const res = await login(email, password);
+            localStorage.setItem('userData', res.token);
+            localStorage.setItem('email', res.email);
             setError("Đăng nhập thành công");
             setTimeout(() => navigate('/home'), 1000)
         } catch (error) {

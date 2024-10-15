@@ -1,0 +1,61 @@
+header.main{
+    padding: 0 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    background-color: #16C0E8;
+    color: white;
+}
+
+header.main .logo{
+    width: 65px;
+    height: auto;
+}
+
+header.main nav{
+    max-width: 1024px;
+}
+
+header.main nav ul{
+    display: flex;
+    gap: 40px;
+}
+
+header.main nav ul a{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-weight: bold;
+    height: 40px;
+    padding: 0 10px;
+    border: rgba(255,255,255,0.30) solid 1px;
+    border-radius: 8px;
+    transition: background-color ease-in-out 0.25s;
+}
+
+header.main nav ul a:hover{
+    background-color: rgba(217,217,217,0.3);
+}
+
+header.main nav ul li.active a{
+    border: none;
+    background-color: rgba(217,217,217,0.3);
+}
+
+header.main .noti_ava{
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+header.main .noti_ava .ava{
+    height: 58px;
+    width: 58px;
+    border-radius: 8px;
+}
+
+header.main .noti_ava .ava img{
+    height: 100%;
+    width: auto;
+}

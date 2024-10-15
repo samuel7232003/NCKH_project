@@ -1,4 +1,4 @@
-header ul li a::after{
+header.pre ul li a::after{
     content: "";
     height: 2px;
     width: 0%;
@@ -7,14 +7,14 @@ header ul li a::after{
     transition: width ease-in-out 0.25s;
 }
 
-header ul li:hover a::after{
+header.pre ul li:hover a::after{
     width: 100%;
 }
 
-header .login-btn{
+header.pre .login-btn{
     transition: background-color ease-in-out 0.25s;
 }
 
-header .login-btn:hover{
+header.pre .login-btn:hover{
     background-color: rgb(22,192,232);
 }

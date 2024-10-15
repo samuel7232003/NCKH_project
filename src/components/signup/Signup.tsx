@@ -21,8 +21,11 @@ export default function Signup(){
         try {
             const res = await signup(user);
             if(res.message === "Email exited!") setError("Email đăng kí đã tồn tại!");
-            else if(res.message === "Signup succeful!") setTimeout(() => naviagte('/home'), 1000);
-            else setError("Đăng kí thêm dữ liệu thất bại thất bại!");
+            else{
+                localStorage.setItem('userData', res.token);
+                localStorage.setItem('email', res.email);
+                setTimeout(() => naviagte('/home'), 1000);
+            }
         } catch (error) {
             setError("Đăng kí thất bại!");
         }
