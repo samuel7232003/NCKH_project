@@ -1,0 +1,6 @@
+.main-dashboard{
+    max-width: 1024px;
+    padding: 14px;
+    display: flex;
+    margin: 0 auto;
+}

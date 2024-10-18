@@ -10,16 +10,17 @@ export default function Login(){
     const [eError, setEError] = useState(false);
     const [pwdError, setPwdError] = useState(false);
     const [error, setError] = useState("");
+    const [isSaveLogin, setIsSaveLogin] = useState(false);
     const navigate = useNavigate();
 
     function validate(type: "email"|"pwd", val : string){
         if(type === "email"){
-            setEmail(val);
+            setEmail(val.trim());
             if(val === "") setEError(true);
             else setEError(false);
         }
         if(type === "pwd"){
-            setPassword(val);
+            setPassword(val.trim());
             if(val === "") setPwdError(true);
             else setPwdError(false);
         }
@@ -33,7 +34,7 @@ export default function Login(){
             setError("Đăng nhập thành công");
             setTimeout(() => navigate('/home'), 1000)
         } catch (error) {
-            setError("Đăng nhập thất bại");
+            setError("Sai tên đăng nhập hoặc mật khẩu!");
         }
     }
 
@@ -44,6 +45,7 @@ export default function Login(){
             setError("Không được để trống các trường!")
         }
         else{
+            if(isSaveLogin) localStorage.setItem("saveLogin", "true");
             checklogin();
         }
     }
@@ -56,7 +58,7 @@ export default function Login(){
                 <fieldset><input className={(eError ? "error" : "")} onChange={(e) => validate("email", e.target.value)} value={email} type="email" placeholder="Email" /></fieldset>
                 <fieldset><input className={(pwdError ? "error" : "")} onChange={(e) => validate("pwd", e.target.value)} value={password} type="password" placeholder="Mật khẩu" /></fieldset>
                 <div className='remember-login'>
-                    <Switch/>
+                    <Switch onChange={(value) => setIsSaveLogin(value)}/>
                     <p>Ghi nhớ đăng nhập</p>
                 </div>
                 <button onClick={handleLogin}>ĐĂNG NHẬP</button>

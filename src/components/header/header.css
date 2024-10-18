@@ -1,3 +1,7 @@
+header{
+    position: relative;
+}
+
 header.main{
     padding: 0 35px;
     display: flex;
@@ -49,13 +53,100 @@ header.main .noti_ava{
     align-items: center;
 }
 
+header.main .noti_ava .noti{
+    cursor: pointer;
+}
+
 header.main .noti_ava .ava{
     height: 58px;
     width: 58px;
-    border-radius: 8px;
+    border-radius: 100%;
+    cursor: pointer;
 }
 
 header.main .noti_ava .ava img{
     height: 100%;
     width: auto;
+}
+
+.ava-box {
+    position: absolute;
+    top: 92px;
+    right: 12px;
+    width: 252px;
+    border-radius: 8px;
+    border: rgba(201,201,201,0.7) solid 1px;
+    background-color: white;
+    padding: 12px;
+    display: flex;
+    flex-flow: column;
+}
+
+.ava-box .my-infor{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    background-color: #d9d9d9;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.ava-box .my-infor .main{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.my-infor .main figure{
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.my-infor .main figure img{
+    height: 100%;
+    width: auto;
+}
+
+.my-infor .main p{
+    font-weight: bold;
+    color: black;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.my-infor .edit{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.my-infor::after{
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: #d9d9d9;
+    margin: 10px 0px;
+}
+
+.ava-box ul li{
+    height: 50px;
+    padding: 0 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color ease-in-out 0.25s;
+}
+
+.ava-box ul li:hover{
+    background-color: #d9d9d9;;
 }

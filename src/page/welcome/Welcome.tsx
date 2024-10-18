@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import down_icon from "./images/down-icon.png"
 import './welcome.css'
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function Welcome(){
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        const saveLogin = localStorage.getItem("saveLogin");
+        if(saveLogin) navigate("/home");
+    }, [])
+
     return (
     <>
         <div className="bg-welcome-bg w-[100vw] h-[100vh] bg-cover fixed z-[-1]"></div>

@@ -13,7 +13,7 @@ export default function Signup(){
     const naviagte = useNavigate();
 
     function handleInput(type: "first_name"|"last_name"|"email"|"password"|"check-pwd", val: string){
-        if(type === "check-pwd") setCheckPwd(val);
+        if(type === "check-pwd") setCheckPwd(val.trim());
         else setUser({...user, [type as keyof User]: val});
     }
 

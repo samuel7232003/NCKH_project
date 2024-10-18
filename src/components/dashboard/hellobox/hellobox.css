@@ -1,0 +1,58 @@
+.hello-box{
+    position: relative;
+    border-radius: 10px;
+    background-color: #16C0E8;
+    width: 704px;
+    height: 161px;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+}
+
+.hello-box .text{
+    max-width: 420px;
+    color: white;
+}
+
+.hello-box .text .title{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.hello-box .text .title figure{
+    width: 25px;
+    height: 25px;
+}
+.hello-box .text .title img{
+    width: 100%;
+    height: auto;
+}
+
+.hello-box .text .title p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hello-box .text .sub{
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.hello-box .text .sub span{
+    font-weight: bold;
+    font-style: italic;
+}
+
+.hello-box .image{
+    position: absolute;
+    right: -68px;
+    top: 5px
+}
+
+.hello-box .tree-icon{
+    position: absolute;
+    left: -15px;
+    bottom: -25px;
+}

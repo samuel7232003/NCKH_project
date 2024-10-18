@@ -5,6 +5,7 @@ import WelcomeChat from "./components/welcomeChat/WelcomeChat";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import Homev2 from "./screens/Homev2";
+import Dashboard from "./components/dashboard/Dashboard";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
     {
         path:"/home",
         element: <Homev2/>,
-        children:[]
+        children:[
+            {
+                path:"",
+                element: <Dashboard/>
+            }
+        ]
     }
 ])
