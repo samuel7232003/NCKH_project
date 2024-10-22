@@ -40,8 +40,6 @@ export default function Dailynote({account}: Props){
 
     useEffect(() => {
         const todayNoteData = listDiary.diarys.find(index => index.date === moment(new Date).format("YYYY-MM-DD"));
-        console.log(todayNoteData);
-        console.log(listDiary);
         if(todayNoteData) setTodayNote(todayNoteData);
     }, [listDiary])
 

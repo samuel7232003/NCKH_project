@@ -1,0 +1,102 @@
+.feelingchart{
+    height: 100%;
+    border: rgba(201, 201, 201, 0.7) solid 1px;
+    border-radius: 10px;
+    width: 435px;
+    padding: 12px 22px;
+    position: relative;
+}
+
+.feelingchart .title{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.feelingchart .title figure{
+    height: 21px;
+}
+
+.feelingchart .title figure img{
+    height: 100%;
+    width: auto;
+}
+
+.feelingchart .chart .grid figure{
+    height: 20px;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.feelingchart .chart .grid figure::after{
+    content: "";
+    height: 1px;
+    border-top: rgba(201, 201, 201, 0.7) dashed 1px;
+    width: 328px;
+    display: block;
+}
+
+.feelingchart .chart .grid figure.end::after{
+    border-top: rgba(201, 201, 201, 0.7) solid 1px;
+}
+
+.feelingchart .grid figure img{
+    height: 100%;
+    width: auto;
+}
+
+.feelingchart .grid .end span{
+    position: relative;
+}
+
+.feelingchart .grid .end span::after{
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 42px;
+    height: 178px;
+    width: 1px;
+    background-color: rgba(201, 201, 201, 0.7);
+}
+
+.feelingchart .chart .value{
+    position: absolute;
+    display: flex;
+    bottom: 22px;
+    right: 64px;
+    font-weight: bold;
+    font-size: 9px;
+    width: 280px;
+    height: 140px;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.feelingchart .chart .value div{
+    width: 14px;
+}
+
+.feelingchart .chart .value p{
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+}
+
+.feelingchart .chart .value figure{
+    width: 100%;
+    height: 70px;
+    background-color: blanchedalmond;
+    margin-bottom: 15px;
+}
+
+.feelingchart .edit{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

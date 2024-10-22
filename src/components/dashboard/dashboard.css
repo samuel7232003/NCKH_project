@@ -8,4 +8,5 @@
 .feeling{
     display: flex;
     height: 278px;
+    justify-content: space-between;
 }

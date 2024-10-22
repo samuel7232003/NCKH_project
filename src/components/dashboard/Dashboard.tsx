@@ -2,6 +2,7 @@ import { useAppSelector } from "../../redux/builder"
 import HelloBox from "./hellobox/HelloBox";
 import './dashboard.css'
 import Dailynote from "./dailynote/Dailynote";
+import FeelingChart from "./feelingchart/FeelingChart";
 
 export default function Dashboard(){
     const account = useAppSelector(state => state.user.user);
@@ -14,7 +15,7 @@ export default function Dashboard(){
                     <HelloBox account={account}/>
                     <div className="feeling">
                         <Dailynote account={account}/>
-                        <div></div>
+                        <FeelingChart account={account} />
                     </div>
                 </div>
                 <div className="calendar"></div>
