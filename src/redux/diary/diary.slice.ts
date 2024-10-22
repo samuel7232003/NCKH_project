@@ -3,7 +3,7 @@ import { Diary, DiaryModel, ListDiary } from "./diary.state";
 
 const initalDiaryState:DiaryModel = {
     diary: {
-        id: '',
+        _id: '',
         idUser: '',
         date: '',
         survey: 0,

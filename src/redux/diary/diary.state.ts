@@ -1,5 +1,5 @@
 export interface Diary{
-    id: string;
+    _id: string;
     idUser: string;
     date: string;
     survey: number;

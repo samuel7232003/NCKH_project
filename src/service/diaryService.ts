@@ -18,3 +18,13 @@ export async function addDiary(diary: Diary) {
         throw(error);
     }
 }
+
+export async function removeDiary(idUser: string, date: string) {
+    try{
+        const data = {idUser: idUser, date: date};
+        const respone = await apiInstance.post('/removeDiary', data);
+        return respone.data;
+    } catch (error){
+        throw(error);
+    }
+}

@@ -3,6 +3,7 @@ const connectDB = require('./db.js');
 const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
+const { message } = require("antd");
 
 const app = express()
 
@@ -69,7 +70,6 @@ app.get('/listDiary/:id', async(req, res) => {
 })
 
 app.post('/addDiary', async(req, res) =>{
-    console.log(req.body);
     const idUser = req.body.idUser;
     const date = req.body.date;
     const survey = req.body.survey;
@@ -80,6 +80,18 @@ app.post('/addDiary', async(req, res) =>{
     } catch(error){
         return res.json({message: "Add faied!"});
     }
+})
+
+app.post('/removeDiary', async(req, res) => {
+    const idUser = req.body.idUser;
+    const date = req.body.date;
+    try{
+        const response = await diaryModel.deleteOne({idUser, date});
+        return res.json({message: "Remove success!"});
+    } catch(error){
+        return res.json({message: "Remove fail!"});
+    }
+
 })
 
 app.listen(3001, () => {

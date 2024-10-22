@@ -31,6 +31,11 @@
     margin-bottom: 5px;
 }
 
+.dailynote ul li figure img{
+    height: 100%;
+    width: auto;
+}
+
 .dailynote ul li:hover img{
     transition: transform ease-in-out 0.25s;
 }
@@ -107,4 +112,79 @@
     font-size: 12px;
     font-weight: bold;
     color: #16c0e8;
+}
+
+.dailynote.done{
+    border: none;
+    background-size: cover;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    position: relative;
+}
+
+.dailynote.done .date{
+    font-weight: bold;
+    font-size: 12px;
+    color: #6c6c6c;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+.dailynote.done .date::after{
+    content: "";
+    height: 1px;
+    width: 40px;
+    background-color: #6c6c6c;
+    display: block;
+}
+
+.dailynote.done .icon{
+    height: 88px;
+}
+
+.dailynote.done .icon img{
+    height: 100%;
+    width: auto;
+}
+
+.dailynote.done .title{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dailynote.done .message{
+    height: 64px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.7);
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: black;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.dailynote.done .remove{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 20px;
+    opacity: 0;
+    transition: opacity ease-in-out 0.25s;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.dailynote.done .remove img{
+    height: 100%;
+    width: auto;
+}
+
+.dailynote.done:hover .remove{
+    opacity: 1;
 }
