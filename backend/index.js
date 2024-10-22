@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require('./db.js');
 const accountModel = require("./models/Account.js")
+const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
 
 const app = express()
@@ -55,10 +56,32 @@ app.get('/account/:email', async(req, res) =>{
     const email = req.params.email;
     const response = await accountModel.findOne({email});
     if(!response) return res.sendStatus(401);
-    res.send(response)
+    res.send(response);
+})
+
+app.get('/listDiary/:id', async(req, res) => {
+    const idUser = req.params.id;
+    const query = {};
+    if(idUser) query.idUser = idUser;
+    const response = await diaryModel.find(query);
+    if(!response) return res.sendStatus(401);
+    res.send(response);
+})
+
+app.post('/addDiary', async(req, res) =>{
+    console.log(req.body);
+    const idUser = req.body.idUser;
+    const date = req.body.date;
+    const survey = req.body.survey;
+    const message = req.body.message;
+    try{
+        const response = await diaryModel.create({idUser, date, survey, message});
+        return res.json({message: "Add success!"});
+    } catch(error){
+        return res.json({message: "Add faied!"});
+    }
 })
 
 app.listen(3001, () => {
     console.log("App is running")
 })
-

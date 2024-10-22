@@ -2,7 +2,7 @@ import { Switch } from 'antd'
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { accountLogin, login } from '../../service/accountService';
+import { login } from '../../service/accountService';
 
 export default function Login(){
     const [email, setEmail] = useState("");

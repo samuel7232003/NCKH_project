@@ -3,7 +3,7 @@ import { User, UserListModel } from "./user.state";
 
 export const initialUserState:UserListModel = {
     user: {
-        id: '',
+        _id: '',
         email: '',
         password: '',
         first_name:'',
