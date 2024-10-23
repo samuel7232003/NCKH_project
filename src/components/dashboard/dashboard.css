@@ -24,4 +24,54 @@
     width: 50%;
     border: rgba(201, 201, 201, 0.7) solid 1px;
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.main-dashboard .option .sub{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(201, 201, 201, 0.7);
+}
+
+.main-dashboard .chat{
+    background-image: url('./images/Avatar\ \(1\).png');
+    background-position: center;
+    background-size: cover;
+}
+
+.main-dashboard .chat figure{
+    border-radius: 50%;
+    height: 82px;
+    width: 82px;
+    overflow: hidden;
+}
+
+.main-dashboard .chat figure img{
+    height: 100%;
+    width: auto;
+}
+
+.main-dashboard .chat h2{
+    font-weight: bold;
+}
+
+.main-dashboard .chat p{
+    font-size: 10px;
+    font-style: italic;
+}
+
+.main-dashboard .option .game{
+    background-image: url('./images/game_img.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.main-dashboard .game h2{
+    font-weight: bold;
+    width: 90px;
+    text-align: center;
 }

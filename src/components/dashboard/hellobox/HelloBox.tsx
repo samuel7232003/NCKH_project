@@ -25,7 +25,7 @@ export default function HelloBox({account}:Props){
                     <figure><img src={hello_icon} alt="" /></figure>
                     <p>Xin chào, {account.last_name}!</p>
                 </div>
-                <p className="sub">Hôm nay là ngày <span>thứ {count}</span> bạn đồng hành cùng chúng tôi. <br/>
+                <p className="sub">Hôm nay là ngày <span>thứ {count+1}</span> bạn đồng hành cùng chúng tôi. <br/>
                 Hãy tiếp tục quan tâm đến Sức khỏe Tâm thần và yêu bản thân nhiều nhé!</p>
             </div>
             <figure className="image"><img src={hello_image} alt="" /></figure>
