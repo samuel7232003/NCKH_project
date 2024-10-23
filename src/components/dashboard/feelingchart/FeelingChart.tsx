@@ -18,6 +18,7 @@ interface Props{
 
 export default function FeelingChart({account}:Props){
     const listDiary = useAppSelector(state => state.diary.listDiary);
+    const diary = useAppSelector(state => state.diary.diary);
     const dispatch = useAppDispatch()
     const [listSurvey, setListSurvey] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
 
@@ -49,6 +50,11 @@ export default function FeelingChart({account}:Props){
             setListSurvey([...list]);
         }
     },[listDiary])
+
+    useEffect(()=>{
+        const newList = listSurvey.map((value, index) => index === 7 ? diary.survey : value);
+        setListSurvey([...newList]);
+    }, [diary])
 
     function getVal(num: number|null):React.CSSProperties{
         if(!num) num = 0;

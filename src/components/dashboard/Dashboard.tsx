@@ -3,6 +3,8 @@ import HelloBox from "./hellobox/HelloBox";
 import './dashboard.css'
 import Dailynote from "./dailynote/Dailynote";
 import FeelingChart from "./feelingchart/FeelingChart";
+import Calendarbox from "./calendar/Calendarbox";
+import Timeline from "./timeline/Timeline";
 
 export default function Dashboard(){
     const account = useAppSelector(state => state.user.user);
@@ -17,8 +19,13 @@ export default function Dashboard(){
                         <Dailynote account={account}/>
                         <FeelingChart account={account} />
                     </div>
+                    <Timeline/>
+                    <div className="option">
+                        <div className="chat"></div>
+                        <div className="game"></div>
+                    </div>
                 </div>
-                <div className="calendar"></div>
+                <Calendarbox account={account}/>
             </main>
         }
     </>

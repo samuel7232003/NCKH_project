@@ -1,12 +1,27 @@
 .main-dashboard{
-    max-width: 1024px;
-    padding: 14px;
+    width: 1024px;
+    padding: 8px 14px;
     display: flex;
     margin: 0 auto;
+    justify-content: space-between;
 }
 
 .feeling{
     display: flex;
     height: 278px;
     justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.main-dashboard .option{
+    height: 155px;
+    display: flex;
+    gap: 10px;
+}
+
+.main-dashboard .option .game,
+.main-dashboard .option .chat{
+    width: 50%;
+    border: rgba(201, 201, 201, 0.7) solid 1px;
+    border-radius: 10px;
 }

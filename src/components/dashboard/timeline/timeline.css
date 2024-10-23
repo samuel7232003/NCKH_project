@@ -1,0 +1,43 @@
+.timeline{
+    height: 70px;
+    width: 100%;
+    border: rgba(201, 201, 201, 0.7) solid 1px;
+    border-radius: 10px;
+    padding: 3px 8px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.timeline .grid{
+    display: flex;
+    width: 512px;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.timeline .grid p{
+    font-weight: bold;
+    color: rgba(201, 201, 201, 0.7);
+    font-size: 9px;
+    width: 1px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.timeline .grid p.center{
+    color: black;
+}
+
+.timeline .grid p::after{
+    content: "";
+    height: 48px;
+    border-left: rgba(201, 201, 201, 0.7) dashed 1px;
+}
+
+.timeline .edit{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+}

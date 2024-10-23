@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Diary, DiaryModel, ListDiary } from "./diary.state";
 
-const initalDiaryState:DiaryModel = {
+export const initalDiaryState:DiaryModel = {
     diary: {
         _id: '',
         idUser: '',

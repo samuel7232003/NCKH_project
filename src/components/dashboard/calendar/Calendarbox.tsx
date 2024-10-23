@@ -1,0 +1,24 @@
+import { User } from '../../../redux/user/user.state';
+import './calendarbox.css'
+import edit_icon from './images/Edit (1).png'
+import calendar_icon from './images/Calendar_light (1).png'
+import { Calendar } from 'antd';
+
+interface Props{
+    account: User;
+}
+
+export default function Calendarbox({account}:Props){
+    return(
+        <div className="calendarbox">
+            <div className='title'>
+                <figure><img src={calendar_icon} alt="" /></figure>
+                <p>Todo-list của bạn</p>
+            </div>
+            <div className='calendar'>
+                <Calendar fullscreen={false}/>
+            </div>
+            <figure className='edit'><img src={edit_icon} alt="" /></figure>
+        </div>
+    )
+}

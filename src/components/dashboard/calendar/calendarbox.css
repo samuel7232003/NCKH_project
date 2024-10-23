@@ -1,0 +1,39 @@
+.calendarbox{
+    height: auto;
+    width: 282px;
+    border: rgba(201, 201, 201, 0.7) solid 1px;
+    border-radius: 10px;
+    padding: 12px 8px;
+    position: relative;
+}
+
+.calendarbox .title{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 5px;
+    margin-left: 5px;
+}
+
+.calendarbox .title figure{
+    height: 22px;
+}
+
+.calendarbox .title figure img{
+    height: 100%;
+    width: auto;
+}
+
+.ant-picker-calendar-mode-switch{
+    display: none;
+}
+
+.calendarbox .calendar th{
+    font-weight: bold;
+}
+
+.calendarbox .edit{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}

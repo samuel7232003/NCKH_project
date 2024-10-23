@@ -14,7 +14,7 @@ import './dailynote.css'
 import { useEffect, useState } from 'react'
 import { User } from '../../../redux/user/user.state'
 import { useAppDispatch, useAppSelector } from '../../../redux/builder'
-import { getListDiary } from '../../../redux/diary/diary.action'
+import { getListDiary, setDiary } from '../../../redux/diary/diary.action'
 import { addDiary, removeDiary } from '../../../service/diaryService'
 import { Diary } from '../../../redux/diary/diary.state'
 import moment from 'moment'
@@ -92,6 +92,7 @@ export default function Dailynote({account}: Props){
                 message: message
             }
             saveDiary(diary);
+            dispatch(setDiary(diary));
             setTodayNote(diary);
         }
     }
@@ -105,6 +106,7 @@ export default function Dailynote({account}: Props){
             }
         }
         remove();
+        dispatch(setDiary(null));
         setTodayNote(null);
     }
 
