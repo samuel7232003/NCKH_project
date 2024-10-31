@@ -1,5 +1,3 @@
-const { message } = require('antd')
-const { data } = require('autoprefixer')
 const mongoose = require('mongoose')
 
 const diarySchema = mongoose.Schema({
