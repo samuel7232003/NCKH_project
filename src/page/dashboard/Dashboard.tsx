@@ -1,10 +1,10 @@
 import { useAppSelector } from "../../redux/builder"
-import HelloBox from "./hellobox/HelloBox";
+import HelloBox from "../../components/dashboard/hellobox/HelloBox";
 import './dashboard.css'
-import Dailynote from "./dailynote/Dailynote";
-import FeelingChart from "./feelingchart/FeelingChart";
-import Calendarbox from "./calendar/Calendarbox";
-import Timeline from "./timeline/Timeline";
+import Dailynote from "../../components/dashboard/dailynote/Dailynote";
+import FeelingChart from "../../components/dashboard/feelingchart/FeelingChart";
+import Calendarbox from "../../components/dashboard/calendar/Calendarbox";
+import Timeline from "../../components/dashboard/timeline/Timeline";
 import avaChat from "./images/Avatar (1).png"
 
 export default function Dashboard(){
@@ -17,7 +17,7 @@ export default function Dashboard(){
                 <div className="main-left">
                     <HelloBox account={account}/>
                     <div className="feeling">
-                        <Dailynote account={account}/>
+                        <Dailynote account={account} type="today"/>
                         <FeelingChart account={account} />
                     </div>
                     <Timeline/>

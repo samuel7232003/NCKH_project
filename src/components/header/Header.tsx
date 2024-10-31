@@ -18,14 +18,15 @@ export default function Header(){
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [subBox, setSubBox] = useState<"ava"|"noti"|null>(null);
+    const [active, setActive] = useState("home");
 
     useEffect(() => {
         const fectchData = async () => {
-            const data = localStorage.getItem('email')
-            if(data) { await dispatch(getUser(data))}
+            const data = localStorage.getItem('email');
+            if(data) await dispatch(getUser(data));
         }
         fectchData()
-    }, [])
+    }, []);
 
     function handleLogout(){
         localStorage.clear();
@@ -42,14 +43,14 @@ export default function Header(){
             <figure className="logo"><img src="/logo.png" alt=""/></figure>
             <nav>
                 <ul>
-                    <li className="active">
-                        <Link to="/">
+                    <li className={(active === "home") ? "active":""} onClick={() => setActive("home")}>
+                        <Link to="/home">
                             <figure><img src={home_icon} alt="" /></figure>
                             <p>Trang chủ</p>
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/">
+                    <li className={(active === "diary") ? "active":""} onClick={() => setActive("diary")}>
+                        <Link to="./diarypage">
                             <figure><img src={note_icon} alt="" /></figure>
                             <p>Nhật ký</p>
                         </Link>

@@ -2,11 +2,11 @@ import { User } from "../../../redux/user/user.state";
 import './feelingchart.css'
 import tree_icon from './images/Beige Blue Simple Illustrated Study Blog Logo (4) 1.png'
 import edit_icon from './images/Edit.png'
-import veryHappy from '../dailynote/images/🦆 emoji _smiling face with heart-shaped eyes_ (1).png'
-import happy from '../dailynote/images/🦆 emoji _smiling face with open mouth and smiling eyes_ (1).png'
-import normal from '../dailynote/images/🦆 emoji _slightly smiling face_ (1).png'
-import sad from '../dailynote/images/🦆 emoji _slightly frowning face_ (1).png'
-import verySad from '../dailynote/images/🦆 emoji _loudly crying face_ (1).png'
+import veryHappy from '../../../image/🦆 emoji _smiling face with heart-shaped eyes_ (1).png'
+import happy from '../../../image/🦆 emoji _smiling face with open mouth and smiling eyes_ (1).png'
+import normal from '../../../image/🦆 emoji _slightly smiling face_ (1).png'
+import sad from '../../../image/🦆 emoji _slightly frowning face_ (1).png'
+import verySad from '../../../image/🦆 emoji _loudly crying face_ (1).png'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
 import { getListDiary } from "../../../redux/diary/diary.action";
@@ -31,7 +31,7 @@ export default function FeelingChart({account}:Props){
             }
         }
         fetchData();
-    },[])
+    },[account])
 
     useEffect(()=>{
         if(listDiary.idUser!==""){
@@ -51,13 +51,9 @@ export default function FeelingChart({account}:Props){
         }
     },[listDiary])
 
-    useEffect(()=>{
-        const newList = listSurvey.map((value, index) => index === 7 ? diary.survey : value);
-        setListSurvey([...newList]);
-    }, [diary])
-
     function getVal(num: number|null):React.CSSProperties{
         if(!num) num = 0;
+        if(num === -1) num = diary.survey;
         const heightVal = [`4px`, `28px`, `56px`, `84px`, `112px`, `140px`];
         const colorVal = [`#D9D9D9`, `#FF0000`, `#FFA700`, `#FFF400`, `#A3FF00`, `#2CBA00`];
         return {height: heightVal[num], background: colorVal[num]}
@@ -98,7 +94,7 @@ export default function FeelingChart({account}:Props){
                         <div><figure style={getVal(listSurvey[4])}></figure><p>{getDay(3)}</p></div>
                         <div><figure style={getVal(listSurvey[5])}></figure><p>{getDay(2)}</p></div>
                         <div><figure style={getVal(listSurvey[6])}></figure><p>{getDay(1)}</p></div>
-                        <div><figure style={getVal(listSurvey[7])}></figure><p>Hôm nay</p></div>
+                        <div><figure style={getVal(-1)}></figure><p>Hôm nay</p></div>
                     </div>
                 </div>
                 <figure className="edit"><img src={edit_icon} alt="" /></figure>

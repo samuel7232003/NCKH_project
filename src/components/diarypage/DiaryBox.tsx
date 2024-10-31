@@ -1,67 +1,43 @@
-import verySad from '../../../image/🦆 emoji _loudly crying face_ (1).png'
-import sad from '../../../image/🦆 emoji _slightly frowning face_ (1).png'
-import normal from '../../../image/🦆 emoji _slightly smiling face_ (1).png'
-import happy from '../../../image/🦆 emoji _smiling face with open mouth and smiling eyes_ (1).png'
-import veryHappy from '../../../image/🦆 emoji _smiling face with heart-shaped eyes_ (1).png'
-import send_icon from './images/Send_fill.png'
-import remove_icon from './images/Trash.png'
-import normal_img from '../../../image/normal_img.jpg'
-import verySad_img from '../../../image/verySad_img.jpg'
-import sad_img from '../../../image/sad_img.jpg'
-import happy_img from '../../../image/happy_img.jpg'
-import veryHappy_img from '../../../image/veryHappy_img.jpg'
-import './dailynote.css'
-import { useEffect, useState } from 'react'
-import { User } from '../../../redux/user/user.state'
-import { useAppDispatch, useAppSelector } from '../../../redux/builder'
-import { getListDiary, setDiary } from '../../../redux/diary/diary.action'
-import { addDiary, removeDiary } from '../../../service/diaryService'
-import { Diary } from '../../../redux/diary/diary.state'
-import moment from 'moment'
-import { useNavigate } from 'react-router-dom'
+import { Diary } from "../../redux/diary/diary.state";
+import verySad from '../../image/🦆 emoji _loudly crying face_ (1).png'
+import sad from '../../image/🦆 emoji _slightly frowning face_ (1).png'
+import normal from '../../image/🦆 emoji _slightly smiling face_ (1).png'
+import happy from '../../image/🦆 emoji _smiling face with open mouth and smiling eyes_ (1).png'
+import veryHappy from '../../image/🦆 emoji _smiling face with heart-shaped eyes_ (1).png'
+import { useEffect, useState } from "react";
+import normal_img from '../../image/normal_img.jpg'
+import verySad_img from '../../image/verySad_img.jpg'
+import sad_img from '../../image/sad_img.jpg'
+import happy_img from '../../image/happy_img.jpg'
+import veryHappy_img from '../../image/veryHappy_img.jpg'
+import { User } from "../../redux/user/user.state";
+import moment from "moment";
+import { addDiary, removeDiary } from "../../service/diaryService";
+import send_icon from '../dashboard/dailynote/images/Send_fill.png'
+import remove_icon from '../dashboard/dailynote/images/Trash.png'
+import { initalDiaryState } from "../../redux/diary/diary.slice";
+import './diarybox.css'
 
 interface Props{
-    account: User
-    type: string
+    diary: Diary;
+    account: User;
 }
 
-export default function Dailynote({account, type}: Props){
+export default function DiaryBox({diary, account}:Props){
     const [dailyEmotion, setDailyEmotion] = useState<string|null>(null);
+    const [nowDiary, setNowDiary] = useState<Diary>(diary);
     const [message, setMessage] = useState("");
-    const dispatch = useAppDispatch();
-    const listDiary = useAppSelector(state => state.diary.listDiary);
-    const diary = useAppSelector(state => state.diary.diary);
-    const navigate = useNavigate();
-
-    useEffect(() =>{
-        const fectchData = async () =>{
-            if(account._id !== "") await dispatch(getListDiary(account._id))
-        }
-        fectchData()
-    }, [account]);
 
     useEffect(() => {
-        const todayNoteData = listDiary.diarys.find(index => index.date === moment(new Date).format("YYYY-MM-DD"));
-        if(todayNoteData) dispatch(setDiary(todayNoteData));
-    }, [listDiary])
-
+        setNowDiary(diary);
+    },[diary])
+    
     function handleSelect(type: string){
         setDailyEmotion(type);
     }
 
     function handleMessage(val: string){
         if(val.length <= 100) setMessage(val);
-    }
-
-    function getSurvey(type: string|null){
-        switch (type){
-            case "verySad": return 1;
-            case "sad": return 2;
-            case "normal": return 3;
-            case "happy": return 4;
-            case "veryHappy": return 5;
-            default: return 0;
-        }
     }
 
     function getIcon(num : number){
@@ -72,6 +48,17 @@ export default function Dailynote({account, type}: Props){
             case 4: return {icon: happy, title: "Vui vẻ", bg: happy_img, theme: "black"};
             case 5: return {icon: veryHappy, title: "Rất vui", bg: veryHappy_img, theme: "white"};
             default: return {icon: undefined, title: "", bg: undefined, theme:""};
+        }
+    }
+
+    function getSurvey(type: string|null){
+        switch (type){
+            case "verySad": return 1;
+            case "sad": return 2;
+            case "normal": return 3;
+            case "happy": return 4;
+            case "veryHappy": return 5;
+            default: return 0;
         }
     }
 
@@ -94,7 +81,7 @@ export default function Dailynote({account, type}: Props){
                 message: message
             }
             saveDiary(diary);
-            dispatch(setDiary(diary));
+            setNowDiary(diary);
         }
     }
 
@@ -102,22 +89,23 @@ export default function Dailynote({account, type}: Props){
         e.stopPropagation();
         const remove = async () => {
             try{
-                const res = await removeDiary(account._id, diary.date!);
+                const res = await removeDiary(account._id, nowDiary.date!);
             } catch (error){
                 console.log(error);
             }
         }
         remove();
-        dispatch(setDiary(null));
+        setNowDiary(initalDiaryState.diary);
     }
 
     function handleClick(){
-        if(type==="today") navigate("./diarypage");
+        
     }
 
+
     return(
-        (diary.date==="") ?
-            <div className="dailynote">
+        (nowDiary.date==="") ?
+            <div className="dailybox">
                 <h2>Ngày hôm nay của bạn thế nào?</h2>
                 <ul>
                     <li className={(dailyEmotion === 'verySad') ? 'select':''} onClick={() => handleSelect("verySad")}>
@@ -147,11 +135,11 @@ export default function Dailynote({account, type}: Props){
                 <div onClick={handleSave} className='btn_save'><figure><img src={send_icon} alt="" /></figure><p>Lưu</p></div>
             </div>
             :
-            <div className="dailynote done" style={{backgroundImage: `url(${getIcon(diary.survey).bg})`}} onClick={handleClick}>
-                <p className='date' style={getIcon(diary.survey).theme === "white" ? {color: `#fff`}:undefined}>{diary.date}</p>
-                <figure className='icon'><img src={getIcon(diary.survey).icon} alt="" /></figure>
-                <p className='title' style={getIcon(diary.survey).theme === "white" ? {color: `#fff`}:undefined}>{getIcon(diary.survey).title}</p>
-                {diary.message !== "" && <p className='message'>{diary.message}</p>}
+            <div className="dailybox done" style={{backgroundImage: `url(${getIcon(nowDiary.survey).bg})`}} onClick={handleClick}>
+                <p className='date' style={getIcon(nowDiary.survey).theme === "white" ? {color: `#fff`}:undefined}>{nowDiary.date}</p>
+                <figure className='icon'><img src={getIcon(nowDiary.survey).icon} alt="" /></figure>
+                <p className='emo' style={getIcon(nowDiary.survey).theme === "white" ? {color: `#fff`}:undefined}>{getIcon(nowDiary.survey).title}</p>
+                {nowDiary.message !=="" && <p className='message'>{nowDiary.message}</p>}
                 <figure onClick={(e) => handleRemove(e)} className='remove'><img src={remove_icon} alt="" /></figure>
             </div>
     )

@@ -16,7 +16,7 @@ export default function HelloBox({account}:Props){
 
     useEffect(() => {
         setCount(listDiary.diarys.length);
-    }, [listDiary])
+    }, [listDiary, account])
 
     return(
         <div className="hello-box">

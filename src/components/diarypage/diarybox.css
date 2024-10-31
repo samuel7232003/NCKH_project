@@ -1,23 +1,24 @@
-.dailynote{
+.dailybox{
     height: 100%;
     border: rgba(201, 201, 201, 0.7) solid 1px;
     border-radius: 10px;
     width: 258px;
     padding: 12px 22px;
+    background-color: white;
 }
 
-.dailynote h2{
+.dailybox h2{
     font-weight: bold;
     max-width: 130px;
     margin-bottom: 10px;
 }
 
-.dailynote ul{
+.dailybox ul{
     display: flex;
     justify-content: space-between;
 }
 
-.dailynote ul li{
+.dailybox ul li{
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -25,52 +26,52 @@
     width: 20%;
 }
 
-.dailynote ul li figure{
+.dailybox ul li figure{
     height: 30px;
     width: 30px;
     margin-bottom: 5px;
 }
 
-.dailynote ul li figure img{
+.dailybox ul li figure img{
     height: 100%;
     width: auto;
 }
 
-.dailynote ul li:hover img{
+.dailybox ul li:hover img{
     transition: transform ease-in-out 0.25s;
 }
 
-.dailynote ul li:hover img{
+.dailybox ul li:hover img{
     transform: scale(1.2);
 }
 
-.dailynote ul li p{
+.dailybox ul li p{
     max-width: 48px;
     font-size: 9px;
     transition: color ease-in-out 0.25s, font-weight ease-in-out 0.25s;
 }
 
-.dailynote ul li:hover p{
+.dailybox ul li:hover p{
     color: #16c0e8;
     font-weight: bold;
 }
 
-.dailynote ul .select img{
+.dailybox ul .select img{
     transform: scale(1.2);
 }
 
-.dailynote ul .select p{
+.dailybox ul .select p{
     color: #16c0e8;
     font-weight: bold;
 }
 
-.dailynote fieldset{
+.dailybox fieldset{
     position: relative;
     height: 100px;
     margin-bottom: 8px;
 }
 
-.dailynote fieldset textarea{
+.dailybox fieldset textarea{
     background-color: #d9d9d9;
     border-radius: 8px;
     height: 100%;
@@ -82,11 +83,11 @@
     outline: none;
 }
 
-.dailynote fieldset textarea::placeholder{
+.dailybox fieldset textarea::placeholder{
     font-style: italic;
 }
 
-.dailynote fieldset p{
+.dailybox fieldset p{
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -94,7 +95,7 @@
     color: #676767;
 }
 
-.dailynote .btn_save{
+.dailybox .btn_save{
     height: 22px;
     border: #16c0e8 solid 1px;
     display: flex;
@@ -104,27 +105,26 @@
     border-radius: 5px;
 }
 
-.dailynote .btn_save:hover{
+.dailybox .btn_save:hover{
     background-color: #e7f9fc;
 }
 
-.dailynote .btn_save p{
+.dailybox .btn_save p{
     font-size: 12px;
     font-weight: bold;
     color: #16c0e8;
 }
 
-.dailynote.done{
+.dailybox.done{
     border: none;
     background-size: cover;
     display: flex;
     flex-flow: column;
     align-items: center;
     position: relative;
-    cursor: pointer;
 }
 
-.dailynote.done .date{
+.dailybox.done .date{
     font-weight: bold;
     font-size: 12px;
     color: #6c6c6c;
@@ -134,7 +134,7 @@
     margin-bottom: 36px;
 }
 
-.dailynote.done .date::after{
+.dailybox.done .date::after{
     content: "";
     height: 1px;
     width: 40px;
@@ -142,23 +142,31 @@
     display: block;
 }
 
-.dailynote.done .icon{
+.dailybox.done .icon{
     height: 88px;
 }
 
-.dailynote.done .icon img{
+.main .dailybox.done .icon{
+    height: 120px;
+}
+
+.dailybox.done .icon img{
     height: 100%;
     width: auto;
 }
 
-.dailynote.done .title{
+.dailybox.done .emo{
     color: black;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.dailynote.done .message{
+.main .dailybox.done .emo{
+    margin-top: 30px;
+}
+
+.dailybox.done .message{
     height: 64px;
     width: 100%;
     background-color: rgba(255,255,255,0.7);
@@ -169,7 +177,7 @@
     font-style: italic;
 }
 
-.dailynote.done .remove{
+.dailybox.done .remove{
     position: absolute;
     top: 10px;
     right: 10px;
@@ -181,11 +189,11 @@
     border-radius: 5px;
 }
 
-.dailynote.done .remove img{
+.dailybox.done .remove img{
     height: 100%;
     width: auto;
 }
 
-.dailynote.done:hover .remove{
+.main .dailybox.done:hover .remove{
     opacity: 1;
 }

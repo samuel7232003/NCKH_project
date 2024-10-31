@@ -80,6 +80,8 @@ header.main .noti_ava .ava img{
     padding: 12px;
     display: flex;
     flex-flow: column;
+    z-index: 1000;
+    background-color: white;
 }
 
 .ava-box .my-infor{

@@ -10,7 +10,7 @@ export default function Timeline(){
             <div className='grid'>
                 {
                     listTime.map((value, index) => 
-                        <p className={(index===4)?'center':""}>{value}</p>
+                        <p key={index} className={(index===4)?'center':""}>{value}</p>
                     )
                 }
             </div>

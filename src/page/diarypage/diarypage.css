@@ -1,0 +1,77 @@
+.diarypage{
+    width: 100%;
+    height: calc(100vh - 70px);
+    position: relative;
+    background-size: cover;
+}
+
+.diarypage .inner{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.diarypage .title{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 22px;
+    width: 100%;
+}
+
+.diarypage .title p{
+    max-width: 578px;
+    text-align: center;
+    font-style: italic;
+    color: white;
+}
+
+.diarypage .listDiary{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diarypage .listDiary .main{
+    height: 464px;
+}
+
+.diarypage .listDiary .sub{
+    height: 278px;
+    width: 258px;
+    position: relative;
+}
+
+.diarypage .listDiary .sub .dailybox::after{
+    content: "";
+    width: 258px;
+    height: 278px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    border-radius: 10px;
+}
+
+.diarypage .listDiary > figure{
+    margin: 0 20px;
+    width: 56px;
+    cursor: pointer;
+}
+
+.diarypage .see-chart{
+    position: absolute;
+    bottom: 20px;
+    left: calc(50vw - 90px);
+    width: 180px;
+    padding: 5px 15px;
+    border: white solid 1px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color ease-in-out 0.25s;
+}
+.diarypage .see-chart:hover{
+    background-color: rgba(255, 255, 255, 0.4);
+}
