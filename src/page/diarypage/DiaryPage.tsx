@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/builder";
 import moment from "moment";
-import { getListDiary, setDiary } from "../../redux/diary/diary.action";
+import { getListDiary } from "../../redux/diary/diary.action";
 import DiaryBox from "../../components/diarypage/DiaryBox";
 import next_icon from "./images/right.png"
 import back_icon from './images/left.png'
@@ -15,6 +15,7 @@ import veryHappy_img from '../../image/veryHappy_img.jpg'
 import bg_img from '../../image/background.png'
 import { Diary } from "../../redux/diary/diary.state";
 import { initalDiaryState } from "../../redux/diary/diary.slice";
+import InforChart from "../../components/infochart/InfoChart";
 
 
 export default function DiaryPage(){
@@ -25,6 +26,7 @@ export default function DiaryPage(){
     const [backDiary, setBackDiary] = useState<Diary|null>();
     const [nextDiary, setNextDiary] = useState<Diary|null>();
     const [index, setIndex] = useState(0);
+    const [openBox, setOpenBox] = useState(false);
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -86,8 +88,11 @@ export default function DiaryPage(){
                     <figure onClick={() => setIndex(index+1)}>{ nextDiary && <img src={next_icon} alt="" />}</figure>
                     <div className="sub">{ nextDiary && <DiaryBox account={account} diary={nextDiary}/>}</div>
                 </div>
-                <p className="see-chart">Xem biểu đồ tâm trạng của bạn</p>
+                {!openBox && <p className="see-chart" onClick={() => setOpenBox(true)}>Xem biểu đồ tâm trạng của bạn</p>}
             </div>
+            {openBox && <div className="sub-box">
+               <InforChart account={account} isOpen={setOpenBox} listDiary={listDiary}/>
+            </div>}
         </main>
     )
 }

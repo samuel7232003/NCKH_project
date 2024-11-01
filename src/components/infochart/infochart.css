@@ -1,0 +1,136 @@
+.infochart{
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background-color: white;
+    padding: 28px 84px;
+    position: relative;
+}
+
+.infochart .box-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 5px;
+}
+
+.infochart .box-title figure{
+    height: 24px;
+}
+
+.infochart .box-title figure img{
+    height: 100%;
+}
+
+.infochart .box-title h2{
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.infochart .box-main{
+    display: flex;
+    gap: 42px;
+}
+
+.infochart .box-main .title{
+    display: none;
+}
+
+.infochart .box-main .feelingchart{
+    height: 244px;
+}
+
+.infochart .box-main .feelingchart .grid{
+    margin-top: 30px;
+}
+
+.infochart .box-main-chart .chart-sumary{
+    margin-top: 20px;
+}
+
+.infochart .box-main-chart .chart-sumary h3{
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.infochart .box-main-chart .chart-sumary h3::after{
+    content: "";
+    height: 1px;
+    width: 420px;
+    background-color: rgba(201,201,201,0.7);
+    display: block;
+}
+
+.infochart .box-main-chart .chart-sumary p{
+    margin-bottom: 20px;
+}
+
+.infochart .chart-sumary span{
+    font-size: 23px;
+    margin-left: 20px;
+}
+
+.infochart .chart-sumary div{
+    display: flex;
+    gap: 20px;
+}
+
+.infochart .chart-sumary figure{
+    height: 24px;
+}
+
+.infochart .chart-sumary figure img{
+    height: 100%;
+    width: auto;
+}
+
+.infochart .box-main-advice{
+    padding: 30px 40px;
+    background-color: #FFEAAD;
+    border-radius: 8px;
+    border: rgba(201,201,201,0.7) solid 1px;
+    position: relative;
+}
+
+.infochart .box-main-advice h3{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.infochart .box-main-advice p{
+    font-style: italic;
+    text-align: justify;
+}
+
+.infochart .box-main-advice p.sum{
+    margin-bottom: 15px;
+}
+
+.infochart .box-main-advice > figure{
+    position: absolute;
+    bottom: 2px;
+    right: -40px;
+}
+
+.infochart .exit-icon{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    height: 28px;
+    border-radius: 8px;
+    transition: background-color ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.infochart .exit-icon img{
+    height: 100%;
+}
+
+.infochart .exit-icon:hover{
+    background-color: #ff000059;
+}
