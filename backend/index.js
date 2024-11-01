@@ -3,7 +3,6 @@ const connectDB = require('./db.js');
 const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
-const { message } = require("antd");
 
 const app = express()
 
