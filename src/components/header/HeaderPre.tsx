@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import './headerPre.css'
 
 export default function HeaderPre(){
+    function handleTop(){
+        window.scrollTo({ top: 0, behavior: 'smooth'})
+    }
+
     return(
         <header className="pre h-[80px] flex bg-[rgba(0,0,0,0.4)] items-center px-[35px] text-[#fff] fixed top-0 right-0 left-0">
             <figure><img className="h-max" src="/logo.png" alt=""/></figure>
@@ -12,7 +16,7 @@ export default function HeaderPre(){
                 </ul>
             </nav>
             <Link className="font-bold" to="/login">
-                <div className="login-btn h-[47px] w-[156px] rounded-lg bg-[rgba(22,192,232,0.7)] flex justify-center items-center">
+                <div onClick={handleTop} className="login-btn h-[47px] w-[156px] rounded-lg bg-[rgba(22,192,232,0.7)] flex justify-center items-center">
                     Đăng nhập
                 </div>
             </Link>
