@@ -5,12 +5,14 @@ import { useState } from 'react'
 import { User } from '../../redux/user/user.state'
 import { initialUserState } from '../../redux/user/user.slice'
 import { signup } from '../../service/accountService'
+import see_pwd from "../../image/View_light.png"
 
 export default function Signup(){
     const [user, setUser] = useState<User>(initialUserState.user);
     const [checkPwd, setCheckPwd] = useState("");
     const [error, setError] = useState("");
     const naviagte = useNavigate();
+    const [visiPwd, setVisiPwd] = useState(false);
 
     function handleInput(type: "first_name"|"last_name"|"email"|"password"|"check-pwd", val: string){
         if(type === "check-pwd") setCheckPwd(val.trim());
@@ -49,8 +51,14 @@ export default function Signup(){
                     <input onChange={e => handleInput("last_name", e.target.value)} className='last-name' type="text" placeholder="Tên" />
                 </fieldset>
                 <fieldset><input onChange={e => handleInput('email', e.target.value)} type="email" placeholder="Email" /></fieldset>
-                <fieldset><input onChange={e => handleInput('password', e.target.value)} type="password" placeholder="Mật khẩu" /></fieldset>
-                <fieldset><input onChange={e => handleInput('check-pwd', e.target.value)} type="password" placeholder="Xác nhận mật khẩu" /></fieldset>
+                <fieldset className='pwd-field'>
+                    <input onChange={e => handleInput('password', e.target.value)} type={visiPwd?"text":"password"} placeholder="Mật khẩu" />
+                    <figure onClick={() => setVisiPwd(!visiPwd)}><img src={see_pwd} alt="" /></figure>
+                </fieldset>
+                <fieldset className='pwd-field'>
+                    <input onChange={e => handleInput('check-pwd', e.target.value)} type={visiPwd?"text":"password"} placeholder="Xác nhận mật khẩu" />
+                    <figure onClick={() => setVisiPwd(!visiPwd)}><img src={see_pwd} alt="" /></figure>
+                </fieldset>
                 <div className='remember-login'>
                     <Switch/>
                     <p>Ghi nhớ đăng nhập</p>

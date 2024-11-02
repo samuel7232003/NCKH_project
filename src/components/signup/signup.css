@@ -104,3 +104,20 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+.signup .pwd-field{
+    position: relative;
+}
+
+.signup .pwd-field figure{
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    opacity: 0;
+    transition: opacity ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.signup .pwd-field:hover figure{
+    opacity: 1;
+}

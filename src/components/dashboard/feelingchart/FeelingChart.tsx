@@ -9,8 +9,10 @@ import sad from '../../../image/🦆 emoji _slightly frowning face_ (1).png'
 import verySad from '../../../image/🦆 emoji _loudly crying face_ (1).png'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
-import { getListDiary } from "../../../redux/diary/diary.action";
+import { getListDiary, setDiary } from "../../../redux/diary/diary.action";
 import moment from "moment";
+import { Tooltip } from "antd";
+import { useNavigate } from "react-router-dom";
 
 interface Props{
     account: User
@@ -21,6 +23,8 @@ export default function FeelingChart({account}:Props){
     const diary = useAppSelector(state => state.diary.diary);
     const dispatch = useAppDispatch()
     const [listSurvey, setListSurvey] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+    const count = [7, 6, 5, 4, 3, 2, 1]
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -48,6 +52,9 @@ export default function FeelingChart({account}:Props){
                 else return 0;
             });
             setListSurvey([...list]);
+
+            const todayDiary = listDiary.diarys.find(index => index.date === moment(new Date()).format("YYYY-MM-DD"));
+            if(todayDiary) dispatch(setDiary(todayDiary));
         }
     },[listDiary])
 
@@ -65,6 +72,13 @@ export default function FeelingChart({account}:Props){
         let index = today-num-1;
         if(index<0) index+=7;
         return nameDay[index]
+    }
+
+    function getDate(num: number){
+        const today = new Date();
+        const oneDay = 24 * 60 * 60 * 1000;
+        const date = new Date(today.getTime() - num*oneDay);
+        return moment(date).format("DD-MM");
     }
 
     return(
@@ -87,17 +101,15 @@ export default function FeelingChart({account}:Props){
                         <figure className="end"><span></span></figure>
                     </div>
                     <div className="value">
-                        <div><figure style={getVal(listSurvey[0])}></figure><p>{getDay(7)}</p></div>
-                        <div><figure style={getVal(listSurvey[1])}></figure><p>{getDay(6)}</p></div>
-                        <div><figure style={getVal(listSurvey[2])}></figure><p>{getDay(5)}</p></div>
-                        <div><figure style={getVal(listSurvey[3])}></figure><p>{getDay(4)}</p></div>
-                        <div><figure style={getVal(listSurvey[4])}></figure><p>{getDay(3)}</p></div>
-                        <div><figure style={getVal(listSurvey[5])}></figure><p>{getDay(2)}</p></div>
-                        <div><figure style={getVal(listSurvey[6])}></figure><p>{getDay(1)}</p></div>
-                        <div><figure style={getVal(-1)}></figure><p>Hôm nay</p></div>
+                        {
+                            count.map(index => 
+                                <Tooltip key={index} title={getDate(index)}><div><figure style={getVal(listSurvey[7-index])}></figure><p>{getDay(index)}</p></div></Tooltip>
+                            )
+                        }
+                        <Tooltip title={getDate(0)}><div><figure style={getVal(-1)}></figure><p>Hôm nay</p></div></Tooltip>
                     </div>
                 </div>
-                <figure className="edit"><img src={edit_icon} alt="" /></figure>
+                <figure onClick={() => navigate('./diarypage')} className="edit"><img src={edit_icon} alt="" /></figure>
             </div>
         }
         </>

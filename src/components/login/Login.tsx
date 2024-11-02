@@ -1,8 +1,9 @@
-import { Switch } from 'antd'
+import { message, Switch } from 'antd'
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { login } from '../../service/accountService';
+import see_pwd from '../../image/View_light.png'
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ export default function Login(){
     const [error, setError] = useState("");
     const [isSaveLogin, setIsSaveLogin] = useState(false);
     const navigate = useNavigate();
+    const [visiPwd, setVisiPwd] = useState(false);
 
     function validate(type: "email"|"pwd", val : string){
         if(type === "email"){
@@ -31,7 +33,7 @@ export default function Login(){
             const res = await login(email, password);
             localStorage.setItem('userData', res.token);
             localStorage.setItem('email', res.email);
-            setError("Đăng nhập thành công");
+            message.success("Đăng nhập thành công!");
             setTimeout(() => navigate('/home'), 1000)
         } catch (error) {
             setError("Sai tên đăng nhập hoặc mật khẩu!");
@@ -39,6 +41,7 @@ export default function Login(){
     }
 
     function handleLogin(){
+        message.info("Đang đăng nhập...")
         validate("email", email);
         validate("pwd", password);
         if(email==="" || password===""){
@@ -56,7 +59,10 @@ export default function Login(){
             <div className='form'>
                 <p className='error'>{error}</p>
                 <fieldset><input className={(eError ? "error" : "")} onChange={(e) => validate("email", e.target.value)} value={email} type="email" placeholder="Email" /></fieldset>
-                <fieldset><input className={(pwdError ? "error" : "")} onChange={(e) => validate("pwd", e.target.value)} value={password} type="password" placeholder="Mật khẩu" /></fieldset>
+                <fieldset className='pwd-field'>
+                    <input className={(pwdError ? "error" : "")} onChange={(e) => validate("pwd", e.target.value)} value={password} type={visiPwd ?"text": "password"} placeholder="Mật khẩu" />
+                    <figure onClick={() => setVisiPwd(!visiPwd)}><img src={see_pwd} alt="" /></figure>
+                </fieldset>
                 <div className='remember-login'>
                     <Switch onChange={(value) => setIsSaveLogin(value)}/>
                     <p>Ghi nhớ đăng nhập</p>

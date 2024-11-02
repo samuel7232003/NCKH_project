@@ -16,7 +16,9 @@ import bg_img from '../../image/background.png'
 import { Diary } from "../../redux/diary/diary.state";
 import { initalDiaryState } from "../../redux/diary/diary.slice";
 import InforChart from "../../components/infochart/InfoChart";
-
+import add_icon from './images/Add_round_duotone_fill_line.png'
+import { Tooltip } from "antd";
+import AddDiaryBox from "../../components/diarypage/AddDiaryBox";
 
 export default function DiaryPage(){
     const account = useAppSelector(state => state.user.user);
@@ -27,6 +29,7 @@ export default function DiaryPage(){
     const [nextDiary, setNextDiary] = useState<Diary|null>();
     const [index, setIndex] = useState(0);
     const [openBox, setOpenBox] = useState(false);
+    const [openAdd, setOpenAdd] = useState(false);
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -43,7 +46,7 @@ export default function DiaryPage(){
         let i = 0;
         const todayNote = listDiary.diarys.find((value, index) => {
             i = index;
-            return value.date === moment(new Date).format("YYYY-MM-DD")
+            return value.date === moment(new Date()).format("YYYY-MM-DD")
         });
         setIndex(i);
         if(todayNote) setNowDiary(todayNote);
@@ -93,6 +96,10 @@ export default function DiaryPage(){
             {openBox && <div className="sub-box">
                <InforChart account={account} isOpen={setOpenBox} listDiary={listDiary}/>
             </div>}
+            <Tooltip title="Thêm nhật kí mới!">
+                <figure onClick={() => setOpenAdd(!openAdd)} className="add-diary"><img src={add_icon} alt="" /></figure>
+            </Tooltip>
+            {openAdd && <AddDiaryBox account={account} listDiary={listDiary} setOpen={setOpenAdd}/>}
         </main>
     )
 }

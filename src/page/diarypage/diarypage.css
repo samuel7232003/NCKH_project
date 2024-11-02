@@ -83,3 +83,111 @@
     top: calc(50vh - 270px);
     left: calc(50vw - 512px);
 }
+
+.diarypage .add-diary{
+    height: 80px;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    transition: transform ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.diarypage .add-diary:hover{
+    transform: rotate(180deg);
+}
+
+.diarypage .add-diary img{
+    height: 100%;
+    width: auto;
+}
+
+.diarypage .add-diary-box{
+    position: absolute;
+    height: 250px;
+    width: 230px;
+    right: 30px;
+    bottom: 130px;
+    background-color: white;
+    border-radius: 8px;
+    border: rgba(201,201,201,0.7) solid 1px;
+}
+
+.diarypage .add-diary-box h3{
+    font-weight: bold;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+}
+
+.diarypage .add-diary-box h3::after{
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color: rgba(201, 201, 201, 0.7);
+}
+
+.diarypage .add-diary-box .pick-emoji,
+.diarypage .add-diary-box .pick-date{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    gap: 5px;
+}
+
+.diarypage .add-diary-box .pick-emoji p,
+.diarypage .add-diary-box .pick-date p{
+    font-size: 14px;
+}
+
+.diarypage .pick-emoji .e-val{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.diarypage .pick-emoji figure{
+    height: 22px;
+}
+
+.diarypage .pick-emoji figure img{
+    height: 100%;
+}
+
+.diarypage .add-diary-box textarea{
+    background-color: #d9d9d9;
+    border-radius: 6px;
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 10px;
+    resize: none;
+    height: 85px;
+}
+
+.diarypage .add-diary-box .save-btn{
+    display: flex;
+    border-radius: 5px;
+    width: 70px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: #16c0e8 solid 2px;
+    margin-left: calc(100% - 80px);
+    cursor: pointer;
+}
+
+.diarypage .add-diary-box .save-btn:hover{
+    background-color: #e7f9fc;
+}
+
+
+.diarypage .add-diary-box .save-btn p{
+    font-size: 12px;
+    font-weight: bold;
+    color: #16c0e8;
+}

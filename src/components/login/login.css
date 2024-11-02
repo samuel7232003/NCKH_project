@@ -95,3 +95,20 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+.login .pwd-field{
+    position: relative;
+}
+
+.login .pwd-field figure{
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    opacity: 0;
+    transition: opacity ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.login .pwd-field:hover figure{
+    opacity: 1;
+}

@@ -8,10 +8,14 @@ import { getDiarys } from "../../service/diaryService";
 export const diaryAction = diarySlice.actions;
 
 export const getListDiary = (id: string):ThunkAction<void, RootState, unknown, AnyAction> => {
+    function compareDates(a:Diary, b:Diary){
+        return (new Date(a.date)).getTime() - (new Date(b.date)).getTime();
+    }
     return async(dispatch, getState) => {
         const respone :Diary[] = await getDiarys(id);
         const data:ListDiary = {idUser: id, diarys: respone}
-        dispatch(diaryAction.setListDiary(data));
+        const sortData:ListDiary = {...data, diarys: data.diarys.sort(compareDates)};
+        dispatch(diaryAction.setListDiary(sortData));
     }
 }
 
