@@ -81,8 +81,9 @@ export default function PersonalPage(){
 
     const _handleReaderLoaded = (readerEvt: any) => {
         let binaryString = readerEvt.target.result;
-        setBase64(btoa(binaryString))
-        setAcc({...acc, avatar: btoa(binaryString)});
+        const str = btoa(binaryString);
+        setBase64(str)
+        setAcc({...acc, avatar: str});
     }
     
     return(

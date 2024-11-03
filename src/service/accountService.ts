@@ -1,4 +1,3 @@
-import { server } from "typescript";
 import { User } from "../redux/user/user.state";
 import { apiInstance, handleError } from "./api";
 
