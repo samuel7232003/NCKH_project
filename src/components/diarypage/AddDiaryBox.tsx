@@ -11,6 +11,7 @@ import { initalDiaryState } from '../../redux/diary/diary.slice'
 import { User } from '../../redux/user/user.state'
 import { Diary, ListDiary } from '../../redux/diary/diary.state'
 import { addDiary } from '../../service/diaryService'
+import diary_icon from '../../page/diarypage/images/notebook.png'
 
 interface Props{
     account: User,
@@ -49,33 +50,36 @@ export default function AppDiaryBox({account, listDiary, setOpen}:Props){
 
     return(
         <div className="add-diary-box">
+            <div className='header'>
+                <figure><img src={diary_icon} alt="" /></figure>
                 <h3>Tạo mới một nhật kí</h3>
-                <div className="pick-date">
-                    <p>Ngày:</p>
-                    <DatePicker className={errorDate ?'border-[red]':""} onChange={e => {
-                        if(e) setDiary({...diary, date: e.format("YYYY-MM-DD")})
-                        else setDiary({...diary, date: ""})
-                    }} maxDate={dayjs()}/>
-                </div>
-                <div className="pick-emoji">
-                    <p>Tâm trạng:</p>
-                    <Select
-                        options={[
-                            {value:5, label: <div className="e-val"> <figure><img src={veryHappy} alt="" /></figure> Rất vui vẻ </div>},
-                            {value:4, label: <div className="e-val"> <figure><img src={happy} alt="" /></figure> Vui vẻ </div>},
-                            {value:3, label: <div className="e-val"> <figure><img src={normal} alt="" /></figure> Bình thường</div>},
-                            {value:2, label: <div className="e-val"> <figure><img src={sad} alt="" /></figure> Buồn bã</div>},
-                            {value:1, label: <div className="e-val"> <figure><img src={verySad} alt="" /></figure> Rất buồn </div>},
-                        ]}
-                        defaultValue={5}
-                        onChange={e => setDiary({...diary, survey: e})}
-                    />
-                </div>
-                <textarea onChange={e => setDiary({...diary, message: e.target.value})} name="" id="" placeholder="Nhập thêm ghi chú..."></textarea>
-                <div onClick={() => handleSave()} className="save-btn">
-                    <figure><img src={save_icon} alt="" /></figure>
-                    <p>Lưu</p>
-                </div>
             </div>
+            <div className="pick-date">
+                <p>Ngày:</p>
+                <DatePicker className={errorDate ?'border-[red]':""} onChange={e => {
+                    if(e) setDiary({...diary, date: e.format("YYYY-MM-DD")})
+                    else setDiary({...diary, date: ""})
+                }} maxDate={dayjs()}/>
+            </div>
+            <div className="pick-emoji">
+                <p>Tâm trạng:</p>
+                <Select
+                    options={[
+                        {value:5, label: <div className="e-val"> <figure><img src={veryHappy} alt="" /></figure> Rất vui vẻ </div>},
+                        {value:4, label: <div className="e-val"> <figure><img src={happy} alt="" /></figure> Vui vẻ </div>},
+                        {value:3, label: <div className="e-val"> <figure><img src={normal} alt="" /></figure> Bình thường</div>},
+                        {value:2, label: <div className="e-val"> <figure><img src={sad} alt="" /></figure> Buồn bã</div>},
+                        {value:1, label: <div className="e-val"> <figure><img src={verySad} alt="" /></figure> Rất buồn </div>},
+                    ]}
+                    defaultValue={5}
+                    onChange={e => setDiary({...diary, survey: e})}
+                />
+            </div>
+            <textarea onChange={e => setDiary({...diary, message: e.target.value})} name="" id="" placeholder="Nhập thêm ghi chú..."></textarea>
+            <div onClick={() => handleSave()} className="save-btn">
+                <figure><img src={save_icon} alt="" /></figure>
+                <p>Lưu</p>
+            </div>
+        </div>
     )
 }

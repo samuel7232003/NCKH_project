@@ -113,20 +113,27 @@
     border: rgba(201,201,201,0.7) solid 1px;
 }
 
-.diarypage .add-diary-box h3{
-    font-weight: bold;
+.diarypage .add-diary-box .header{
     display: flex;
-    flex-flow: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    gap: 5px;
+    position: relative;
     height: 36px;
+    margin-bottom: 5px;
 }
 
-.diarypage .add-diary-box h3::after{
+.diarypage .add-diary-box h3{
+    font-weight: bold;
+}
+
+.diarypage .add-diary-box .header::after{
+    position: absolute;
     content: "";
     height: 1px;
     width: 100%;
     background-color: rgba(201, 201, 201, 0.7);
+    bottom: 0;
 }
 
 .diarypage .add-diary-box .pick-emoji,

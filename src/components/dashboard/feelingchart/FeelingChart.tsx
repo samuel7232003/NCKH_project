@@ -71,6 +71,7 @@ export default function FeelingChart({account}:Props){
         const nameDay = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
         let index = today-num-1;
         if(index<0) index+=7;
+        if(index<0) index+=7;
         return nameDay[index]
     }
 
