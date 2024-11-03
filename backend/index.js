@@ -93,7 +93,7 @@ app.post('/removeDiary', async(req, res) => {
 })
 
 app.post('/editAccount', async(req, res) => {
-    const newAcc = req.body.user;
+    const newAcc = req.body;
     try{
         const response = await accountModel.replaceOne(
             {_id: newAcc._id},
