@@ -3,6 +3,7 @@ const connectDB = require('./db.js');
 const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
+const { message } = require("antd");
 
 const app = express()
 
@@ -90,7 +91,26 @@ app.post('/removeDiary', async(req, res) => {
     } catch(error){
         return res.json({message: "Remove fail!"});
     }
+})
 
+app.post('/editAccount', async(req, res) => {
+    const newAcc = req.body.user;
+    try{
+        const response = await accountModel.replaceOne(
+            {_id: newAcc._id},
+            {
+                first_name: newAcc.first_name,
+                last_name: newAcc.last_name,
+                birth: newAcc.birth,
+                gender: newAcc.gender,
+                email: newAcc.email,
+                password: newAcc.password
+            }
+        )
+        res.send(newAcc);
+    } catch(error){
+        return res.json({message: "Seve fail!"});
+    }
 })
 
 app.listen(3001, () => {

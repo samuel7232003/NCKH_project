@@ -42,3 +42,13 @@ export async function getAccount(id: string) {
         throw(error);
     }
 }
+
+export async function editAccount(user:User) {
+    try{
+        const respone = await apiInstance.post("/editAccount", user);
+        console.log(respone);
+        return respone.data;
+    } catch (error){
+        throw(error)
+    }
+}

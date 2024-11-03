@@ -39,6 +39,7 @@
     align-items: center;
     position: relative;
     margin-bottom: 20px;
+    height: 48px;
 }
 
 .main-personal .name::after{
@@ -48,6 +49,26 @@
     background-color: #000;
     position: absolute;
     bottom: 0px;
+}
+
+.main-personal .name .edit-name{
+    display: flex;
+    gap: 10px;
+}
+
+.main-personal .name .edit-name input{
+    border: rgba(201, 201, 201, 0.7) solid 1px;
+    padding: 5px 10px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.main-personal .name .edit-name fieldset:first-child{
+    width: 150px;
+}
+
+.main-personal .name .edit-name fieldset:nth-child(2){
+    width: 100px;
 }
 
 .main-personal .name .title{
@@ -81,8 +102,13 @@
     margin-bottom: 20px;
 }
 
+.main-personal .birth-gen .val{
+    font-weight: bold;
+}
+
 .main-personal .birth-gen .ant-select{
     min-width: 90px;
+    font-weight: bold;
 }
 
 .main-personal .acc{
@@ -108,8 +134,31 @@
     width: 100px;
 }
 
+.main-personal .acc .info > input{
+    padding: 0 5px;
+    background-color: #f3f3f3;
+    border: rgba(201, 201, 201, 0.7) solid 1px;
+}
+
 .main-personal .acc .info .val{
     font-style: italic;
+}
+
+.main-personal .acc .info .edit-pwd{
+    display: flex;
+    gap: 10px;
+}
+
+.main-personal .acc .info .edit-pwd fieldset{
+    width: 140px;
+}
+
+.main-personal .acc .info .edit-pwd input{
+    width: 100%;
+    padding: 0 5px;
+    font-size: 12px;
+    background-color: #f3f3f3;
+    border: rgba(201, 201, 201, 0.7) solid 1px;
 }
 
 .main-personal .acc figure{
