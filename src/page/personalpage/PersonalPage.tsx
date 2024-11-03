@@ -34,7 +34,6 @@ export default function PersonalPage(){
     }, [editAcc])
 
     const confirm: PopconfirmProps['onConfirm'] = (e) => {
-        console.log(acc);
         if(acc.last_name === "") {
             message.error("Tên của bạn không được để trống! Lưu thất bại!");
         }

@@ -103,10 +103,10 @@ app.post('/editAccount', async(req, res) => {
                 birth: newAcc.birth,
                 gender: newAcc.gender,
                 email: newAcc.email,
-                password: newAcc.password
+                password: newAcc.password,
+                avatar: newAcc.avatar
             }
         )
-        res.send(newAcc);
     } catch(error){
         return res.json({message: "Seve fail!"});
     }
