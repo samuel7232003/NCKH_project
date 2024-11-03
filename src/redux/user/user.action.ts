@@ -16,7 +16,7 @@ export const getUser = (id: string):ThunkAction<void, RootState, unknown, AnyAct
 
 export const editUser = (user: User):ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) => {
+        dispatch(userActions.setUser({...user}));
         const res: User = await editAccount(user);
-        dispatch(userActions.setUser(user));
     }
 }

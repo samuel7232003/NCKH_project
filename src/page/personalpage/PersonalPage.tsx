@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import './personalpage.css'
 import { useEffect, useState } from "react";
 import { editUser } from "../../redux/user/user.action";
+import { User } from "../../redux/user/user.state";
 
 export default function PersonalPage(){
     const account = useAppSelector(state => state.user.user);
@@ -13,10 +14,12 @@ export default function PersonalPage(){
     const [editAcc, setEditAcc] = useState(false);
     const [confirmPwd, setConfirmPwd] = useState("");
     const dispatch = useAppDispatch();
+    const [base64, setBase64] = useState<string>();
 
     useEffect(() => {
-        setAcc(account);
+        setBase64(account.avatar);
         setConfirmPwd(account.password);
+        setAcc({...account});
     },[account])
 
     useEffect(() => {
@@ -33,6 +36,14 @@ export default function PersonalPage(){
         setConfirmPwd("");
     }, [editAcc])
 
+    async function changeUser(acc:User) {
+        try {
+            const res = await dispatch(editUser(acc));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const confirm: PopconfirmProps['onConfirm'] = (e) => {
         if(acc.last_name === "") {
             message.error("Tên của bạn không được để trống! Lưu thất bại!");
@@ -46,7 +57,9 @@ export default function PersonalPage(){
             setEditAcc(false);
         }
         else{
-            dispatch(editUser(acc));
+            changeUser(acc);
+            setEditAcc(false);
+            setEditInfo(false);
             message.success("Đã lưu thông tin thành công!");
         }
     };
@@ -56,11 +69,29 @@ export default function PersonalPage(){
         setEditAcc(false);
         message.info('Đã hủy lưu những thay đổi!');
     };
+
+    function handleUpload(e: React.ChangeEvent<HTMLInputElement>){
+        const files = e.target.files;
+        if(files){
+            const reader = new FileReader();
+            reader.onload = _handleReaderLoaded;
+            reader.readAsBinaryString(files[0]);
+        }
+    }
+
+    const _handleReaderLoaded = (readerEvt: any) => {
+        let binaryString = readerEvt.target.result;
+        setBase64(btoa(binaryString))
+        setAcc({...acc, avatar: btoa(binaryString)});
+    }
     
     return(
         <main className="main-personal">
             {account &&<div>
-                <figure className="ava"><img src={`data:image/png;base64,${account.avatar}`} alt="" /></figure>
+                <figure className="ava">
+                    {base64 && <img src={`data:image/png;base64,${base64}`} alt="" />}
+                    <div><input onChange={(e) => handleUpload(e)} type="file" accept=".jpg, .png" /></div>
+                </figure>
                 <div className="name">
                     <p className="title">Họ và tên:</p>
                     {editInfo ? 

@@ -22,15 +22,34 @@
 
 .main-personal .ava{
     height: 280px;
+    width: 280px;
     overflow: hidden;
     border-radius: 100%;
     border: #d9d9d9 solid 5px;
     margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.main-personal .ava div{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(201, 201, 201, 0.7);
+    opacity: 0;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-personal .ava:hover div{
+    opacity: 1;
 }
 
 .main-personal .ava img{
     height: 100%;
-    width: auto;
 }
 
 .main-personal .name{

@@ -61,7 +61,12 @@ header.main .noti_ava .ava{
     height: 58px;
     width: 58px;
     border-radius: 100%;
+    overflow: hidden;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
 }
 
 header.main .noti_ava .ava img{
@@ -92,6 +97,7 @@ header.main .noti_ava .ava img{
     background-color: #d9d9d9;
     padding: 5px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .ava-box .my-infor .main{
