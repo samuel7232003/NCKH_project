@@ -7,6 +7,7 @@ import Signup from "./components/signup/Signup";
 import Homev2 from "./screens/Homev2";
 import Dashboard from "./page/dashboard/Dashboard";
 import DiaryPage from "./page/diarypage/DiaryPage";
+import PersonalPage from "./page/personalpage/PersonalPage";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
             {
                 path:"diarypage",
                 element: <DiaryPage/>
+            },
+            {
+                path:"personal",
+                element: <PersonalPage/>
             }
         ]
     }

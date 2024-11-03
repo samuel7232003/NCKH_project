@@ -4,7 +4,9 @@ export interface User{
     password: string,
     first_name: string,
     last_name: string,
-    avatar: string
+    avatar: string,
+    birth: string,
+    gender: string
 }
 
 export interface UserListModel{

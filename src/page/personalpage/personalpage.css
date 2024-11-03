@@ -1,0 +1,137 @@
+.main-personal{
+    height: calc(100vh - 70px);
+    background-image: url('../../image/background.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-personal > div{
+    background-color: white;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    border-radius: 8px;
+    height: 660px;
+    width: 592px;
+    padding: 20px 80px;
+    align-items: center;
+}
+
+.main-personal .ava{
+    height: 280px;
+    overflow: hidden;
+    border-radius: 100%;
+    border: #d9d9d9 solid 5px;
+    margin-bottom: 10px;
+}
+
+.main-personal .ava img{
+    height: 100%;
+    width: auto;
+}
+
+.main-personal .name{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.main-personal .name::after{
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color: #000;
+    position: absolute;
+    bottom: 0px;
+}
+
+.main-personal .name .title{
+    margin-right: 30px;
+}
+
+.main-personal .name .val{
+    font-weight: bold;
+    font-size: 32px;
+    max-width: 300px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.main-personal .name figure{
+    position: absolute;
+    right: 0px;
+    height: 24px;
+}
+
+.main-personal .name figure img{
+    height: 100%;
+    width: auto;
+}
+
+.main-personal .birth-gen{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.main-personal .birth-gen .ant-select{
+    min-width: 90px;
+}
+
+.main-personal .acc{
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.main-personal .acc h3{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.main-personal .acc .info{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.main-personal .acc .info .title{
+    width: 100px;
+}
+
+.main-personal .acc .info .val{
+    font-style: italic;
+}
+
+.main-personal .acc figure{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.main-personal .save-btn{
+    width: 172px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #16c0e8;
+    border: #16c0e8 solid 2px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.main-personal .save-btn:hover{
+    background-color: #e7f9fc;
+}

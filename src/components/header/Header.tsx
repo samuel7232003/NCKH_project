@@ -84,7 +84,7 @@ export default function Header(){
             {
                 (subBox === "ava") &&
                     <div className="ava-box">
-                        <div className="my-infor">
+                        <div onClick={() => {navigate('./personal'); setSubBox(null)}} className="my-infor">
                             <div className="main">
                                 <figure><img src={`data:image/png;base64,${account.avatar}`} alt="" /></figure>
                                 <p>{account.first_name} {account.last_name}</p>
