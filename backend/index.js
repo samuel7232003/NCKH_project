@@ -140,7 +140,7 @@ app.post('/addTask', async(req, res) =>{
         const res = await taskModel.find(query);
         return res.send(res);
     } catch(error){
-        return res.json({message: "Add faied!"});
+        return res.json({message: "Add faied!", error: error});
     }
 })
 
