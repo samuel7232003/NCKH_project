@@ -135,9 +135,22 @@ app.post('/addTask', async(req, res) =>{
     const type = req.body.message;
     try{
         const response = await diaryModel.create({idUser,time, date, content, type});
-        return res.json({message: "Add success!"});
+        const query = {};
+        query.idUser = idUser;
+        const res = await taskModel.find(query);
+        return res.send(res);
     } catch(error){
         return res.json({message: "Add faied!"});
+    }
+})
+
+app.get('/removeTask/:id', async(req, res) => {
+    const _id = req.params.id;
+    try{
+        const response = await taskModel.deleteOne({_id});
+        return res.json({message: "Remove success!"});
+    } catch(error){
+        return res.json({message: "Remove fail!"});
     }
 })
 

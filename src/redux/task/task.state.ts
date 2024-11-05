@@ -7,12 +7,12 @@ export interface Task{
     type: string;
 }
 
-export interface listTask{
+export interface ListTask{
     idUser: string;
-    task: Task[];
+    tasks: Task[];
 }
 
 export interface TaskModel{
     task: Task;
-    listTask: listTask;
+    listTask: ListTask;
 }
