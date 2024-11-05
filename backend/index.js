@@ -134,7 +134,7 @@ app.post('/addTask', async(req, res) =>{
     const content = req.body.content;
     const type = req.body.type;
     try{
-        const response = await diaryModel.create({idUser,time, date, content, type});
+        const response = await taskModel.create({idUser,time, date, content, type});
         const query = {};
         query.idUser = idUser;
         const res = await taskModel.find(query);
