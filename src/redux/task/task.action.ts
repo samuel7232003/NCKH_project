@@ -25,6 +25,7 @@ export const addNewTask = (task: Task): ThunkAction<void, RootState, unknown, An
     }
     return async (dispatch, getState) =>{
         const respone = await addTask(task);
+        console.log(respone);
         const data:ListTask = {idUser: task.idUser, tasks: respone};
         const sortData:ListTask = {...data, tasks: data.tasks.sort(compareDates)};
         dispatch(taskAction.setListTask(sortData));

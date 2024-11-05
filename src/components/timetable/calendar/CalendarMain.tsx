@@ -1,11 +1,11 @@
-import { Calendar, CalendarProps, DatePicker, Select, TimePicker, Tooltip } from 'antd'
+import { Calendar, CalendarProps, DatePicker, message, Select, TimePicker, Tooltip } from 'antd'
 import './calendarmain.css'
 import { Dayjs } from 'dayjs';
 import list_icon from './images/Arhives_alt.png'
 import { User } from '../../../redux/user/user.state';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/builder';
-import { getListTask } from '../../../redux/task/task.action';
+import { addNewTask, getListTask } from '../../../redux/task/task.action';
 import home_icon from './images/Home_duotone.png'
 import school_icon from './images/Basket.png'
 import ousside_icon from './images/Map.png'
@@ -66,7 +66,12 @@ export default function CalendarMain({account}:Props){
     }
 
     function handleSave(){
-        
+        const add = async () =>{
+            const res = await dispatch(addNewTask(newTask));
+        }
+        add();
+        setOpenAddBox(false);
+        message.success("Thêm công việc mới thành công!")
     }
 
     return(
