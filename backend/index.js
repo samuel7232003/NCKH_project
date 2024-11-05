@@ -134,13 +134,10 @@ app.post('/addTask', async(req, res) =>{
     const content = req.body.content;
     const type = req.body.type;
     try{
-        const response = await taskModel.create({idUser,time, date, content, type});
-        const query = {};
-        query.idUser = idUser;
-        const res = await taskModel.find(query);
-        return res.send(res);
+        const response = await taskModel.create({idUser, time, date, content, type});
+        return res.json({message: "Remove success!"});
     } catch(error){
-        return res.json({message: "Add faied!", error: error});
+        return res.json({message: "Add faied!"});
     }
 })
 
