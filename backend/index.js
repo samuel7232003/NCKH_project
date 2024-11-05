@@ -135,7 +135,7 @@ app.post('/addTask', async(req, res) =>{
     const type = req.body.type;
     try{
         const response = await taskModel.create({idUser, time, date, content, type});
-        return res.json({message: "Remove success!"});
+        return res.json({message: "add success!"});
     } catch(error){
         return res.json({message: "Add faied!"});
     }

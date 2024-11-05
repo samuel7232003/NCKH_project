@@ -18,3 +18,12 @@ export async function getTasks(id: string) {
         throw(error)
     }
 }
+
+export async function deleteTask(id: string){
+    try {
+        const respone = await apiInstance.get(`./removeTask/${id}`);
+        return respone.data;
+    } catch (error) {
+        throw(error)
+    }
+}

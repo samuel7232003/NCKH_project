@@ -5,7 +5,7 @@ import list_icon from './images/Arhives_alt.png'
 import { User } from '../../../redux/user/user.state';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/builder';
-import { addNewTask, getListTask } from '../../../redux/task/task.action';
+import { addNewTask, getListTask, removeTask } from '../../../redux/task/task.action';
 import home_icon from './images/Home_duotone.png'
 import school_icon from './images/Basket.png'
 import ousside_icon from './images/Map.png'
@@ -23,13 +23,14 @@ export default function CalendarMain({account}:Props){
     const dispatch = useAppDispatch();
     const listTask = useAppSelector(state => state.task.listTask);
     const [openAddBox, setOpenAddBox] = useState(false);
-    const [newTask, setNewTask] = useState<Task>({_id:"", idUser: account._id, time: "", date: "", type: "home", content:""});
+    const [newTask, setNewTask] = useState<Task>(initialTaskState.task);
 
     useEffect(() => {
         const fetchData = async () => {
             if(account._id!=="") dispatch(getListTask(account._id));
         }
         fetchData();
+        setNewTask({...newTask, idUser: account._id, type: "home"});
     }, [account])
 
     const getListData = (value: Dayjs) => {
@@ -74,6 +75,14 @@ export default function CalendarMain({account}:Props){
         message.success("Thêm công việc mới thành công!")
     }
 
+    function handleRemove(id: string){
+        const remove = async () =>{
+            const res = await dispatch(removeTask(id, account._id));
+        }
+        remove();
+        message.success("Xóa công việc thành công!")
+    }
+
     return(
         <div className='calendarmain'>
             <div className="calendarCpn">
@@ -99,7 +108,7 @@ export default function CalendarMain({account}:Props){
                                 <p className='content'>{value.content}</p>
                             </div>
                             <div className='addBtn'>
-                            <figure className='removeTask'><img src={remove_icon} alt="" /></figure>
+                            <figure onClick={() => handleRemove(value._id)} className='removeTask'><img src={remove_icon} alt="" /></figure>
                         </div>
                         </li>
                     )}
