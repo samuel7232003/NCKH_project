@@ -1,0 +1,115 @@
+.calendarmain{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendarmain .calendarCpn{
+    height: 100%;
+    width: 610px;
+    border-radius: 8px;
+    border: #d9d9d9 solid 1px;
+    overflow: hidden;
+    padding: 0 5px;
+}
+
+.calendarmain .calendarCpn thead th{
+    font-weight: bold;
+    position: relative;
+    z-index: 0;
+}
+
+.calendarmain .calendarCpn thead th:first-child{
+    color: white;
+}
+
+.calendarmain .calendarCpn thead th:first-child::after{
+    background-color: rgb(220, 59, 59);
+}
+
+.calendarmain .calendarCpn thead th::after{
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 90%;
+    top: 0;
+    background-color: #d9d9d9;
+    right: 0;
+    z-index: -1;
+}
+
+.calendarmain .calendarCpn .ant-picker-calendar{
+    overflow: hidden !important;  
+}
+
+.calendarmain .calendarCpn .ant-picker-cell-inner{
+    height: 58px;
+}
+
+.calendarmain .todolist{
+    height: 100%;
+    width: 362px;
+    border-radius: 8px;
+    padding: 20px 10px;
+    border: #d9d9d9 solid 1px;
+}
+
+.calendarmain .todolist .todo-title{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.calendarmain .todolist .todo-title::after{
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #d9d9d9;
+}
+
+.calendarmain .todolist .todo-title h3{
+    font-weight: bold;
+}
+
+.calendarmain .todo-list{
+    max-height: 350px;
+    overflow-y: scroll;
+}
+
+.calendarmain .todo-list li{
+    height: 60px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #2CBA00;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.calendarmain .todo-list li .datenum{
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    color: #2CBA00;
+    border-radius: 25px;
+    margin-right: 10px;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+}
+
+.calendarmain .todo-list li .time{
+    font-style: italic;
+    font-size: 10px;
+}
+
+.calendarmain .todo-list li .content{
+    font-weight: bold;
+}

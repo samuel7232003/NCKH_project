@@ -1,0 +1,35 @@
+.timetable{
+    height: calc(100vh - 70px);
+    background-image: url('../../image/background.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timetable > div {
+    width: 1024px;
+    height: 680px;
+    background-color: white;
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.timetable .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.timetable .title h2{
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.timetable .calendar{
+    width: 100%;
+    height: 435px;
+}

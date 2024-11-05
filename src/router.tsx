@@ -8,6 +8,7 @@ import Homev2 from "./screens/Homev2";
 import Dashboard from "./page/dashboard/Dashboard";
 import DiaryPage from "./page/diarypage/DiaryPage";
 import PersonalPage from "./page/personalpage/PersonalPage";
+import Timetable from "./page/timetable/Timetable";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             {
                 path:"personal",
                 element: <PersonalPage/>
+            },
+            {
+                path:"timetable",
+                element: <Timetable/>
             }
         ]
     }

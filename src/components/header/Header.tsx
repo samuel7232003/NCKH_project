@@ -56,19 +56,19 @@ export default function Header(){
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="./timetable">
                             <figure><img src={calendar_icon} alt="" /></figure>
                             <p>Thời khóa biểu</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="./">
                             <figure><img src={chat_icon} alt="" /></figure>
                             <p>Trò chuyện</p>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="./">
                             <figure><img src={game_icon} alt="" /></figure>
                             <p>Giải trí</p>
                         </Link>

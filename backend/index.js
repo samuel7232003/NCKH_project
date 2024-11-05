@@ -4,6 +4,7 @@ const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const taskModel = require("./models/Task.js");
 
 const app = express()
 
@@ -114,6 +115,29 @@ app.post('/editAccount', async(req, res) => {
         )
     } catch(error){
         return res.json({message: "Seve fail!"});
+    }
+})
+
+app.get('/listTask/:id', async(req, res) => {
+    const idUser = req.params.id;
+    const query = {};
+    if(idUser) query.idUser = idUser;
+    const response = await taskModel.find(query);
+    if(!response) return res.sendStatus(401);
+    res.send(response);
+})
+
+app.post('/addTask', async(req, res) =>{
+    const idUser = req.body.idUser;
+    const time = req.body.time;
+    const date = req.body.date;
+    const content = req.body.survey;
+    const type = req.body.message;
+    try{
+        const response = await diaryModel.create({idUser,time, date, content, type});
+        return res.json({message: "Add success!"});
+    } catch(error){
+        return res.json({message: "Add faied!"});
     }
 })
 
