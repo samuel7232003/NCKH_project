@@ -14,10 +14,6 @@ app.use(cors({
     origin: "*"
 }))
 
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-app.use(bodyParser.text({ limit: '200mb' }));
-
 connectDB()
 
 const token = "token_login"
@@ -42,8 +38,7 @@ app.post('/signup', async (req, res) => {
     const password = req.body.password;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
-    const fs = require('fs');
-    const base64Image = fs.readFileSync('./images/avatardefault.png').toString('base64');
+    const base64Image = 'https://res.cloudinary.com/df7mhs6xj/image/upload/v1730885237/gvh57hvea5d1e5sjqjrx.png';
     const checkRes = await accountModel.findOne({email});
     if(checkRes) return res.json({message: "Email exited!"});
     else {
