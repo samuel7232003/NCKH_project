@@ -8,6 +8,7 @@ import { editUser } from "../../redux/user/user.action";
 import { User } from "../../redux/user/user.state";
 import axios from "axios";
 
+
 export default function PersonalPage(){
     const account = useAppSelector(state => state.user.user);
     const [acc, setAcc] = useState(account);
@@ -68,7 +69,7 @@ export default function PersonalPage(){
         setEditAcc(false);
         message.info('Đã hủy lưu những thay đổi!');
     };
-
+  
     function handleUpload(e: React.ChangeEvent<HTMLInputElement>){
         let file;
         if(e.target.files) file = e.target.files[0];

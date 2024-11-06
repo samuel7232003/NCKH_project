@@ -1,5 +1,5 @@
 import { User } from "../redux/user/user.state";
-import { apiInstance, handleError } from "./api";
+import { apiInstance } from "./api";
 
 export interface accountLogin {
     email: string;
