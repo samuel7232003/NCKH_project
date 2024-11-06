@@ -4,8 +4,6 @@ const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
 const taskModel = require("./models/Task.js");
-const fileUploader = require('./config/cloudinary.config');
-
 
 const app = express()
 
@@ -146,14 +144,6 @@ app.get('/removeTask/:id', async(req, res) => {
         return res.json({message: "Remove fail!"});
     }
 })
-
-app.post('./cloundinary-upload', fileUploader.single('file'), (req, res, next) => {
-    if(!req.file){
-        next(new Error("No file upload!"));
-        return;
-    }
-    res.json({secure_url: req.file.path});
-});
 
 app.listen(3001, () => {
     console.log("App is running")
