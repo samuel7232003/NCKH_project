@@ -3,8 +3,9 @@ const connectDB = require('./db.js');
 const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const taskModel = require("./models/Task.js");
+const fileUploader = require('./config/cloudinary.config');
+
 
 const app = express()
 
@@ -13,10 +14,6 @@ app.use(express.json())
 app.use(cors({
     origin: "*"
 }))
-
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
-app.use(bodyParser.text({ limit: '200mb' }));
 
 connectDB()
 
@@ -150,6 +147,14 @@ app.get('/removeTask/:id', async(req, res) => {
         return res.json({message: "Remove fail!"});
     }
 })
+
+app.post('./cloundinary-upload', fileUploader.single('file'), (req, res, next) => {
+    if(!req.file){
+        next(new Error("No file upload!"));
+        return;
+    }
+    res.json({secure_url: req.file.path});
+});
 
 app.listen(3001, () => {
     console.log("App is running")
