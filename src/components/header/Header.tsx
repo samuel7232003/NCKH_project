@@ -78,7 +78,7 @@ export default function Header(){
             <div className="noti_ava">
                 <figure className="noti"><img src={noti_icon} alt="" /></figure>
                 <figure className="ava" onClick={() => handleOpenBox("ava")}>
-                    {(!account.avatar) ? <p>Loading!</p> : <img src={`data:image/png;base64,${account.avatar}`} alt="" />}
+                    {(!account.avatar) ? <p>Loading!</p> : <img src={account.avatar} alt="" />}
                 </figure>
             </div>
             {

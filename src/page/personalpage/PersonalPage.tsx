@@ -6,7 +6,8 @@ import './personalpage.css'
 import { useEffect, useState } from "react";
 import { editUser } from "../../redux/user/user.action";
 import { User } from "../../redux/user/user.state";
-import { cloudinaryUpload } from "../../service/uploads";
+import axios from "axios";
+
 
 export default function PersonalPage(){
     const account = useAppSelector(state => state.user.user);
@@ -15,10 +16,8 @@ export default function PersonalPage(){
     const [editAcc, setEditAcc] = useState(false);
     const [confirmPwd, setConfirmPwd] = useState("");
     const dispatch = useAppDispatch();
-    const [base64, setBase64] = useState<string>();
 
     useEffect(() => {
-        setBase64(account.avatar);
         setConfirmPwd(account.password);
         setAcc({...account});
     },[account])
@@ -70,28 +69,19 @@ export default function PersonalPage(){
         setEditAcc(false);
         message.info('Đã hủy lưu những thay đổi!');
     };
-
-    // function handleUpload(e: React.ChangeEvent<HTMLInputElement>){
-    //     const files = e.target.files;
-    //     if(files){
-    //         const reader = new FileReader();
-    //         reader.onload = _handleReaderLoaded;
-    //         reader.readAsBinaryString(files[0]);
-    //     }
-    // }
-
-    // const _handleReaderLoaded = (readerEvt: any) => {
-    //     let binaryString = readerEvt.target.result;
-    //     const str = btoa(binaryString);
-    //     setBase64(str)
-    //     setAcc({...acc, avatar: str});
-    // }
-
-    const handleFileUpload = (e:React.ChangeEvent<HTMLInputElement>) =>{
-        const uploadData = new FormData();
-        if(e.target.files) {
-            uploadData.append("file", e.target.files[0], "file");
-            cloudinaryUpload(uploadData);
+  
+    function handleUpload(e: React.ChangeEvent<HTMLInputElement>){
+        let file;
+        if(e.target.files) file = e.target.files[0];
+        if(file){
+            console.log(file);
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", 'qwertyu');
+            axios.post('https://api.cloudinary.com/v1_1/df7mhs6xj/image/upload', formData).then((res) => {
+                const url = res.data.secure_url;
+                setAcc({...acc, avatar: url});
+            })
         }
     }
     
@@ -99,8 +89,8 @@ export default function PersonalPage(){
         <main className="main-personal">
             {account &&<div>
                 <figure className="ava">
-                    {base64 && <img src={`data:image/png;base64,${base64}`} alt="" />}
-                    <div><input onChange={(e) => handleFileUpload(e)} type="file" accept=".jpg, .png" /></div>
+                    {(acc.avatar!=="") && <img src={acc.avatar} alt="" />}
+                    <div><input onChange={(e) => handleUpload(e)} type="file" accept=".jpg, .png" /></div>
                 </figure>
                 <div className="name">
                     <p className="title">Họ và tên:</p>

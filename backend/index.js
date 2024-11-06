@@ -39,8 +39,7 @@ app.post('/signup', async (req, res) => {
     const password = req.body.password;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
-    const fs = require('fs');
-    const base64Image = fs.readFileSync('./images/avatardefault.png').toString('base64');
+    const base64Image = 'https://res.cloudinary.com/df7mhs6xj/image/upload/v1730885237/gvh57hvea5d1e5sjqjrx.png';
     const checkRes = await accountModel.findOne({email});
     if(checkRes) return res.json({message: "Email exited!"});
     else {
