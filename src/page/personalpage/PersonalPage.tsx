@@ -52,7 +52,7 @@ export default function PersonalPage(){
             message.error("Email không được để trống! Lưu thất bại!");
             setEditAcc(false);
         }
-        else if(acc.password !== confirmPwd || acc.password==="") {
+        else if((acc.password !== confirmPwd || acc.password==="") && editAcc===true) {
             message.error("Xác nhận mật khẩu thất bại! Lưu thất bại!");
             setEditAcc(false);
         }

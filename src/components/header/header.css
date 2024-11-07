@@ -111,6 +111,11 @@ header.main .noti_ava .ava img{
     width: 40px;
     border-radius: 100%;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    overflow: hidden;
 }
 
 .my-infor .main figure img{

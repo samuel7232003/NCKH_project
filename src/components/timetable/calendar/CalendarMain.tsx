@@ -60,9 +60,9 @@ export default function CalendarMain({account}:Props){
 
     function getTypeStyle(type: string){
         switch (type){
-            case "home": return {icon: home_icon, content: "Nhà", color: "#2CBA00"};
-            case "school": return {icon: school_icon, content: "Trường", color: "#16C0E8"};
-            default: return {icon: ousside_icon, content: "Bên ngoài", color: "#FFC600"};
+            case "home": return {icon: home_icon, content: "Nhà", color: "#7AB2D3"};
+            case "school": return {icon: school_icon, content: "Trường", color: "#FFBF61"};
+            default: return {icon: ousside_icon, content: "Bên ngoài", color: "#9B7EBD"};
         }
     }
 

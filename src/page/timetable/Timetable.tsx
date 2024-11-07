@@ -1,3 +1,4 @@
+import Timeline from '../../components/dashboard/timeline/Timeline';
 import CalendarMain from '../../components/timetable/calendar/CalendarMain'
 import { useAppSelector } from '../../redux/builder'
 import tree_icon from './images/Beige Blue Simple Illustrated Study Blog Logo (4) 2.png'
@@ -16,6 +17,9 @@ export default function Timetable(){
                 </div>
                 <div className='calendar'>
                     <CalendarMain account={account}/>
+                </div>
+                <div className='timeline-main'>
+                    <Timeline/>
                 </div>
             </div>
         </main>

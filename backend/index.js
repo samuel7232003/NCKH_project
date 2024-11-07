@@ -4,6 +4,7 @@ const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
 const taskModel = require("./models/Task.js");
+const dailyTaskModel = require("./models/DailyTask.js")
 
 const app = express()
 
@@ -139,6 +140,40 @@ app.get('/removeTask/:id', async(req, res) => {
     const _id = req.params.id;
     try{
         const response = await taskModel.deleteOne({_id});
+        return res.json({message: "Remove success!"});
+    } catch(error){
+        return res.json({message: "Remove fail!"});
+    }
+})
+
+app.get('/listDailyTask/:id', async(req, res) => {
+    const idUser = req.params.id;
+    const query = {};
+    if(idUser) query.idUser = idUser;
+    const response = await dailyTaskModel.find(query);
+    if(!response) return res.sendStatus(401);
+    res.send(response);
+})
+
+app.post('/addDailyTask', async(req, res) =>{
+    const idUser = req.body.idUser;
+    const start = req.body.start;
+    const end = req.body.end;
+    const content = req.body.content;
+    const type = req.body.type;
+    const color = req.body.color
+    try{
+        const response = await dailyTaskModel.create({idUser, start, end, content, type, color});
+        return res.json({message: "add success!"});
+    } catch(error){
+        return res.json({message: "Add faied!"});
+    }
+})
+
+app.get('/removeDailyTask/:id', async(req, res) => {
+    const _id = req.params.id;
+    try{
+        const response = await dailyTaskModel.deleteOne({_id});
         return res.json({message: "Remove success!"});
     } catch(error){
         return res.json({message: "Remove fail!"});

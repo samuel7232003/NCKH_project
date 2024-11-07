@@ -32,4 +32,13 @@
 .timetable .calendar{
     width: 100%;
     height: 435px;
+    margin-bottom: 15px;
+}
+
+.timetable .timeline-main{
+    height: 145px;
+}
+
+.timetable .timeline-main .timeline{
+    height: 100%;
 }
