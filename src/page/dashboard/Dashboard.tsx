@@ -20,7 +20,7 @@ export default function Dashboard(){
                         <Dailynote account={account} type="today"/>
                         <FeelingChart account={account} />
                     </div>
-                    <Timeline/>
+                    <Timeline account={account}/>
                     <div className="option">
                         <div className="chat">
                             <div className="sub">

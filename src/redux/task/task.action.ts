@@ -25,7 +25,6 @@ export const addNewTask = (task: Task): ThunkAction<void, RootState, unknown, An
     }
     return async (dispatch, getState) =>{
         const respone = await addTask(task);
-        console.log(respone);
         const res :Task[] = await getTasks(task.idUser);
         const data:ListTask = {idUser: task.idUser, tasks: res};
         const sortData:ListTask = {...data, tasks: data.tasks.sort(compareDates)};
@@ -39,7 +38,6 @@ export const removeTask = (id: string, idUser: string): ThunkAction<void, RootSt
     }
     return async (dispatch, getState) => {
         const respone = await deleteTask(id);
-        console.log(respone);
         const res :Task[] = await getTasks(idUser);
         const data:ListTask = {idUser: idUser, tasks: res};
         const sortData:ListTask = {...data, tasks: data.tasks.sort(compareDates)};

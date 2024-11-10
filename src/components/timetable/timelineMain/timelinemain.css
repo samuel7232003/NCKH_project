@@ -1,0 +1,155 @@
+.timelinemain{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.timelinemain .timeline{
+    height: 100%;
+    width: 612px;
+    background-color: white;
+}
+
+.timelinemain .timeline .grid{
+    margin: 10px 20px;
+    width: 532px;
+    padding: 0 10px;
+}
+
+.timelinemain .timeline .grid p{
+    font-size: 10px;
+}
+
+.timelinemain .timeline .grid p::after{
+    height: 100px;
+}
+
+.timelinemain .timeline .value{
+    margin-left: 38px;
+}
+
+.timelinemain .timeline .value li{
+    height: 36px;
+}
+
+.timelinemain .timeline .value li:hover figure.delete{
+    display: block;
+}
+
+.timelinemain .timeline .edit{
+    display: none;
+}
+
+.timelinemain .add-dailyTask{
+    width: 362px;
+    height: 100%;
+    border: #d9d9d9 solid 1px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+}
+
+.timelinemain .add-dailyTask .title{
+    position: relative;
+    display: flex;
+    gap: 5px;
+    justify-content: start;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+}
+
+.timelinemain .add-dailyTask .title p{
+    font-weight: bold;
+}
+
+.timelinemain .add-dailyTask .time{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.timelinemain .add-dailyTask .time .ant-picker{
+    height: 26px;
+}
+
+.timelinemain .add-dailyTask .style{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.timelinemain .add-dailyTask .style .ant-select{
+    width: 100px;
+}
+
+.timelinemain .add-dailyTask .style .ant-select-selector{
+    background-color: #5c5c5c;
+}
+
+.timelinemain .add-dailyTask .style .ant-select-arrow{
+    color: white;
+}
+
+.timelinemain .add-dailyTask .style figure{
+    display: flex;
+    color: white;
+    height: 20px;
+    align-items: center;
+}
+
+.timelinemain .add-dailyTask .style figure img{
+    height: 100%;
+    width: auto;
+}
+
+.timelinemain .add-dailyTask fieldset{
+    display: flex;
+    justify-content: space-between;
+}
+
+.timelinemain .add-dailyTask fieldset input{
+    background-color: #d9d9d9;
+    padding: 2px 10px;
+    border-radius: 5px;
+    width: 232px;
+}
+
+.timelinemain .add-dailyTask fieldset input::placeholder{
+    font-style: italic;
+}
+
+.timelinemain .add-dailyTask fieldset .add{
+    display: flex;
+    background-color: #16c0e8;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 10px;
+    transition: background-color ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.timelinemain .add-dailyTask fieldset .add:hover{
+    background-color: #5ecce5;
+}
+
+.timelinemain .add-dailyTask fieldset .add p{
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.timelinemain .add-dailyTask .add figure{
+    height: 16px;
+    transition: transform ease-in-out 0.25s;
+}
+
+.timelinemain .add-dailyTask .add figure img{
+    height: 100%;
+}
+
+.timelinemain .add-dailyTask fieldset .add:hover figure{
+    transform: rotate(360deg);
+}

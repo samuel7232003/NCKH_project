@@ -12,6 +12,7 @@
     border: #d9d9d9 solid 1px;
     overflow: hidden;
     padding: 0 5px;
+    background-color: white;
 }
 
 .calendarmain .calendarCpn thead th{
@@ -37,6 +38,7 @@
     background-color: #d9d9d9;
     right: 0;
     z-index: -1;
+    border-radius: 3px;
 }
 
 .calendarmain .calendarCpn .ant-picker-calendar{
@@ -81,6 +83,7 @@
     padding: 20px 10px;
     border: #d9d9d9 solid 1px;
     position: relative;
+    background-color: white;
 }
 
 .calendarmain .todolist .todo-title{
