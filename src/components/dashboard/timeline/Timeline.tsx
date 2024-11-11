@@ -11,7 +11,8 @@ import study_icon from "./images/Book_open_alt_light.png"
 import work_icon from "./images/Basket_light.png"
 import { DailyTask } from '../../../redux/dailyTask/dailyTask.state';
 import remove_icon from './images/Trash (1).png'
-import { message } from 'antd';
+import { message, Tooltip } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 interface Props{
     account: User;
@@ -21,6 +22,7 @@ export default function Timeline({account}:Props){
     const [listTime, setListTime] = useState(["15h", "16h", "15h", "16h", "15h", "16h", "15h", "16h", "15h"]);
     const dispatch = useAppDispatch();
     const listDailyTask = useAppSelector(state => state.dailyTask.listDailyTask);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const now:number = (new Date()).getHours();
@@ -91,6 +93,7 @@ export default function Timeline({account}:Props){
                 {(listDailyTask.idUser!=="")&&
                     <ul>
                         {listDailyTask.dailyTasks.map(index => 
+                            <Tooltip title={index.content}>
                             <li key={index._id} style={{background:`${index.color}`, 
                                 width: `${getLength(index)}px`,
                                 left: `${getLeft(index.start)}px`}}> 
@@ -98,11 +101,12 @@ export default function Timeline({account}:Props){
                                 <p>{index.content}</p>
                                 <figure className='delete' onClick={() => handleDelete(index._id)}><img src={remove_icon} alt="" /></figure>
                             </li>
+                            </Tooltip>
                         )}
                     </ul>
                 }
             </div>
-            <figure className='edit'><img src={edit_icon} alt="" /></figure>
+            <figure className='edit' onClick={() => navigate("./timetable")}><img src={edit_icon} alt="" /></figure>
         </div>
     )
 }

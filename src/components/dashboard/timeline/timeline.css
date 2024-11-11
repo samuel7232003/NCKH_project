@@ -60,6 +60,7 @@
     padding: 0 5px;
     position: absolute;
     overflow: hidden;
+    height: 24px;
 }
 
 .timeline .value li:hover{
@@ -73,7 +74,8 @@
 }
 
 .timeline .value li figure{
-    height: 20px;
+    height: 16px;
+    min-width: 16px;
 }
 
 .timeline .value li figure img{
@@ -95,5 +97,5 @@
     position: absolute;
     top: 5px;
     right: 5px;
-
+    cursor: pointer;
 }
