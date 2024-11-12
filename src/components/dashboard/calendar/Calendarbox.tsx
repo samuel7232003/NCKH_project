@@ -10,6 +10,8 @@ import home_icon from './images/Home_duotone.png'
 import school_icon from './images/Basket.png'
 import ousside_icon from './images/Map.png'
 import { useNavigate } from 'react-router-dom';
+import { sendMessage } from '../../../service/messageService';
+import { Message } from '../../../redux/message/message.state';
 
 interface Props{
     account: User;
@@ -25,7 +27,18 @@ export default function Calendarbox({account}:Props){
             if(account._id!=="") dispatch(getListTask(account._id));
         }
         fetchData();
+        
     }, [account])
+
+    function testtt(){
+        const message:Message = {_id: "", senderId:account._id, roomId: "", type: "join", content:"", time: ""}
+        const test = async () => {
+            const res = await sendMessage(message);
+            console.log(res);
+        } 
+
+        test()
+    }
 
     function getTypeStyle(type: string){
         switch (type){
@@ -41,7 +54,7 @@ export default function Calendarbox({account}:Props){
                 <figure><img src={calendar_icon} alt="" /></figure>
                 <p>Todo-list của bạn</p>
             </div>
-            <div className='calendar'>
+            <div onClick={testtt} className='calendar'>
                 <Calendar fullscreen={false}/>
             </div>
             <ul className='todo-list'>

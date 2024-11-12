@@ -4,7 +4,9 @@ const accountModel = require("./models/Account.js")
 const diaryModel = require("./models/Diary.js")
 const cors = require('cors');
 const taskModel = require("./models/Task.js");
-const dailyTaskModel = require("./models/DailyTask.js")
+const dailyTaskModel = require("./models/DailyTask.js");
+const messageModel = require("./models/Message.js");
+const roomChatModel = require("./models/RoomChat.js");
 
 const app = express()
 
@@ -177,6 +179,58 @@ app.get('/removeDailyTask/:id', async(req, res) => {
         return res.json({message: "Remove success!"});
     } catch(error){
         return res.json({message: "Remove fail!"});
+    }
+})
+
+app.get('/getIdRoom/:id', async(req, res) =>{
+    const senderId = req.params.id;
+    const query = {};
+    if(senderId){
+        query.type = "join"
+        query.senderId = senderId;
+    }
+    try {
+        const response = await messageModel.find(query);
+        if(!response) res.status(401);
+        res.send(response);
+    } catch (error) {
+        return res.json({message: "Get fail!"});
+    }
+})
+
+app.post('/getRooms/', async(req, res) => {
+    const listId = req.body.listId;
+    try {
+        const response = await roomChatModel.find({_id: { $in: listId}});
+        if(!response) res.status(401);
+        res.send(response);
+    } catch (error) {
+        return res.json({message: "Get room fail!"});
+    }
+})
+
+app.post('/addMessage', async(req, res) => {
+    const senderId = req.body.senderId;
+    let roomId = req.body.roomId;
+    const content = req.body.content;
+    const type = req.body.type;
+    const time = req.body.time;
+    const name = "";
+    const avatar = "";
+    const lastMessage = "Đoạn chat mới được tạo!";
+    try {
+        if(type === "join"){
+            const response = await roomChatModel.create({name, avatar, lastMessage});
+            roomId = response._id;
+            const response_ = await messageModel.create({senderId, roomId, content, type, time});
+            return res.json({message: "Add new room success!"});
+        }
+        else {
+            const response = await messageModel.create({sendId:senderId, roomId: roomId, content: content, type: type, time: time});
+            return res.json({message: "Addsuccess!"});
+        }
+    } catch (error) {
+        return res.json({message: "Add fail!", error: error.message});
     }
 })
 

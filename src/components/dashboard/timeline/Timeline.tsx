@@ -93,8 +93,8 @@ export default function Timeline({account}:Props){
                 {(listDailyTask.idUser!=="")&&
                     <ul>
                         {listDailyTask.dailyTasks.map(index => 
-                            <Tooltip title={index.content}>
-                            <li key={index._id} style={{background:`${index.color}`, 
+                            <Tooltip key={index._id} title={index.content}>
+                            <li style={{background:`${index.color}`, 
                                 width: `${getLength(index)}px`,
                                 left: `${getLeft(index.start)}px`}}> 
                                 <figure><img src={getIcon(index.type)} alt="" /></figure>
