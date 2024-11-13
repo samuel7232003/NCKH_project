@@ -17,7 +17,7 @@ app.use(cors({
 
 const http = require("http");
 const server = http.createServer(app);
-const socketIo = require("socket.io")(app, {
+const socketIo = require("socket.io")(server, {
     cors: {
         origin: "*",
     }
@@ -294,4 +294,8 @@ app.get('/getMessages/:id', async (req, res) =>{
 
 app.listen(3001, () => {
     console.log("App is running")
+})
+
+server.listen(3000, () =>{
+    console.log("App is running2")
 })
