@@ -1,0 +1,22 @@
+.chatpage{
+    height: calc(100vh - 70px);
+    background-image: url('../../image/background.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    padding: 15px;
+    gap: 15px;
+}
+
+.chatpage .list-room{
+    height: 100%;
+    width: 310px;
+    min-width: 310px;
+}
+
+.chatpage .chat-box{
+    height: 100%;
+    width: 100%;
+    min-width: 700px;
+    flex-grow: 1;
+}

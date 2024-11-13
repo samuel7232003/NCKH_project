@@ -7,7 +7,6 @@ const taskModel = require("./models/Task.js");
 const dailyTaskModel = require("./models/DailyTask.js");
 const messageModel = require("./models/Message.js");
 const roomChatModel = require("./models/RoomChat.js");
-
 const app = express()
 
 app.use(express.json())
@@ -198,8 +197,8 @@ app.get('/getIdRoom/:id', async(req, res) =>{
     }
 })
 
-app.post('/getRooms/', async(req, res) => {
-    const listId = req.body.listId;
+app.post('/getRoomsByListId/', async(req, res) => {
+    const listId = req.body;
     try {
         const response = await roomChatModel.find({_id: { $in: listId}});
         if(!response) res.status(401);
@@ -209,28 +208,51 @@ app.post('/getRooms/', async(req, res) => {
     }
 })
 
+app.post('/getUsersById', async(req, res) => {
+    const listId = req.body;
+    try {
+        const uniUsers = [... new Set(listId)];
+        const result = await accountModel.find({_id: { $in: uniUsers}});
+        res.send(result);
+    } catch (error) {
+        return res.json({message: "Get users fail!"});
+    }
+})
+
 app.post('/addMessage', async(req, res) => {
     const senderId = req.body.senderId;
-    let roomId = req.body.roomId;
+    const roomId = req.body.roomId;
     const content = req.body.content;
     const type = req.body.type;
     const time = req.body.time;
     const name = "";
     const avatar = "";
+    const isSeen = false;
     const lastMessage = "Đoạn chat mới được tạo!";
     try {
         if(type === "join"){
-            const response = await roomChatModel.create({name, avatar, lastMessage});
-            roomId = response._id;
-            const response_ = await messageModel.create({senderId, roomId, content, type, time});
+            const response = await roomChatModel.create({name, avatar, lastMessage, isSeen});
+            const roomId_ = response._id;
+            const response_ = await messageModel.create({senderId: senderId, roomId: roomId_, content: content, type:"join", time:time});
+            if(content!=="") await messageModel.create({senderId: content, roomId: roomId_, content: senderId, type:"join", time:time});
             return res.json({message: "Add new room success!"});
         }
         else {
-            const response = await messageModel.create({sendId:senderId, roomId: roomId, content: content, type: type, time: time});
+            const response = await messageModel.create({senderId:senderId, roomId: roomId, content: content, type: type, time: time});
             return res.json({message: "Addsuccess!"});
         }
     } catch (error) {
         return res.json({message: "Add fail!", error: error.message});
+    }
+})
+
+app.get('/getMessages/:id', async (req, res) =>{
+    const roomId = req.params.id;
+    try {
+        const response = await messageModel.find({roomId: roomId, type: "message"});
+        res.send(response);
+    } catch (error) {
+        return res.json({message: "Get fail!"});
     }
 })
 

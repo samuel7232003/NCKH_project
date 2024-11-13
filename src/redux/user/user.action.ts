@@ -20,3 +20,9 @@ export const editUser = (user: User):ThunkAction<void, RootState, unknown, AnyAc
         const res: User = await editAccount(user);
     }
 }
+
+export const setUserConnectList = (users : User[]):ThunkAction<void, RootState, unknown, AnyAction> => {
+    return async(dispatch, getState) =>{
+        dispatch(userActions.setUserConnectList([...users]));
+    }
+}

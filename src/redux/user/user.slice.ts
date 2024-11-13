@@ -12,7 +12,8 @@ export const initialUserState:UserListModel = {
         birth: '',
         gender: ''
     },
-    userList: []
+    userList: [],
+    userConnectList: [],
 }
 
 export const userSlice = createSlice({
@@ -24,6 +25,9 @@ export const userSlice = createSlice({
         },
         setUserList(state, action: PayloadAction<User[]>){
             state.userList = action.payload;
+        },
+        setUserConnectList(state, action: PayloadAction<User[]>){
+            state.userConnectList = action.payload;
         }
     }
 })

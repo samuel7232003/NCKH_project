@@ -9,6 +9,7 @@ import Dashboard from "./page/dashboard/Dashboard";
 import DiaryPage from "./page/diarypage/DiaryPage";
 import PersonalPage from "./page/personalpage/PersonalPage";
 import Timetable from "./page/timetable/Timetable";
+import ChatPage from "./page/chatpage/ChatPage";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
             {
                 path:"timetable",
                 element: <Timetable/>
+            },
+            {
+                path: "chatpage",
+                element: <ChatPage/>
             }
         ]
     }

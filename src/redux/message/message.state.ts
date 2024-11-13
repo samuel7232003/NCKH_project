@@ -10,6 +10,9 @@ export interface Message{
 export interface RoomChat{
     _id: string;
     name: string;
+    lastMessage: string;
+    isSeen: boolean;
+    avatar: string;
 }
 
 export interface ListMessage{

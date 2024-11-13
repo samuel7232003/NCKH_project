@@ -1,0 +1,81 @@
+.list-room-main{
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    padding: 12px 20px;
+    height: 100%;
+}
+
+.list-room-main .title{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    position: relative;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.list-room-main .title::after{
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color: #999;
+    bottom: 0;
+    position: absolute;
+}
+
+.list-room-main .title figure{
+    height: 24px;
+}
+
+.list-room-main .title figure img{
+    height: 100%;
+}
+
+.list-room-main .title h2{
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.list-room-main ul{
+    height: calc(100% - 40px);
+    overflow: auto;
+}
+
+.list-room-main ul::-webkit-scrollbar{
+    width: 3px;
+}
+
+.list-room-main ul li{
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    display: flex;
+    height: 64px;
+    align-items: center;
+    padding: 0 12px;
+    gap: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.list-room-main ul li .ava{
+    height: 45px;
+    width: 45px;
+    border-radius: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-room-main ul li .ava .img{
+    height: 100%;
+    width: auto;
+}
+
+.list-room-main ul li .name{
+    font-weight: bold;
+}
+
+.list-room-main ul li .mess{
+    font-size: 12px;
+}

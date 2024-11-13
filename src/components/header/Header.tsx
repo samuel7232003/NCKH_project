@@ -62,7 +62,7 @@ export default function Header(){
                         </Link>
                     </li>
                     <li>
-                        <Link to="./">
+                        <Link to="./chatpage">
                             <figure><img src={chat_icon} alt="" /></figure>
                             <p>Trò chuyện</p>
                         </Link>
