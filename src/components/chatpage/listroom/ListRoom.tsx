@@ -3,7 +3,7 @@ import list_icon from './images/Group_fill.png'
 import addMode_icon from './images/dell_square.png'
 import { User } from "../../../redux/user/user.state";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
-import { Message, RoomChat } from "../../../redux/message/message.state";
+import { RoomChat } from "../../../redux/message/message.state";
 import { getListRoomChat } from "../../../redux/message/message.action";
 import './listroom.css'
 

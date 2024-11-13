@@ -1,3 +1,5 @@
+import { getReceiverSocketId, io } from "../socket/socket.js";
+
 const express = require("express");
 const connectDB = require('./db.js');
 const accountModel = require("./models/Account.js")
@@ -239,8 +241,14 @@ app.post('/addMessage', async(req, res) => {
         }
         else {
             const response = await messageModel.create({senderId:senderId, roomId: roomId, content: content, type: type, time: time});
+            const receiverSocketId = getReceiverSocketId(roomId);
+		    if (receiverSocketId) {
+			// io.to(<socket_id>).emit() used to send events to specific client
+		        io.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
+		    }
             return res.json({message: "Addsuccess!"});
         }
+
     } catch (error) {
         return res.json({message: "Add fail!", error: error.message});
     }

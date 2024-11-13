@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
 import { getListMessage, sendMessage } from "../../../redux/message/message.action";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
 interface Props{
     account: User;
@@ -20,7 +20,8 @@ export default function ChatBox({account, chatBox}:Props){
     const [content, setContent] = useState("");
     const dispatch = useAppDispatch()
     const listMessages = useAppSelector(state => state.message.listMessage);
-    const listUserCont = useAppSelector(state => state.user.userConnectList);
+    const [socket, setSocket] = useState<Socket|null>(null);
+	const [onlineUsers, setOnlineUsers] = useState([]);
 
     useEffect(() => {
         const fetchData = async () =>{
@@ -32,7 +33,20 @@ export default function ChatBox({account, chatBox}:Props){
         }
         fetchData();
 
-        const socket = io();
+        if(chatBox){
+            const socket = io("https://nckh-project.onrender.com", {
+                query: {
+                    roomId: chatBox!._id
+                }
+            });
+    
+            setSocket(socket);
+    
+            socket.on("getOnlineUsers", (users) => {
+                setOnlineUsers(users);
+            });
+        }
+
     }, [chatBox])
 
     function handleSend(){
