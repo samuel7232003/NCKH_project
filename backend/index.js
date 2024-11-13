@@ -1,6 +1,3 @@
-const getReceiverSocketId = require("./socket/socket.js");
-const io = require("./socket/socket.js");
-
 const express = require("express");
 const connectDB = require('./db.js');
 const accountModel = require("./models/Account.js")
@@ -10,7 +7,8 @@ const taskModel = require("./models/Task.js");
 const dailyTaskModel = require("./models/DailyTask.js");
 const messageModel = require("./models/Message.js");
 const roomChatModel = require("./models/RoomChat.js");
-const app = express()
+const server = require("socket.io");
+const app = express();
 
 app.use(express.json())
 
@@ -21,6 +19,7 @@ app.use(cors({
 connectDB()
 
 const token = "token_login"
+
 
 app.use((req, res, next) => {
     if(req.path !== "/login" && req.path !== "/signup" && req.get('authorization') !== token){
@@ -222,6 +221,29 @@ app.post('/getUsersById', async(req, res) => {
     }
 })
 
+const userSocketMap = {}
+
+const getReceiverSocketId = (receiverId) => {
+    return userSocketMap[receiverId];
+}
+
+app.on('connection', (socket) => {
+    console.log("a user connected", socket.id);
+
+	const userId = socket.handshake.query.roomId;
+	if (userId != "undefined") userSocketMap[userId] = socket.id;
+
+	// io.emit() is used to send events to all the connected clients
+	app.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+	// socket.on() is used to listen to the events. can be used both on client and server side
+	socket.on("disconnect", () => {
+		console.log("user disconnected", socket.id);
+		delete userSocketMap[userId];
+		app.emit("getOnlineUsers", Object.keys(userSocketMap));
+	});
+})
+
 app.post('/addMessage', async(req, res) => {
     const senderId = req.body.senderId;
     const roomId = req.body.roomId;
@@ -245,7 +267,7 @@ app.post('/addMessage', async(req, res) => {
             const receiverSocketId = getReceiverSocketId(roomId);
 		    if (receiverSocketId) {
 			// io.to(<socket_id>).emit() used to send events to specific client
-		        io.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
+		        app.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
 		    }
             return res.json({message: "Addsuccess!"});
         }
