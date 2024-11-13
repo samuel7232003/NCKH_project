@@ -20,33 +20,54 @@ export default function ChatBox({account, chatBox}:Props){
     const [content, setContent] = useState("");
     const dispatch = useAppDispatch()
     const listMessages = useAppSelector(state => state.message.listMessage);
+    const [socket, setSocket] = useState<Socket|null>(null);
+	const [onlineUsers, setOnlineUsers] = useState([]);
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-    const [socket, setSocket] = useState<Socket>();
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      };
 
     useEffect(() => {
         const fetchData = async () =>{
             try {
-                if(chatBox) dispatch(getListMessage(chatBox._id));
+                if(chatBox) await dispatch(getListMessage(chatBox._id));
             } catch (error) {
                 console.log(error);
             }
         }
+
         fetchData();
 
-        const i = io("https://nckh-project.onrender.com");
-        setSocket(i);
+        if(socket===null && account._id!=="" && chatBox){
+            const newSocket = io('https://nckh-project.onrender.com', {
+                query: {userId: account._id}
+            });
+        
+            newSocket.on('connect', () => {
+                console.log('Connected to WebSocket server');
+            });
+            setSocket(newSocket);
 
-        socket?.on('sendDataServer', dataGot => {
-            console.log(dataGot);
-        })
+            newSocket.on("getOnlineUsers", (users) => {
+				setOnlineUsers(users);
+			});
 
-        return () => {
-            if (socket) {
-              socket.disconnect();
-            }
-        };
+            newSocket.emit('join-room', chatBox._id);
 
-    }, [chatBox])
+            newSocket.on("receive", (data)=>{
+                fetchData();
+            })
+        }
+    }, [chatBox, account])
+
+    useEffect(() => {
+        
+    }, [account])
+
+    useEffect(() => {
+        console.log(onlineUsers);
+    },[onlineUsers])
 
     function handleSend(){
         const time = dayjs().format("HH:mm, DD/MM");
@@ -59,13 +80,16 @@ export default function ChatBox({account, chatBox}:Props){
                 console.log(error);
             }
         }
-        if(content!=="") send();
+        if(content!==""){
+            send();
+            socket?.emit('send', chatBox?._id)
+        }
         setContent("");
     }
 
     useEffect(() => {
-        console.log(listMessages);
-    }, [listMessages])
+        scrollToBottom();
+    },[listMessages])
 
     return(
         (chatBox) ? <div className="chat-box-main">
@@ -75,7 +99,7 @@ export default function ChatBox({account, chatBox}:Props){
                 <figure className="setting"><img src={setting_icon} alt="" /></figure>
             </div>
             <div className="chat-line">
-                <ul>
+                <ul >
                     {listMessages.messages.map(index => {
                         if(index.senderId === account._id) return <li key={index._id} className="mine">
                            <div className="text">
@@ -92,6 +116,7 @@ export default function ChatBox({account, chatBox}:Props){
                         </li>
                     })}
                 </ul>
+                <div ref={messagesEndRef}></div>
             </div>
             <div className="footer">
                 <Tooltip title="Gửi hình ảnh!"><figure className="addImage-btn"><img src={addImage_icon} alt="" /></figure></Tooltip>

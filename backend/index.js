@@ -231,21 +231,33 @@ app.post('/getUsersById', async(req, res) => {
 
 const userSocketMap = {}
 
-const getReceiverSocketId = (receiverId) => {
-    return userSocketMap[receiverId];
-}
+// const getReceiverSocketId = (receiverId) => {
+//     return userSocketMap[receiverId];
+// }
 
 socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
-    console.log("New client connected" + socket._id); 
-  
-    socket.on("sendDataClient", function(data) { // Handle khi có sự kiện tên là sendDataClient từ phía client
-      socketIo.emit("sendDataServer", { data });// phát sự kiện  có tên sendDataServer cùng với dữ liệu tin nhắn từ phía server
+    console.log("New client connected " + socket.id);
+
+    const userId = socket.handshake.query.userId;
+
+    if (userId != "undefined") userSocketMap[userId] = socket.id;
+
+    socketIo.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+    socket.on('join-room', (data) =>{
+        socket.join(data);
     })
   
-    socket.on("disconnect", () => {
-      console.log("Client disconnected"); // Khi client disconnect thì log ra terminal.
+    socket.on("send", (data) => {
+        socket.to(data).emit("receive", data);
     });
-  });
+
+    socket.on("disconnect", () => {
+        console.log("Client disconnected");
+        delete userSocketMap[userId];
+	    socketIo.emit("getOnlineUsers", Object.keys(userSocketMap));
+    });
+});
 
 app.post('/addMessage', async(req, res) => {
     const senderId = req.body.senderId;
@@ -267,11 +279,11 @@ app.post('/addMessage', async(req, res) => {
         }
         else {
             const response = await messageModel.create({senderId:senderId, roomId: roomId, content: content, type: type, time: time});
-            const receiverSocketId = getReceiverSocketId(roomId);
-		    if (receiverSocketId) {
-			// io.to(<socket_id>).emit() used to send events to specific client
-		        server.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
-		    }
+            // const receiverSocketId = getReceiverSocketId(roomId);
+		    // if (receiverSocketId) {
+			// // io.to(<socket_id>).emit() used to send events to specific client
+		    //     server.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
+		    // }
             return res.json({message: "Addsuccess!"});
         }
 
@@ -290,10 +302,6 @@ app.get('/getMessages/:id', async (req, res) =>{
     }
 })
 
-app.listen(3001, () => {
-    console.log("App is running")
-})
-
-server.listen(3000, () =>{
+server.listen(3001, () =>{
     console.log("App is running2")
 })

@@ -12,6 +12,7 @@ import './header.css'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/builder";
 import { getUser } from "../../redux/user/user.action";
+import { io, Socket } from "socket.io-client";
 
 export default function Header(){
     const account = useAppSelector(state => state.user.user);
@@ -19,17 +20,33 @@ export default function Header(){
     const navigate = useNavigate();
     const [subBox, setSubBox] = useState<"ava"|"noti"|null>(null);
     const [active, setActive] = useState("home");
+    const [socket, setSocket] = useState<Socket|null>(null)
 
     useEffect(() => {
+        const data = localStorage.getItem('email');
         const fectchData = async () => {
-            const data = localStorage.getItem('email');
             if(data) await dispatch(getUser(data));
         }
         fectchData()
     }, []);
 
+    useEffect(() => {
+        if(socket===null && account._id!==""){
+            const newSocket = io('https://nckh-project.onrender.com', {
+                query: {userId: account._id}
+            });
+        
+            newSocket.on('connect', () => {
+                console.log('Connected to WebSocket server');
+            });
+            setSocket(newSocket);
+        }
+    }, [account])
+
     function handleLogout(){
         localStorage.clear();
+        if(socket) socket.disconnect();
+        setSocket(null);
         setTimeout(() => navigate("/"), 1000);
     }
 

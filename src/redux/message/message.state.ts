@@ -1,3 +1,4 @@
+
 export interface Message{
     _id: string;
     senderId: string;
@@ -27,5 +28,5 @@ export interface ListRoomChat{
 
 export interface MessageModel{
     listMessage: ListMessage;
-    listRoomChat: ListRoomChat;  
+    listRoomChat: ListRoomChat
 } 

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { login } from '../../service/accountService';
 import see_pwd from '../../image/View_light.png'
+import { io } from 'socket.io-client';
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -34,7 +35,8 @@ export default function Login(){
             localStorage.setItem('userData', res.token);
             localStorage.setItem('email', res.email);
             message.success("Đăng nhập thành công!");
-            setTimeout(() => navigate('/home'), 1000)
+            setTimeout(() => navigate('/home'), 1000);
+
         } catch (error) {
             setError("Sai tên đăng nhập hoặc mật khẩu!");
         }
