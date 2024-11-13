@@ -6,7 +6,6 @@ import { ListMessage, ListRoomChat, Message, RoomChat } from "./message.state";
 import { getMessages, getRoomChat, sendMessageMess } from "../../service/messageService";
 import { User } from "../user/user.state";
 import { userActions } from "../user/user.action";
-import { message } from "antd";
 
 export const messageAction = messageSlice.actions;
 

@@ -17,14 +17,12 @@ app.use(cors({
 
 const http = require("http");
 const server = http.createServer(app);
+
 const socketIo = require("socket.io")(server, {
     cors: {
         origin: "*",
     }
 }); 
-
-
-
 
 connectDB()
 
@@ -272,7 +270,7 @@ app.post('/addMessage', async(req, res) => {
             const receiverSocketId = getReceiverSocketId(roomId);
 		    if (receiverSocketId) {
 			// io.to(<socket_id>).emit() used to send events to specific client
-		        app.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
+		        server.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
 		    }
             return res.json({message: "Addsuccess!"});
         }
