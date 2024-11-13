@@ -7,7 +7,6 @@ const taskModel = require("./models/Task.js");
 const dailyTaskModel = require("./models/DailyTask.js");
 const messageModel = require("./models/Message.js");
 const roomChatModel = require("./models/RoomChat.js");
-const server = require("socket.io");
 const app = express();
 
 app.use(express.json())
@@ -15,6 +14,17 @@ app.use(express.json())
 app.use(cors({
     origin: "*"
 }))
+
+const http = require("http");
+const server = http.createServer(app);
+const socketIo = require("socket.io")(app, {
+    cors: {
+        origin: "*",
+    }
+}); 
+
+
+
 
 connectDB()
 
@@ -227,22 +237,17 @@ const getReceiverSocketId = (receiverId) => {
     return userSocketMap[receiverId];
 }
 
-app.on('connection', (socket) => {
-    console.log("a user connected", socket.id);
-
-	const userId = socket.handshake.query.roomId;
-	if (userId != "undefined") userSocketMap[userId] = socket.id;
-
-	// io.emit() is used to send events to all the connected clients
-	app.emit("getOnlineUsers", Object.keys(userSocketMap));
-
-	// socket.on() is used to listen to the events. can be used both on client and server side
-	socket.on("disconnect", () => {
-		console.log("user disconnected", socket.id);
-		delete userSocketMap[userId];
-		app.emit("getOnlineUsers", Object.keys(userSocketMap));
-	});
-})
+socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
+    console.log("New client connected" + socket.roomId); 
+  
+    socket.on("sendDataClient", function(data) { // Handle khi có sự kiện tên là sendDataClient từ phía client
+      socketIo.emit("sendDataServer", { data });// phát sự kiện  có tên sendDataServer cùng với dữ liệu tin nhắn từ phía server
+    })
+  
+    socket.on("disconnect", () => {
+      console.log("Client disconnected"); // Khi client disconnect thì log ra terminal.
+    });
+  });
 
 app.post('/addMessage', async(req, res) => {
     const senderId = req.body.senderId;

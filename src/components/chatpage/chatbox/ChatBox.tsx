@@ -5,11 +5,11 @@ import send_icon from './images/Send_fill (2).png'
 import { Message, RoomChat } from "../../../redux/message/message.state";
 import './chatbox.css'
 import { Tooltip } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
 import { getListMessage, sendMessage } from "../../../redux/message/message.action";
-import { io, Socket } from "socket.io-client";
+import {io, Socket} from "socket.io-client";
 
 interface Props{
     account: User;
@@ -20,8 +20,8 @@ export default function ChatBox({account, chatBox}:Props){
     const [content, setContent] = useState("");
     const dispatch = useAppDispatch()
     const listMessages = useAppSelector(state => state.message.listMessage);
-    const [socket, setSocket] = useState<Socket|null>(null);
-	const [onlineUsers, setOnlineUsers] = useState([]);
+
+    const [socket, setSocket] = useState<Socket>();
 
     useEffect(() => {
         const fetchData = async () =>{
@@ -33,19 +33,18 @@ export default function ChatBox({account, chatBox}:Props){
         }
         fetchData();
 
-        if(chatBox){
-            const socket = io("https://nckh-project.onrender.com", {
-                query: {
-                    roomId: chatBox!._id
-                }
-            });
-    
-            setSocket(socket);
-    
-            socket.on("getOnlineUsers", (users) => {
-                setOnlineUsers(users);
-            });
-        }
+        const i = io("https://nckh-project.onrender.com");
+        setSocket(i);
+
+        socket?.on('sendDataServer', dataGot => {
+            console.log(dataGot);
+        })
+
+        return () => {
+            if (socket) {
+              socket.disconnect();
+            }
+        };
 
     }, [chatBox])
 
