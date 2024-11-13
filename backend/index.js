@@ -1,4 +1,4 @@
-import { getReceiverSocketId, io } from "../socket/socket.js";
+import { getReceiverSocketId, io } from "./socket/socket.js";
 
 const express = require("express");
 const connectDB = require('./db.js');
