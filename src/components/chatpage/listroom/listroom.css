@@ -36,6 +36,15 @@
     flex-grow: 1;
 }
 
+.list-room-main .title .add-new-con{
+    transition: transform ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.list-room-main .title .add-new-con:hover{
+    transform: rotate(180deg);
+}
+
 .list-room-main ul{
     height: calc(100% - 40px);
     overflow: auto;
@@ -55,6 +64,12 @@
     gap: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+    position: relative;
+    transition: background-color ease-in-out 0.25s;
+}
+
+.list-room-main ul li:hover{
+    background-color: #c0c0c0;
 }
 
 .list-room-main ul li .ava{
@@ -78,4 +93,24 @@
 
 .list-room-main ul li .mess{
     font-size: 12px;
+}
+
+.list-room-main ul li .con{
+    height: 24px;
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 12px);
+}
+
+.list-room-main ul li .con img{
+    height: 100%;
+    width: auto;
+}
+
+.list-room-main ul .noti-non{
+    font-style: italic;
+    color: #999;
+    padding: 0 10px;
+    margin-top: 30px;
+    text-align: center;
 }

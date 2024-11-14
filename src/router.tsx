@@ -10,6 +10,7 @@ import DiaryPage from "./page/diarypage/DiaryPage";
 import PersonalPage from "./page/personalpage/PersonalPage";
 import Timetable from "./page/timetable/Timetable";
 import ChatPage from "./page/chatpage/ChatPage";
+import { GamePage } from "./page/gamepage/GamePage";
 
 export const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
             {
                 path: "chatpage",
                 element: <ChatPage/>
+            },
+            {
+                path: 'gamepage',
+                element: <GamePage/>
             }
         ]
     }

@@ -7,7 +7,8 @@ const accountSchema = mongoose.Schema({
     last_name: String,
     avatar: String,
     birth: String,
-    gender: String
+    gender: String,
+    role: String,
 })
 
 const accountModel = mongoose.model("Account", accountSchema)

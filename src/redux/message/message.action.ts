@@ -6,6 +6,7 @@ import { ListMessage, ListRoomChat, Message, RoomChat } from "./message.state";
 import { getMessages, getRoomChat, sendMessageMess } from "../../service/messageService";
 import { User } from "../user/user.state";
 import { userActions } from "../user/user.action";
+import dayjs from "dayjs";
 
 export const messageAction = messageSlice.actions;
 
@@ -42,5 +43,13 @@ export const sendMessage = (message: Message) :ThunkAction<void, RootState, unkn
         const respone:Message[] = await sendMessageMess(message);
         const data:ListMessage = {idRoom: message.roomId, messages: respone};
         dispatch(messageAction.setListMessage(data));
+    }
+}
+
+export const openNewChat = (senderId: string, roomId: string) :ThunkAction<void, RootState, unknown, AnyAction> => {
+    return async(dispatch, getState)=>{
+        const time = dayjs().format("HH:mm, DD/MM");
+        const message: Message = {_id: "", senderId: senderId, roomId: "", content: roomId, type: "join", time:time};
+        const respone:Message[] = await sendMessageMess(message);
     }
 }

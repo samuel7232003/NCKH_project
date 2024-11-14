@@ -27,7 +27,8 @@ export async function getMessages(id:string) {
 export async function sendMessageMess(message:Message) {
     try {
         const respone = await apiInstance.post("/addMessage", message);
-        const res = await apiInstance.get(`/getMessages/${message.roomId}`);
+        const id = respone.data.roomId;
+        const res = await apiInstance.get(`/getMessages/${id}`);
         return res.data;
     } catch (error) {
         throw(error);

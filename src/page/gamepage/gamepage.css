@@ -1,0 +1,75 @@
+.gamepage{
+    height: calc(100vh - 70px);
+    background-image: url('../../image/background.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.gamepage .inner{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.gamepage ul{
+    display: flex;
+    flex-flow: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.gamepage ul li{
+    background: rgba(0, 0, 0, 0.6) center;
+    background-size: cover;
+    height: 180px;
+    width: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform ease-in-out 0.25s;
+}
+
+.gamepage ul li>div{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gamepage ul li .name{
+    font-weight: bold;
+    color: white;
+}
+
+.gamepage ul li:hover{
+    transform: scale(1.1);
+}
+
+.gamepage .back{
+    height: 60px;
+    width: 60px;
+    border-radius: 100px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.gamepage .back img{
+    transition: transform ease-in-out 0.25s;
+}
+
+.gamepage .back:hover img{
+    transform: scale(1.2);
+}

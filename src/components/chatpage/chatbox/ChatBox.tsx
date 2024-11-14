@@ -40,7 +40,8 @@ export default function ChatBox({account, chatBox}:Props){
         fetchData();
 
         if(socket===null && account._id!=="" && chatBox){
-            const newSocket = io('https://nckh-project.onrender.com', {
+            const newSocket = io('http://localhost:3001', {
+            // const newSocket = io('https://nckh-project.onrender.com', {
                 query: {userId: account._id}
             });
         
@@ -126,7 +127,7 @@ export default function ChatBox({account, chatBox}:Props){
             </div>
             <div className="footer">
                 <Tooltip title="Gửi hình ảnh!"><figure className="addImage-btn"><img src={addImage_icon} alt="" /></figure></Tooltip>
-                <input onKeyDown={(e) => handleEnter(e)} value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
+                    <input onKeyDown={(e) => handleEnter(e)} value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
                 <Tooltip title="Gửi tin nhắn!"><figure className="send-btn" onClick={handleSend}><img src={send_icon} alt="" /></figure></Tooltip>
             </div>
         </div>

@@ -16,6 +16,7 @@ app.use(cors({
 }))
 
 const http = require("http");
+const { message } = require("antd");
 const server = http.createServer(app);
 
 const socketIo = require("socket.io")(server, {
@@ -229,11 +230,16 @@ app.post('/getUsersById', async(req, res) => {
     }
 })
 
-const userSocketMap = {}
+app.get('/getAllUser', async(req, res) => {
+    try {
+        const response = await accountModel.find({role: "user"});
+        res.send(response);
+    } catch (error) {
+        return res.json({message: "Get fail!"})
+    }
+})
 
-// const getReceiverSocketId = (receiverId) => {
-//     return userSocketMap[receiverId];
-// }
+const userSocketMap = {}
 
 socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
     console.log("New client connected " + socket.id);
@@ -275,15 +281,10 @@ app.post('/addMessage', async(req, res) => {
             const roomId_ = response._id;
             const response_ = await messageModel.create({senderId: senderId, roomId: roomId_, content: content, type:"join", time:time});
             if(content!=="") await messageModel.create({senderId: content, roomId: roomId_, content: senderId, type:"join", time:time});
-            return res.json({message: "Add new room success!"});
+            return res.send({roomId: roomId_});
         }
         else {
             const response = await messageModel.create({senderId:senderId, roomId: roomId, content: content, type: type, time: time});
-            // const receiverSocketId = getReceiverSocketId(roomId);
-		    // if (receiverSocketId) {
-			// // io.to(<socket_id>).emit() used to send events to specific client
-		    //     server.to(receiverSocketId).emit("newMessage", {senderId:senderId, roomId: roomId, content: content, type: type, time: time});
-		    // }
             return res.json({message: "Addsuccess!"});
         }
 

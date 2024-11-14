@@ -12,7 +12,7 @@ export default function ChatPage(){
     return(
         <main className="chatpage">
             <div className="list-room">
-                {account._id!=="" && <ListRoom account={account} setChatBox={setCurChatBox} />}
+                {account._id!=="" && <ListRoom account={account} setChatBox={setCurChatBox} chatBox={curChatBox} />}
             </div>
             <div className="chat-box">
                 {account._id!=="" && <ChatBox account={account} chatBox={curChatBox} />}

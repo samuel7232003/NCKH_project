@@ -32,7 +32,8 @@ export default function Header(){
 
     useEffect(() => {
         if(socket===null && account._id!==""){
-            const newSocket = io('https://nckh-project.onrender.com', {
+            // const newSocket = io('https://nckh-project.onrender.com', {
+            const newSocket = io('http://localhost:3001', {
                 query: {userId: account._id}
             });
         
@@ -48,6 +49,7 @@ export default function Header(){
         if(socket) socket.disconnect();
         setSocket(null);
         setTimeout(() => navigate("/"), 1000);
+        setTimeout(() => window.location.reload(), 1200);
     }
 
     function handleOpenBox(type: "ava"|"noti"|null){
@@ -85,7 +87,7 @@ export default function Header(){
                         </Link>
                     </li>
                     <li>
-                        <Link to="./">
+                        <Link to="./gamepage">
                             <figure><img src={game_icon} alt="" /></figure>
                             <p>Giải trí</p>
                         </Link>

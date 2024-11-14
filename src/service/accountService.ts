@@ -50,3 +50,12 @@ export async function editAccount(user:User) {
         throw(error)
     }
 }
+
+export async function getAllUser() {
+    try {
+        const respone = await apiInstance.get("/getAllUser");
+        return respone.data;
+    } catch (error) {
+        
+    }
+}
