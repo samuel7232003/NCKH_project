@@ -91,6 +91,12 @@ export default function ChatBox({account, chatBox}:Props){
         scrollToBottom();
     },[listMessages])
 
+    function handleEnter(e:React.KeyboardEvent<HTMLInputElement>){
+        if(e.key === "Enter"){
+            handleSend();
+        }
+    }
+
     return(
         (chatBox) ? <div className="chat-box-main">
             <div className="title">
@@ -120,7 +126,7 @@ export default function ChatBox({account, chatBox}:Props){
             </div>
             <div className="footer">
                 <Tooltip title="Gửi hình ảnh!"><figure className="addImage-btn"><img src={addImage_icon} alt="" /></figure></Tooltip>
-                <input value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
+                <input onKeyDown={(e) => handleEnter(e)} value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
                 <Tooltip title="Gửi tin nhắn!"><figure className="send-btn" onClick={handleSend}><img src={send_icon} alt="" /></figure></Tooltip>
             </div>
         </div>
