@@ -284,7 +284,7 @@ app.post('/addMessage', async(req, res) => {
         }
         else {
             const response = await messageModel.create({senderId:senderId, roomId: roomId, content: content, type: type, time: time});
-            return res.json({message: "Addsuccess!"});
+            return res.send({roomId: roomId});
         }
 
     } catch (error) {
