@@ -19,7 +19,7 @@ header.pre .login-btn:hover{
     background-color: rgb(22,192,232);
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 430px){
     header.pre{
         justify-content: space-between;
     }

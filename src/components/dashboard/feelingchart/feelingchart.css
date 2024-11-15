@@ -108,7 +108,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 430px){
     .feelingchart{
         width: 100%;
         padding: 12px 10px;

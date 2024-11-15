@@ -122,7 +122,7 @@
     opacity: 1;
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 430px){
     .signup{
         width: 100%;
     }

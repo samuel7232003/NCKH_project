@@ -211,7 +211,7 @@
     }
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 430px){
     .diarypage .title{
         display: none;
     }

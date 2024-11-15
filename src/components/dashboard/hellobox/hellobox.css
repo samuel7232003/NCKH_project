@@ -59,7 +59,7 @@
     bottom: -25px;
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 430px){
     .hello-box{
         width: 100%;
         padding: 0 20px;

@@ -15,7 +15,7 @@ main .scroll-down{
     animation-delay: 1s;
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 430px) {
     .main-wc{
         height: auto;
     }

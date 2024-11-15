@@ -214,7 +214,7 @@ header.main .noti_ava .ava img{
     }
 }
 
-@media screen and (max-width : 380px){
+@media screen and (max-width : 430px){
     header.main{
         padding: 0 10px;
     }

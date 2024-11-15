@@ -172,7 +172,7 @@
     transform: rotate(360deg);
 }
 
-@media screen and (max-width: 380px){
+@media screen and (max-width: 430px){
     .chat-box-main .title .back{
         display: block;
     }
