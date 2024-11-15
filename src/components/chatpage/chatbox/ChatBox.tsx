@@ -26,6 +26,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const listOnl = useAppSelector(state => state.user.onlineUsers);
     const listConUser = useAppSelector(state => state.user.userConnectList);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -77,6 +78,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
             socket?.emit('send', chatBox?._id)
         }
         setContent("");
+        inputRef.current?.focus();
     }
 
     useEffect(() => {
@@ -141,7 +143,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
             </div>
             <div className="footer">
                 <Tooltip title="Gửi hình ảnh!"><figure className="addImage-btn"><img src={addImage_icon} alt="" /></figure></Tooltip>
-                    <input onKeyDown={(e) => handleEnter(e)} value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
+                    <input ref={inputRef} onKeyDown={(e) => handleEnter(e)} value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
                 <Tooltip title="Gửi tin nhắn!"><figure className="send-btn" onClick={handleSend}><img src={send_icon} alt="" /></figure></Tooltip>
             </div>
         </div>

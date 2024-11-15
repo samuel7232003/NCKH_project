@@ -74,6 +74,7 @@
     flex-grow: 1;
     overflow: auto;
     padding: 0 28px;
+    align-content: end;
 }
 
 .chat-box-main .chat-line li{
