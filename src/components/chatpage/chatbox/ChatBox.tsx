@@ -10,13 +10,15 @@ import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
 import { getListMessage, sendMessage } from "../../../redux/message/message.action";
 import {io, Socket} from "socket.io-client";
+import back_icon from './images/Expand_left.png'
 
 interface Props{
     account: User;
     chatBox: RoomChat|undefined;
+    setMode: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function ChatBox({account, chatBox}:Props){
+export default function ChatBox({account, chatBox, setMode}:Props){
     const [content, setContent] = useState("");
     const dispatch = useAppDispatch()
     const listMessages = useAppSelector(state => state.message.listMessage);
@@ -103,6 +105,7 @@ export default function ChatBox({account, chatBox}:Props){
     return(
         (chatBox) ? <div className="chat-box-main">
             <div className="title">
+                <figure className="back" onClick={() => setMode(false)}><img src={back_icon} alt="" /></figure>
                 <figure className="ava"><img src={chatBox.avatar} alt="" /></figure>
                 <div className="name-box">
                     <p className="name">{chatBox.name}</p>

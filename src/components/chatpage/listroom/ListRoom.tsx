@@ -16,7 +16,7 @@ import { sendMessageMess } from "../../../service/messageService";
 
 interface Props{
     account: User;
-    setChatBox: React.Dispatch<React.SetStateAction<RoomChat | undefined>>;
+    setChatBox: (chatRoom: RoomChat) => void;
     chatBox: RoomChat|undefined;
 }
 

@@ -50,3 +50,14 @@
         height: auto;
     }
 }
+
+@media screen and (max-width: 380px){
+    .timetable > div{
+        width: 360px;
+        padding: 18px 5px;
+    }
+
+    .timetable .calendar{
+        height: auto;
+    }
+}

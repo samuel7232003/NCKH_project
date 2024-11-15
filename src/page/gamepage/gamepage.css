@@ -73,3 +73,19 @@
 .gamepage .back:hover img{
     transform: scale(1.2);
 }
+
+@media screen and (max-width: 380px){
+    .gamepage{
+        height: auto;
+    }
+
+    .gamepage .inner{
+        padding: 20px 0px;
+    }
+
+    .gamepage ul{
+        flex-flow: column;
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+}

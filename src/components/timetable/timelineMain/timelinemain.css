@@ -172,3 +172,18 @@
         margin: 10px auto;
     }
 }
+
+@media screen and (max-width: 380px){
+    .timelinemain .add-dailyTask{
+        width: auto;
+    }
+
+    .timelinemain .add-dailyTask fieldset input{
+        width: 224px;
+    }
+
+    .calendarmain .addTask{
+        right: 5px;
+        bottom: 5px;
+    }
+}

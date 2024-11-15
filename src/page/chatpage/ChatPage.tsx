@@ -8,14 +8,20 @@ import { RoomChat } from "../../redux/message/message.state";
 export default function ChatPage(){
     const account = useAppSelector(state => state.user.user);
     const [curChatBox, setCurChatBox] = useState<RoomChat>();
+    const [mode, setMode] = useState(false);
+
+    function setCurChat(chatRoom : RoomChat){
+        setCurChatBox(chatRoom);
+        setMode(true);
+    }
 
     return(
         <main className="chatpage">
-            <div className="list-room">
-                {account._id!=="" && <ListRoom account={account} setChatBox={setCurChatBox} chatBox={curChatBox} />}
+            <div className={mode?"hide list-room":"show list-room"}>
+                {account._id!=="" && <ListRoom account={account} setChatBox={setCurChat} chatBox={curChatBox} />}
             </div>
-            <div className="chat-box">
-                {account._id!=="" && <ChatBox account={account} chatBox={curChatBox} />}
+            <div className={mode?"show chat-box":"hide chat-box"}>
+                {account._id!=="" && <ChatBox account={account} chatBox={curChatBox} setMode={setMode} />}
             </div>
         </main>
     )

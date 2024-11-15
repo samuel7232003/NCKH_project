@@ -25,3 +25,23 @@
         min-width: 270px
     }
 }
+
+@media screen and (max-width: 380px){
+    .chat-box.hide,
+    .list-room.hide{
+        display: none;
+    }
+    
+    .chat-box.show,
+    .list-room.show{
+        display: block;
+    }
+
+    .chatpage{
+        padding: 10px;
+    }
+
+    .chatpage .list-room{
+        width: 100%;
+    }
+}

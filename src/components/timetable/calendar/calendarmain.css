@@ -325,3 +325,28 @@
         z-index: 2;
     }
 }
+
+@media screen and (max-width: 380px){
+    .calendarmain{
+        flex-flow: column;
+    }
+
+    .calendarmain .calendarCpn {
+        width: 100%;
+        height: auto;
+        overflow:visible;
+    }
+
+    .timelinemain .timeline {
+        width: 100%;
+        overflow: auto;
+    }
+
+    .calendarmain .calendarCpn .events::-webkit-scrollbar{
+        height: 2px;
+    }
+
+    .calendarmain .todolist {
+        width: 100%;
+    }
+}

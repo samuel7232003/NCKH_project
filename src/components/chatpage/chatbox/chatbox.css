@@ -26,6 +26,12 @@
     left: 0;
 }
 
+.chat-box-main .title .back{
+    height: 16px;
+    width: 16px;
+    display: none;
+}
+
 .chat-box-main .title .ava{
     height: 45px;
     width: 45px;
@@ -113,11 +119,10 @@
 }
 
 .chat-box-main .chat-line li .content{
-    height: 42px;
     display: flex;
     align-items: center;
-    padding: 0 15px;
-    border-radius: 42px;
+    padding: 7px 15px;
+    border-radius: 20px;
 }
 
 .chat-box-main .chat-line li.mine .content{
@@ -165,4 +170,23 @@
 
 .chat-box-main .footer .send-btn:hover{
     transform: rotate(360deg);
+}
+
+@media screen and (max-width: 380px){
+    .chat-box-main .title .back{
+        display: block;
+    }
+
+    .chat-box-main .title{
+        gap: 5px;
+        padding: 0 10px;
+    }
+
+    .chat-box-main .chat-line{
+        padding: 0 10px;
+    }
+
+    .chat-box-main .footer {
+        padding: 0 10px;
+    }
 }
