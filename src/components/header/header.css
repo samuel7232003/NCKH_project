@@ -21,9 +21,23 @@ header.main nav{
     max-width: 1024px;
 }
 
+header.main nav .menu{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-weight: bold;
+    height: 40px;
+    padding: 0 10px;
+    border: rgba(255,255,255,0.30) solid 1px;
+    border-radius: 8px;
+    transition: background-color ease-in-out 0.25s;
+    display: none;
+    position: relative;
+}
+
 header.main nav ul{
     display: flex;
-    gap: 40px;
+    gap: 20px;
 }
 
 header.main nav ul a{
@@ -38,6 +52,7 @@ header.main nav ul a{
     transition: background-color ease-in-out 0.25s;
 }
 
+header.main nav .menu:hover,
 header.main nav ul a:hover{
     background-color: rgba(217,217,217,0.3);
 }
@@ -162,4 +177,60 @@ header.main .noti_ava .ava img{
 
 .ava-box ul li:hover{
     background-color: #d9d9d9;;
+}
+
+@media screen and (max-width : 1024px){
+    header.main nav .menu{
+        display: flex;
+    }
+
+    header.main nav{
+        display: flex;
+        align-items: center;
+        max-width: calc(100% - 195px);
+        overflow: auto;
+    }
+
+    header.main nav::-webkit-scrollbar{
+        height: 4px;
+    }
+
+    header.main nav ul{
+        background-color: #16C0E8;
+        display: none;
+        padding: 10px;
+        border-radius: 8px;
+        top: 75px;
+        left: 0;
+        min-width: 800px;
+    }
+
+    header.main nav:hover .menu{
+        display: none;
+    }
+
+    header.main nav:hover .menu ~ul{
+        display: flex;
+    }
+}
+
+@media screen and (max-width : 380px){
+    header.main{
+        padding: 0 10px;
+    }
+
+    header.main .logo{
+        height: 50px;
+        width: 50px;
+    }
+
+    header.main .noti_ava .ava{
+        height: 50px;
+        width: 50px;
+    }
+
+    header.main .noti_ava .noti{
+        height: 30px;
+        width: 30px;
+    }
 }

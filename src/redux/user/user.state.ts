@@ -12,5 +12,6 @@ export interface User{
 export interface UserListModel{
     user: User,
     userList: User[],
-    userConnectList: User[]
+    userConnectList: User[],
+    onlineUsers: string[]
 }

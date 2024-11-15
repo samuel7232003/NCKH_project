@@ -21,8 +21,9 @@ export default function ChatBox({account, chatBox}:Props){
     const dispatch = useAppDispatch()
     const listMessages = useAppSelector(state => state.message.listMessage);
     const [socket, setSocket] = useState<Socket|null>(null);
-	const [onlineUsers, setOnlineUsers] = useState([]);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
+    const listOnl = useAppSelector(state => state.user.onlineUsers);
+    const listConUser = useAppSelector(state => state.user.userConnectList);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -50,10 +51,6 @@ export default function ChatBox({account, chatBox}:Props){
             });
             setSocket(newSocket);
 
-            newSocket.on("getOnlineUsers", (users) => {
-				setOnlineUsers(users);
-			});
-
             newSocket.emit('join-room', chatBox._id);
 
             newSocket.on("receive", (data)=>{
@@ -61,14 +58,6 @@ export default function ChatBox({account, chatBox}:Props){
             })
         }
     }, [chatBox, account])
-
-    useEffect(() => {
-        
-    }, [account])
-
-    useEffect(() => {
-        console.log(onlineUsers);
-    },[onlineUsers])
 
     function handleSend(){
         const time = dayjs().format("HH:mm, DD/MM");
@@ -98,11 +87,33 @@ export default function ChatBox({account, chatBox}:Props){
         }
     }
 
+    function checkOnl(){
+        const check = listConUser.find(index => {
+            const name = index.first_name + " " + index.last_name;
+            if(index.avatar === chatBox?.avatar && name === chatBox.name) return true;
+            else return false;
+        } )
+        if(check){
+            const result = listOnl.find(index => index === check._id);
+            if(result) return true;
+        }
+        return false;
+    }
+
     return(
         (chatBox) ? <div className="chat-box-main">
             <div className="title">
                 <figure className="ava"><img src={chatBox.avatar} alt="" /></figure>
-                <p>{chatBox.name}</p>
+                <div className="name-box">
+                    <p className="name">{chatBox.name}</p>
+                    {checkOnl() ?<div className="status">
+                         <span style={{background: "#008000"}}></span><p>Online</p> 
+                    </div>:
+                    <div className="status">
+                        <span style={{background: "#999"}}></span><p>Offline</p> 
+                    </div>
+                    }
+                </div>
                 <figure className="setting"><img src={setting_icon} alt="" /></figure>
             </div>
             <div className="chat-line">

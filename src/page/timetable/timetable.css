@@ -1,5 +1,5 @@
 .timetable{
-    height: calc(100vh - 70px);
+    height: 100%;
     background-image: url('../../image/background.png');
     background-size: cover;
     background-position: center;
@@ -37,4 +37,16 @@
 
 .timetable .timeline-main{
     height: 145px;
+}
+
+@media screen and (max-width: 1024px){
+    .timetable > div{
+        width: 768px;
+        margin-top: 20px;
+        height: auto;
+    }
+
+    .timetable .timeline-main {
+        height: auto;
+    }
 }

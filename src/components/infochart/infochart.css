@@ -134,3 +134,54 @@
 .infochart .exit-icon:hover{
     background-color: #ff000059;
 }
+
+@media screen and (max-width: 1024px){
+    .infochart{
+        width: 600px;
+        height: 514px;
+        overflow: auto;
+    }
+
+    .infochart .box-main{
+        flex-flow: column;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .infochart {
+        padding: 20px 10px;
+        width: auto;
+        overflow-x: hidden;
+    }
+
+    .infochart::-webkit-scrollbar{
+        width: 3px;
+    }
+
+    .infochart .box-main-advice{
+        padding: 10px 20px;
+    }
+
+    .infochart .exit-icon {
+        height: 20px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .infochart .chart .value{
+        bottom: 26px;
+    } 
+
+    .infochart .box-main-chart .chart-sumary h3::after{
+        width: 100%;
+    }
+
+    .infochart .box-main-chart .chart-sumary p{
+        margin-bottom: 10px;
+    }
+
+    .infochart .box-main-advice > figure {
+        bottom: -32px;
+        right: -35px;
+    }
+}

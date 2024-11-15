@@ -312,3 +312,16 @@
 .calendarmain .todolist .openBtn:hover{
     transform: rotate(360deg);
 }
+
+@media screen and (max-width: 1024px){
+    .calendarmain{
+        gap: 5px
+    }
+
+    .calendarmain .addTask{
+        position: absolute;
+        width: 340px;
+        right: 10px;
+        z-index: 2;
+    }
+}

@@ -26,3 +26,9 @@ export const setUserConnectList = (users : User[]):ThunkAction<void, RootState, 
         dispatch(userActions.setUserConnectList([...users]));
     }
 }
+
+export const setOnlineUsers = (list : string[]):ThunkAction<void, RootState, unknown, AnyAction> =>{
+    return async(dispatch, getState) => {
+        dispatch(userActions.setOnlineUsers([...list]));
+    }
+}

@@ -5,6 +5,7 @@
     border-radius: 10px;
     padding: 12px 8px;
     position: relative;
+    background-color: white;
 }
 
 .calendarbox .title{
@@ -111,3 +112,40 @@
     font-weight: bold;
 }
 
+@media screen and (max-width: 1024px){
+    .calendarbox{
+        width: 100%;
+    }
+
+    .calendarbox .title{
+        margin-bottom: 20px;
+    }
+
+    .calendarbox .cal-main{
+        display: flex;
+    }
+
+    .calendarbox .calendar{
+        width: 50%;
+        margin-right: 20px;
+    }
+
+    .calendarbox .todo-list{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .calendarbox .cal-main{
+        flex-flow: column;
+    }
+
+    .calendarbox .calendar{
+        width: 100%;
+        margin-right: 0px;
+    }
+
+    .calendarbox .todo-list{
+        width: 100%;
+    }
+}

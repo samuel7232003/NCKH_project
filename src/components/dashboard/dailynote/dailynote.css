@@ -4,6 +4,7 @@
     border-radius: 10px;
     width: 258px;
     padding: 12px 22px;
+    background-color: white;
 }
 
 .dailynote h2{
@@ -188,4 +189,12 @@
 
 .dailynote.done:hover .remove{
     opacity: 1;
+}
+
+@media screen and (max-width: 380px){
+    .dailynote{
+        width: 100%;
+        min-height: 270px;
+        margin-bottom: 10px;
+    }
 }

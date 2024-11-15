@@ -58,3 +58,14 @@
     left: -15px;
     bottom: -25px;
 }
+
+@media screen and (max-width: 380px){
+    .hello-box{
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .hello-box .image{
+        display: none;
+    }
+}

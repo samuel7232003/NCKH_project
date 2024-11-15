@@ -14,3 +14,28 @@ main .scroll-down{
     animation-direction: alternate-reverse;
     animation-delay: 1s;
 }
+
+@media screen and (max-width: 380px) {
+    .main-wc{
+        height: auto;
+    }
+
+    .main-wc .top-wc{
+        flex-flow: column;
+        margin-top: 80px;
+    } 
+
+    .main-wc .top-wc .text-wc{
+        width: 100%;
+    }
+
+    .main-chat-wc{
+        width: 100%;
+    }
+
+    main .scroll-down{
+        display: none;
+    }
+}
+
+

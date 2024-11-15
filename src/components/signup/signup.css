@@ -121,3 +121,25 @@
 .signup .pwd-field:hover figure{
     opacity: 1;
 }
+
+@media screen and (max-width: 380px){
+    .signup{
+        width: 100%;
+    }
+
+    .signup h2{
+        width: 270px;
+    }
+
+    .signup .form {
+        width: 100%;
+    }
+
+    .signup .form fieldset{
+        margin-bottom: 8px;
+    }
+
+    .signup .form p.error {
+        top: 255px
+    }
+}

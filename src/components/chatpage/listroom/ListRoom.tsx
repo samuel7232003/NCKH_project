@@ -26,6 +26,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
     const listRoom = useAppSelector(state => state.message.listRoomChat);
     const [listUser, setListUser] = useState<User[]>([]);
     const listConUser = useAppSelector(state => state.user.userConnectList);
+    const listOnl = useAppSelector(state => state.user.onlineUsers);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -73,6 +74,23 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
         setIsAddMode(false);
     }
 
+    function checkOnline(ava: string, name: string){
+        const list = listConUser.filter(index => {
+            for(let i = 0; i < listOnl.length;i++){
+                if(index._id === listOnl[i]) return true;
+            }
+            return false;
+        })
+        const find = list.find(index =>{
+            const name_acc = index.first_name + " " + index.last_name;
+            if(index.avatar === ava && name_acc === name) return true;
+            else return false;
+        })
+
+        if(find) return true;
+        else return false;
+    }
+
     return(
         (!isAddMode) ? <div className="list-room-main">
             <div className="title">
@@ -86,7 +104,10 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
                 {(listRoom.roomChats.length > 0) ?
                 listRoom.roomChats.map(index => 
                     <li style={(chatBox && chatBox._id === index._id) ? {background: '#c0c0c0'}:undefined} onClick={() => setChatBox(index)} className="room-item" key={index._id}>
-                        <figure className="ava"><img src={index.avatar} alt="" /></figure>
+                        <div className="box-ava">
+                            <figure className="ava"><img src={index.avatar} alt="" /></figure>
+                            {checkOnline(index.avatar, index.name) && <span></span>}
+                        </div>
                         <div>
                             <p className="name">{index.name}</p>
                             <p className="mess">{index.lastMessage}</p>

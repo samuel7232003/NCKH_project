@@ -66,6 +66,7 @@
     cursor: pointer;
     position: relative;
     transition: background-color ease-in-out 0.25s;
+    overflow: hidden;
 }
 
 .list-room-main ul li:hover{
@@ -80,19 +81,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
-.list-room-main ul li .ava .img{
+.list-room-main ul li .ava img{
     height: 100%;
     width: auto;
 }
 
+.list-room-main ul li .box-ava{
+    position: relative;
+}
+
+.list-room-main ul li span{
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    bottom: 0;
+    right: 0;
+    border-radius: 100%;
+    background-color: #008000;
+}
+
 .list-room-main ul li .name{
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .list-room-main ul li .mess{
     font-size: 12px;
+    white-space: nowrap;
 }
 
 .list-room-main ul li .con{

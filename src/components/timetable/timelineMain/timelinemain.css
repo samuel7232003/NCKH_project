@@ -153,3 +153,22 @@
 .timelinemain .add-dailyTask fieldset .add:hover figure{
     transform: rotate(360deg);
 }
+
+@media screen and (max-width: 1024px){
+    .timelinemain{
+        flex-flow: column;
+    }
+
+    .timelinemain .add-dailyTask{
+        height: auto;
+        width: 370px;
+    }
+
+    .timelinemain .timeline {
+        width: 100%;
+    }
+
+    .timelinemain .timeline .grid {
+        margin: 10px auto;
+    }
+}

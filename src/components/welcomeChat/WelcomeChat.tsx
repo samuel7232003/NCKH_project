@@ -4,7 +4,7 @@ import seen_icon from "./images/seen-icon.png"
 
 export default function WelcomeChat(){
     return (
-        <div className="w-[55%] flex items-end text-[#fff]">
+        <div className="w-[55%] flex items-end text-[#fff] main-chat-wc">
             <ul className=" w-[100%] bg-[rgba(217,217,217,0.29)] rounded-[10px] p-[26px]">
                 <li className="flex justify-end mb-5"><p className="pt-2 pb-1 px-4 bg-[rgba(22,192,232,0.79)] rounded-lg">Sức khỏe Tâm thần là gì?</p></li>
                 <li className="flex gap-3 items-end mb-5">

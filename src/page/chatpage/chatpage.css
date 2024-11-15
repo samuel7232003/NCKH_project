@@ -17,6 +17,11 @@
 .chatpage .chat-box{
     height: 100%;
     width: 100%;
-    min-width: 700px;
     flex-grow: 1;
+}
+
+@media screen and (max-width: 1024px){
+    .chatpage .list-room {
+        min-width: 270px
+    }
 }

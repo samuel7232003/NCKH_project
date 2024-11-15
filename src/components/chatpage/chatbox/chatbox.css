@@ -34,6 +34,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .chat-box-main .title .ava img{
@@ -41,10 +42,26 @@
     width: auto;
 }
 
-.chat-box-main .title p{
+.chat-box-main .title .name-box{
+    flex-grow: 1;
+}
+
+.chat-box-main .title .status {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.chat-box-main .title .status span{
+    display: block;
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+}
+
+.chat-box-main .title .name{
     font-weight: bold;
     font-size: 20px;
-    flex-grow: 1;
 }
 
 .chat-box-main .chat-line{

@@ -14,6 +14,7 @@ export const initialUserState:UserListModel = {
     },
     userList: [],
     userConnectList: [],
+    onlineUsers:[]
 }
 
 export const userSlice = createSlice({
@@ -28,6 +29,9 @@ export const userSlice = createSlice({
         },
         setUserConnectList(state, action: PayloadAction<User[]>){
             state.userConnectList = action.payload;
+        },
+        setOnlineUsers(state, action: PayloadAction<string[]>){
+            state.onlineUsers = action.payload;
         }
     }
 })

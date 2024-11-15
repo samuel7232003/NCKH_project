@@ -11,8 +11,9 @@ import logout_icon from "./images/Sign_in_squre.png"
 import './header.css'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/builder";
-import { getUser } from "../../redux/user/user.action";
+import { getUser, setOnlineUsers } from "../../redux/user/user.action";
 import { io, Socket } from "socket.io-client";
+import menu_icon from './images/darhboard.png'
 
 export default function Header(){
     const account = useAppSelector(state => state.user.user);
@@ -20,7 +21,7 @@ export default function Header(){
     const navigate = useNavigate();
     const [subBox, setSubBox] = useState<"ava"|"noti"|null>(null);
     const [active, setActive] = useState("home");
-    const [socket, setSocket] = useState<Socket|null>(null)
+    const [socket, setSocket] = useState<Socket|null>(null);
 
     useEffect(() => {
         const data = localStorage.getItem('email');
@@ -40,6 +41,11 @@ export default function Header(){
             newSocket.on('connect', () => {
                 console.log('Connected to WebSocket server');
             });
+
+            newSocket.on("getOnlineUsers", (users) => {
+				dispatch(setOnlineUsers(users));
+			});
+
             setSocket(newSocket);
         }
     }, [account])
@@ -61,6 +67,10 @@ export default function Header(){
         <header className="main">
             <figure className="logo"><img src="/logo.png" alt=""/></figure>
             <nav>
+                <div className="menu">
+                    <figure><img src={menu_icon} alt="" /></figure>
+                    <p>Menu</p>
+                </div>
                 <ul>
                     <li className={(active === "home") ? "active":""} onClick={() => setActive("home")}>
                         <Link to="/home">

@@ -197,3 +197,9 @@
 .main .dailybox.done:hover .remove{
     opacity: 1;
 }
+
+@media screen and (max-width: 380px){
+    .dailybox.done{
+        width: 215px;
+    }
+}

@@ -16,10 +16,10 @@ export default function Welcome(){
     return (
     <>
         <div className="bg-welcome-bg w-[100vw] h-[100vh] bg-cover fixed z-[-1]"></div>
-        <main className="h-[100vh] flex justify-center items-center px-3">
-            <div className="min-h-h-[380px] w-[1200px] flex">
-                <div className="w-[45%] text-[#fff] pr-[32px]">
-                    <h1 className="text-[42px] font-bold">Chào mừng bạn đến <br/> với...</h1>
+        <main className="h-[100vh] flex justify-center items-center px-3 main-wc">
+            <div className="min-h-h-[380px] w-[1200px] flex top-wc ">
+                <div className="w-[45%] text-[#fff] pr-[32px] text-wc">
+                    <h1 className="text-[42px] font-bold">Chào mừng bạn đến với...</h1>
                     <p>Một website quan tâm đến sức khỏe tâm thần của bạn ...</p>
                 </div>
                 <Outlet/>

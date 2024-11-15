@@ -107,3 +107,28 @@
     right: 10px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 380px){
+    .feelingchart{
+        width: 100%;
+        padding: 12px 10px;
+    }
+
+    .feelingchart .chart .grid figure::after{
+        width: 255px;
+    }
+
+    .feelingchart .grid .end span::after{
+        left: 26px;
+    }
+
+    .feelingchart .chart .grid figure::after{
+        margin-bottom: 6px;
+    }
+
+    .feelingchart .chart .value {
+        bottom: 4px;
+        right: 36px;
+        width: 230px;
+    }
+}

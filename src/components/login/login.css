@@ -112,3 +112,25 @@
 .login .pwd-field:hover figure{
     opacity: 1;
 }
+
+@media screen and (max-width: 380px){
+    .login{
+        width: 100%;
+    }
+
+    .login h2{
+        width: 270px;
+    }
+
+    .login .form {
+        width: 100%;
+    }
+
+    .login .form fieldset{
+        margin-bottom: 8px;
+    }
+
+    .login .form p.error {
+        top: 255px
+    }
+}

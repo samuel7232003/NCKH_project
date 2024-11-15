@@ -43,26 +43,29 @@ export default function Calendarbox({account}:Props){
                 <figure><img src={calendar_icon} alt="" /></figure>
                 <p>Todo-list của bạn</p>
             </div>
-            <div className='calendar'>
-                <Calendar fullscreen={false}/>
-            </div>
-            <ul className='todo-list'>
-                {listTask.tasks.map((value,index) => 
-                    <li key={index} style={{background:`${getTypeStyle(value.type).color}`}}>
-                        <p style={{color:`${getTypeStyle(value.type).color}`}} className='datenum'>{value.date.slice(-2)}</p>
-                        <div>
-                            <div className='li-top'>
-                                <div className='task-type'>
-                                    <figure><img src={getTypeStyle(value.type).icon} alt="" /></figure>
-                                    <p>{getTypeStyle(value.type).content}</p>
+            <div className='cal-main'>
+                <div className='calendar'>
+                    <Calendar fullscreen={false}/>
+                </div>
+                <ul className='todo-list'>
+                    {listTask.tasks.map((value,index) => 
+                        <li key={index} style={{background:`${getTypeStyle(value.type).color}`}}>
+                            <p style={{color:`${getTypeStyle(value.type).color}`}} className='datenum'>{value.date.slice(-2)}</p>
+                            <div>
+                                <div className='li-top'>
+                                    <div className='task-type'>
+                                        <figure><img src={getTypeStyle(value.type).icon} alt="" /></figure>
+                                        <p>{getTypeStyle(value.type).content}</p>
+                                    </div>
+                                    <p className='time'>{value.time} Thứ {new Date(value.date).getDay() + 1}, {value.date}</p>
                                 </div>
-                                <p className='time'>{value.time} Thứ {new Date(value.date).getDay() + 1}, {value.date}</p>
+                                <p className='content'>{value.content}</p>
                             </div>
-                            <p className='content'>{value.content}</p>
-                        </div>
-                    </li>
-                )}
-            </ul>
+                        </li>
+                    )}
+                </ul>
+            </div>
+            
             <figure onClick={() => navigate("./timetable")} className='edit'><img src={edit_icon} alt="" /></figure>
         </div>
     )

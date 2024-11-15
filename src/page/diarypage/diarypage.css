@@ -198,3 +198,41 @@
     font-weight: bold;
     color: #16c0e8;
 }
+
+@media screen and (max-width: 1024px) {
+    .diarypage .listDiary .sub{
+        display: none;
+    }
+
+    .diarypage .sub-box{
+        top: 60px;
+        left: calc(50vw - 300px);
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .diarypage .title{
+        display: none;
+    }
+
+    .diarypage .listDiary .main{
+        height: 358px;
+    }
+
+    .diarypage .add-diary {
+        height: 50px;
+        bottom: 22px;
+        right: 10px;
+    }
+
+    .diarypage .add-diary-box {
+        right: 10px;
+        bottom: 70px;
+    }
+
+    .diarypage .sub-box{
+        left: 10px;
+        right: 10px;
+    }
+} 
