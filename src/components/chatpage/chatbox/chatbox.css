@@ -189,4 +189,8 @@
     .chat-box-main .footer {
         padding: 0 10px;
     }
+
+    .chat-box-main .chat-line::-webkit-scrollbar{
+        width: 2px;
+    }
 }
