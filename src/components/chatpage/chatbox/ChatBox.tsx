@@ -41,8 +41,8 @@ export default function ChatBox({account, chatBox}:Props){
         fetchData();
 
         if(socket===null && account._id!=="" && chatBox){
-            const newSocket = io('http://localhost:3001', {
-            // const newSocket = io('https://nckh-project.onrender.com', {
+            // const newSocket = io('http://localhost:3001', {
+            const newSocket = io('https://nckh-project.onrender.com', {
                 query: {userId: account._id}
             });
         

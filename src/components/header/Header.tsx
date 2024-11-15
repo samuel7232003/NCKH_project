@@ -33,8 +33,8 @@ export default function Header(){
 
     useEffect(() => {
         if(socket===null && account._id!==""){
-            // const newSocket = io('https://nckh-project.onrender.com', {
-            const newSocket = io('http://localhost:3001', {
+            const newSocket = io('https://nckh-project.onrender.com', {
+            // const newSocket = io('http://localhost:3001', {
                 query: {userId: account._id}
             });
         
