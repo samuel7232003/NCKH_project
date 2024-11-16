@@ -8,7 +8,7 @@ import { message, Tooltip } from "antd";
 import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
-import { getListMessage, getListRoomChat, removeRoomChat, sendMessage, setMessages } from "../../../redux/message/message.action";
+import { getListMessage, getListRoomChat, removeRoomChat, sendMessage, setListRoom, setMessages } from "../../../redux/message/message.action";
 import {io, Socket} from "socket.io-client";
 import back_icon from './images/Expand_left.png'
 
@@ -28,26 +28,28 @@ export default function ChatBox({account, chatBox, setMode}:Props){
     const listConUser = useAppSelector(state => state.user.userConnectList);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
+    const chat = useRef(chatBox);
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    useEffect(() => {
-        const fetchData = async () =>{
-            try {
-                if(chatBox) await dispatch(getListMessage(chatBox._id));
-            } catch (error) {
-                console.log(error);
-            }
+    const fetchData = async () =>{
+        try {
+            if(chatBox) await dispatch(getListMessage(chatBox._id));
+        } catch (error) {
+            console.log(error);
         }
+    }
 
+    useEffect(()=>{
         fetchData();
+        chat.current = chatBox;
+    }, [chatBox])
 
-        const updateListRoom = async () => {
-            await dispatch(getListRoomChat(account._id));
-        }
-
-        if(socket===null && account._id!=="" && chatBox){
+    useEffect(() => {
+        
+        if(socket===null && account._id!=="" && chat.current){
             // const newSocket = io('http://localhost:3001', {
             const newSocket = io('https://nckh-project.onrender.com', {
                 query: {userId: account._id}
@@ -58,14 +60,14 @@ export default function ChatBox({account, chatBox, setMode}:Props){
             });
             setSocket(newSocket);
 
-            newSocket.emit('join-room', chatBox._id);
+            newSocket.emit('join-room', chat.current._id);
 
             newSocket.on("receive", (data)=>{
-                if(data.roomId === chatBox._id){
+                if(data.roomId === chat.current!._id){
                     fetchData();
                     fetchData();
                 }
-                updateListRoom();
+                dispatch(setListRoom(data));
             })
         }
     }, [chatBox, account])

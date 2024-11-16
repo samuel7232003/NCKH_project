@@ -29,10 +29,8 @@ export const getListRoomChat = (id: string):ThunkAction<void, RootState, unknown
         const sortedData = result.sort((a, b) => {
             const dateA = dayjs(a.time, 'HH:mm, DD/MM');
             const dateB = dayjs(b.time, 'HH:mm, DD/MM');
-            return dateA.isBefore(dateB) ? -1 : 1; // Sắp xếp theo thứ tự tăng dần
+            return dateA.isBefore(dateB) ? 1 : -1; // Sắp xếp theo thứ tự tăng dần
         });
-
-        console.log(sortedData);
 
         const data:ListRoomChat = {idUser: id, roomChats: sortedData};
         dispatch(messageAction.setListRoomChat(data));
@@ -55,6 +53,7 @@ export const sendMessage = (message: Message) :ThunkAction<void, RootState, unkn
         const data:ListMessage = {idRoom: message.roomId, messages: respone_};
         dispatch(messageAction.setListMessage(data));
 
+
         if(message.type !== "join"){
             const res = await getRoom(message.roomId);
             if(res){
@@ -71,7 +70,14 @@ export const sendMessage = (message: Message) :ThunkAction<void, RootState, unkn
                     if(index._id === newRoom._id) return {...newRoom, avatar:index.avatar, name: index.name, lastSender: lastSender};
                     else return index;
                 })]
-                const result: ListRoomChat = {idUser: message.senderId, roomChats: newList};
+
+                const sortedData = newList.sort((a, b) => {
+                    const dateA = dayjs(a.time, 'HH:mm, DD/MM');
+                    const dateB = dayjs(b.time, 'HH:mm, DD/MM');
+                    return dateA.isBefore(dateB) ? 1 : -1; // Sắp xếp theo thứ tự tăng dần
+                });
+
+                const result: ListRoomChat = {idUser: message.senderId, roomChats: sortedData};
                 dispatch(messageAction.setListRoomChat(result));
             }
         }
@@ -112,5 +118,26 @@ export const setMessages = (listMessage:Message[]):ThunkAction<void, RootState, 
     return async(dispatch, getState)=>{
         const list:ListMessage = {idRoom: listMessage[0].roomId, messages: listMessage}; 
         await dispatch(messageAction.setListMessage(list));
+    }
+}
+
+export const setListRoom = (message:Message):ThunkAction<void, RootState, unknown, AnyAction> => {
+    return async(dispatch, getState)=>{
+        const user = getState().user.user;
+        let lastSender = "";
+        if(user._id === message.senderId) lastSender = "Bạn";
+        else lastSender = getState().user.userConnectList.find((index :User)=> index._id === message.senderId)!.last_name;
+        const result:RoomChat[] = getState().message.listRoomChat.roomChats.map((index :RoomChat) => {
+            if(index._id === message.roomId) return {...index, lastMessage: message.content, time: message.time, lastSender: lastSender};
+            else return index;
+        })
+
+        const sortedData = result.sort((a, b) => {
+            const dateA = dayjs(a.time, 'HH:mm, DD/MM');
+            const dateB = dayjs(b.time, 'HH:mm, DD/MM');
+            return dateA.isBefore(dateB) ? 1 : -1; // Sắp xếp theo thứ tự tăng dần
+        });
+
+        dispatch(messageAction.setListRoomChat({idUser: user._id, roomChats: sortedData}));
     }
 }

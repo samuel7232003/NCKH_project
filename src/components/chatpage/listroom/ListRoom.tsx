@@ -40,7 +40,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
     },[account])
 
     useEffect(() => {
-        if(listRoom.roomChats.length>0 && !chatBox) setChatBox(listRoom.roomChats[0])
+        if(listRoom.roomChats.length>0 && !chatBox) setChatBox(listRoom.roomChats[0]);
     }, [listRoom])
 
     function handleChange(){
