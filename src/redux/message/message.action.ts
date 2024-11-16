@@ -49,7 +49,7 @@ export const getListMessage = (id: string):ThunkAction<void, RootState, unknown,
 export const sendMessage = (message: Message) :ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState)=>{
         const respone = await sendMessageMess(message);
-        const respone_ = await getMessages(message.roomId);
+        const respone_ = [...getState().message.listMessage.messages, message];
         const data:ListMessage = {idRoom: message.roomId, messages: respone_};
         dispatch(messageAction.setListMessage(data));
 
