@@ -40,7 +40,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
     },[account])
 
     useEffect(() => {
-        if(listRoom.roomChats.length>0) setChatBox(listRoom.roomChats[0])
+        if(listRoom.roomChats.length>0 && !chatBox) setChatBox(listRoom.roomChats[0])
     }, [listRoom])
 
     function handleChange(){
@@ -66,12 +66,13 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
             try {
                 const res = await sendMessageMess(message);
                 await dispatch(getListRoomChat(account._id));
+                setIsAddMode(false);
             } catch (error) {
                 console.log(error);
             }
         }
         openChat();
-        setIsAddMode(false);
+        
     }
 
     function checkOnline(ava: string, name: string){
@@ -110,7 +111,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
                         </div>
                         <div>
                             <p className="name">{index.name}</p>
-                            <p className="mess">{index.lastMessage}</p>
+                            <p className="mess">{index.lastSender}: {index.lastMessage}</p>
                         </div>
                     </li>
                 ):

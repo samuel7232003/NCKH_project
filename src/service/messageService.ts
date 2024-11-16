@@ -1,4 +1,4 @@
-import { Message } from "../redux/message/message.state";
+import { Message, RoomChat } from "../redux/message/message.state";
 import { apiInstance } from "./api";
 
 export async function getRoomChat(id:string) {
@@ -27,10 +27,35 @@ export async function getMessages(id:string) {
 export async function sendMessageMess(message:Message) {
     try {
         const respone = await apiInstance.post("/addMessage", message);
-        const id = respone.data.roomId;
-        const res = await apiInstance.get(`/getMessages/${id}`);
-        return res.data;
+        return respone;
     } catch (error) {
         throw(error);
+    }
+}
+
+export async function deleteRoom(id:string) {
+    try {
+        const res = await apiInstance.get(`/deleteRoom/${id}`);
+        return res.data.message;
+    } catch (error) {
+        throw(error);
+    }
+}
+
+export async function updateRoom(room: RoomChat) {
+    try {
+        const res = await apiInstance.post("/updateRoom", room);
+        return res.data;
+    } catch (error) {
+        throw(error)
+    }
+}
+
+export async function getRoom(id:string) {
+    try {
+        const res = await apiInstance.get(`/getRoomChat/${id}`);
+        return res.data;
+    } catch (error) {
+        throw(error)
     }
 }

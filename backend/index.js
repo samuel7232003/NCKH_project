@@ -49,12 +49,19 @@ app.post('/signup', async (req, res) => {
     const password = req.body.password;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
+    const role = req.body.role;
     const base64Image = 'https://res.cloudinary.com/df7mhs6xj/image/upload/v1730885237/gvh57hvea5d1e5sjqjrx.png';
     const checkRes = await accountModel.findOne({email});
     if(checkRes) return res.json({message: "Email exited!"});
     else {
         try{
-            const response = await accountModel.create({email, password, first_name, last_name, avatar: base64Image});
+            const response = await accountModel.create({
+                email: email,
+                password: password,
+                first_name: first_name, 
+                last_name: last_name, 
+                avatar: base64Image, 
+                role: role});
             // res.send(token);
             return res.json({token, email});
         }
@@ -116,7 +123,8 @@ app.post('/editAccount', async(req, res) => {
                 gender: newAcc.gender,
                 email: newAcc.email,
                 password: newAcc.password,
-                avatar: newAcc.avatar
+                avatar: newAcc.avatar,
+                role: newAcc.role
             }
         )
     } catch(error){
@@ -218,6 +226,17 @@ app.post('/getRoomsByListId/', async(req, res) => {
     }
 })
 
+app.get('/getRoomChat/:id', async(req, res) => {
+    const id = req.params.id;
+    try {
+        const response = await roomChatModel.findOne({_id: id});
+        if(!response) res.status(401);
+        res.send(response);
+    } catch (error) {
+        return res.json({message: "Get room fail!"});
+    }
+})
+
 app.post('/getUsersById', async(req, res) => {
     const listId = req.body;
     try {
@@ -254,7 +273,7 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
     })
   
     socket.on("send", (data) => {
-        socket.to(data).emit("receive", data);
+        socket.to(data.roomId).emit("receive", data);
     });
 
     socket.on("disconnect", () => {
@@ -276,7 +295,14 @@ app.post('/addMessage', async(req, res) => {
     const lastMessage = "Đoạn chat mới được tạo!";
     try {
         if(type === "join"){
-            const response = await roomChatModel.create({name, avatar, lastMessage, isSeen});
+            const response = await roomChatModel.create({
+                name: name, 
+                avatar: avatar,
+                lastMessage: lastMessage,
+                isSeen: isSeen, 
+                time: time, 
+                lastSender: senderId 
+            });
             const roomId_ = response._id;
             const response_ = await messageModel.create({senderId: senderId, roomId: roomId_, content: content, type:"join", time:time});
             if(content!=="") await messageModel.create({senderId: content, roomId: roomId_, content: senderId, type:"join", time:time});
@@ -299,6 +325,44 @@ app.get('/getMessages/:id', async (req, res) =>{
         res.send(response);
     } catch (error) {
         return res.json({message: "Get fail!"});
+    }
+})
+
+app.get('/deleteRoom/:id', async(req, res) =>{
+    const roomId = req.params.id;
+    try {
+        const response = await messageModel.deleteMany({roomId: roomId});
+        const response_ = await roomChatModel.deleteOne({_id: roomId});
+        return res.json({message: "Delete done!"});
+    } catch(error){
+        return res.json({message: "Delete fail!"});
+    }
+})
+
+app.post('/updateRoom', async(req, res) => {
+    const id = req.body._id;
+    const time = req.body.time;
+    const name = req.body.name;
+    const avatar = req.body.avatar;
+    const lastMessage = req.body.lastMessage;
+    const isSeen = req.body.isSeen;
+    const lastSender = req.body.lastSender;
+    try {
+        const response = await roomChatModel.replaceOne(
+            {_id: id},
+            {
+                name: name,
+                time: time,
+                avatar: avatar,
+                lastMessage: lastMessage,
+                isSeen: isSeen,
+                lastSender: lastSender
+            }
+        )
+
+        return res.json({message: "Update done!"});
+    } catch (error) {
+        return res.json({message: "Update fail!"});
     }
 })
 

@@ -14,6 +14,8 @@ export interface RoomChat{
     lastMessage: string;
     isSeen: boolean;
     avatar: string;
+    time: string;
+    lastSender: string;
 }
 
 export interface ListMessage{

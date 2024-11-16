@@ -4,11 +4,11 @@ import addImage_icon from './images/Img_box.png'
 import send_icon from './images/Send_fill (2).png'
 import { Message, RoomChat } from "../../../redux/message/message.state";
 import './chatbox.css'
-import { Tooltip } from "antd";
+import { message, Tooltip } from "antd";
 import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
-import { getListMessage, sendMessage } from "../../../redux/message/message.action";
+import { getListMessage, getListRoomChat, removeRoomChat, sendMessage, setMessages } from "../../../redux/message/message.action";
 import {io, Socket} from "socket.io-client";
 import back_icon from './images/Expand_left.png'
 
@@ -30,7 +30,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      };
+    };
 
     useEffect(() => {
         const fetchData = async () =>{
@@ -42,6 +42,10 @@ export default function ChatBox({account, chatBox, setMode}:Props){
         }
 
         fetchData();
+
+        const updateListRoom = async () => {
+            await dispatch(getListRoomChat(account._id));
+        }
 
         if(socket===null && account._id!=="" && chatBox){
             // const newSocket = io('http://localhost:3001', {
@@ -57,7 +61,11 @@ export default function ChatBox({account, chatBox, setMode}:Props){
             newSocket.emit('join-room', chatBox._id);
 
             newSocket.on("receive", (data)=>{
-                fetchData();
+                if(data.roomId === chatBox._id){
+                    fetchData();
+                    fetchData();
+                }
+                updateListRoom();
             })
         }
     }, [chatBox, account])
@@ -75,7 +83,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
         }
         if(content!==""){
             send();
-            socket?.emit('send', chatBox?._id)
+            socket?.emit('send', message)
         }
         setContent("");
         inputRef.current?.focus();
@@ -104,6 +112,19 @@ export default function ChatBox({account, chatBox, setMode}:Props){
         return false;
     }
 
+    function handleDeleteRoom(roomId: string){
+        const deleteRoom = async () => {
+            try {
+                message.info("Đang thực hiện xóa đoạn chat!");
+                await dispatch(removeRoomChat(roomId, account._id));
+                message.success("Xóa xong đoạn chat");
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        deleteRoom();
+    }
+
     return(
         (chatBox) ? <div className="chat-box-main">
             <div className="title">
@@ -119,7 +140,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
                     </div>
                     }
                 </div>
-                <figure className="setting"><img src={setting_icon} alt="" /></figure>
+                <figure className="setting" onClick={() => handleDeleteRoom(chatBox._id)}><img src={setting_icon} alt="" /></figure>
             </div>
             <div className="chat-line">
                 <ul >
