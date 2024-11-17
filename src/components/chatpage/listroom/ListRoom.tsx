@@ -13,6 +13,8 @@ import { getAllUser } from "../../../service/accountService";
 import con_icon from './images/Send_fill (3).png'
 import dayjs from "dayjs";
 import { sendMessageMess } from "../../../service/messageService";
+import closeSearch_icon from "./images/close_ring_light.png"
+import search_icon from "./images/Search_light.png"
 
 interface Props{
     account: User;
@@ -28,6 +30,9 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
 
     const [isAddMode, setIsAddMode] = useState(false);
     const [listUser, setListUser] = useState<User[]>([]);
+    const [search, setSearch] = useState("");
+    const [viewList, setViewList] = useState(listRoom.roomChats);
+    const [viewListUser, setViewListUser] = useState(listUser);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -40,8 +45,17 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
         fetchData();
     },[account])
 
+    useEffect(() => {
+        setViewList(listRoom.roomChats);
+    },[listRoom])
+
+    useEffect(() => {
+        setViewListUser(listUser);
+    },[listUser])
+
     function handleChange(){
         setIsAddMode(true);
+        setSearch("");
         const fetchData = async () => {
             const res:User[] = await getAllUser();
             const data:User[] = res.filter(index => {
@@ -54,6 +68,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
             setListUser(data);
         }
         fetchData();
+        setViewListUser(listUser);
     }
 
     function handleOpenChat(id: string){
@@ -87,6 +102,27 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
         else return false;
     }
 
+    function handleSearch(text: string){
+        setSearch(text);
+        if(isAddMode){
+            if(text === "") setViewListUser(listUser);
+            else setViewListUser([...listUser.filter((index:User) => {
+                const name = index.first_name + " " + index.last_name;
+                return name.includes(text);
+            })])
+        }
+        else{
+            if(text === "") setViewList(listRoom.roomChats);
+            else setViewList([...listRoom.roomChats.filter((index: RoomChat) => index.name.includes(text))]);
+        }
+    }
+
+    function handleBack(){
+        setIsAddMode(false); 
+        setSearch(""); 
+        setViewList(listRoom.roomChats);
+    }
+
     return(
         (!isAddMode) ? <div className="list-room-main">
             <div className="title">
@@ -96,9 +132,14 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
                     <figure className="add-new-con" onClick={handleChange}><img src={addMode_icon} alt="" /></figure>
                 </Tooltip>
             </div>
+            <fieldset>
+                <figure className="s-icon"><img src={search_icon} alt="" /></figure>
+                <input type="text" placeholder="Nhập để tìm kiếm người dùng..." value={search} onChange={e => handleSearch(e.target.value.trim())}/>
+                <figure className="c-icon" style={(search === "") ? {display: "none"} : undefined} onClick={() => setSearch("")}><img src={closeSearch_icon} alt="" /></figure>
+            </fieldset>
             <ul>
                 {(listRoom.roomChats.length > 0) ?
-                listRoom.roomChats.map(index => 
+                viewList.map(index => 
                     <li style={(chatBox && chatBox._id === index._id) ? {background: '#c0c0c0'}:undefined} onClick={() => setChatBox(index)} className="room-item" key={index._id}>
                         <div className="box-ava">
                             <figure className="ava"><img src={index.avatar} alt="" /></figure>
@@ -119,11 +160,18 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
                 <figure><img src={add_icon} alt="" /></figure>
                 <h2>Kết nối với người mới</h2>
                 <Tooltip title="Tìm kết nối mới">
-                    <figure className="add-new-con" onClick={() => setIsAddMode(false)}><img src={back_icon} alt="" /></figure>
+                    <figure className="add-new-con" onClick={handleBack}><img src={back_icon} alt="" /></figure>
                 </Tooltip>
             </div>
+            <fieldset>
+            <fieldset>
+                <figure className="s-icon"><img src={search_icon} alt="" /></figure>
+                <input type="text" placeholder="Nhập để tìm kiếm người dùng..." value={search} onChange={e => handleSearch(e.target.value.trim())}/>
+                <figure className="c-icon" style={(search === "") ? {display: "none"} : undefined} onClick={() => setSearch("")}><img src={closeSearch_icon} alt="" /></figure>
+            </fieldset>
+            </fieldset>
             <ul>
-                {listUser.map(index =>
+                {viewListUser.map(index =>
                     <Tooltip title="Nhấn để kết nối ngay!" key={index._id}>
                         <li className="room-item" onClick={() => handleOpenChat(index._id)}>
                             <figure className="ava"><img src={index.avatar} alt="" /></figure>

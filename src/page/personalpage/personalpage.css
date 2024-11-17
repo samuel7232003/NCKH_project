@@ -103,6 +103,10 @@
     white-space: nowrap;
 }
 
+.main-personal .name .val::-webkit-scrollbar{
+    height: 5px;
+}
+
 .main-personal .name figure{
     position: absolute;
     right: 0px;

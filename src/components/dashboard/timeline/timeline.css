@@ -6,8 +6,13 @@
     padding: 3px 8px;
     position: relative;
     margin-bottom: 10px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     background-color: white;
+}
+
+.timeline::-webkit-scrollbar{
+    height: 5px;
 }
 
 .timeline .grid{

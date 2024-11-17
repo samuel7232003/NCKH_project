@@ -45,8 +45,41 @@
     transform: rotate(180deg);
 }
 
+.list-room-main fieldset{
+    height: 35px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.list-room-main fieldset input{
+    height: 100%;
+    padding: 0 32px;
+    font-size: 14px;
+    width: 100%;
+    border-radius: 25px;
+}
+
+.list-room-main fieldset input::placeholder{
+    font-style: italic;
+}
+
+.list-room-main fieldset .s-icon{
+    height: 24px;
+    position: absolute;
+    left: 5px;
+    top: 5px
+}
+
+.list-room-main fieldset .c-icon{
+    height: 24px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
 .list-room-main ul{
-    height: calc(100% - 40px);
+    height: calc(100% - 88px);
     overflow: auto;
 }
 
