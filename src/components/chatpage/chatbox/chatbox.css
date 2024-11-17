@@ -102,6 +102,9 @@
 
 .chat-box-main .setting-box ul{
     padding: 10px;
+    display: flex;
+    flex-flow: column;
+    gap: 5px;
 }
 
 .chat-box-main .setting-box li{
