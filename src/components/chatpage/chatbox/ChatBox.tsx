@@ -4,13 +4,17 @@ import addImage_icon from './images/Img_box.png'
 import send_icon from './images/Send_fill (2).png'
 import { Message, RoomChat } from "../../../redux/message/message.state";
 import './chatbox.css'
-import { message, Tooltip } from "antd";
+import { message} from "antd";
 import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
-import { getListMessage, getListRoomChat, removeRoomChat, sendMessage, setListRoom, setMessages } from "../../../redux/message/message.action";
+import { getListMessage, removeRoomChat, sendMessage, setListRoom } from "../../../redux/message/message.action";
 import {io, Socket} from "socket.io-client";
-import back_icon from './images/Expand_left.png'
+import back_icon from './images/Expand_left.png';
+import delete_icon from './images/Trash_duotone_line.png'
+import axios from "axios";
+import deleteImgae_icon from './images/Close_square_duotone_broken_line.png'
+import { apiInstance } from "../../../service/api";
 
 interface Props{
     account: User;
@@ -19,20 +23,20 @@ interface Props{
 }
 
 export default function ChatBox({account, chatBox, setMode}:Props){
-    const [content, setContent] = useState("");
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     const listMessages = useAppSelector(state => state.message.listMessage);
-    const [socket, setSocket] = useState<Socket|null>(null);
-    const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const listOnl = useAppSelector(state => state.user.onlineUsers);
     const listConUser = useAppSelector(state => state.user.userConnectList);
+    const listRoom = useAppSelector(state => state.message.listRoomChat);
+
+    const [content, setContent] = useState("");
+    const [socket, setSocket] = useState<Socket|null>(null);
+    const [settingBox, setSettingBox] = useState(false);
+    const [image, setImage] = useState("");
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
-
+    const inputImage = useRef<HTMLInputElement | null>(null);
     const chat = useRef(chatBox);
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
 
     const fetchData = async () =>{
         try {
@@ -43,29 +47,23 @@ export default function ChatBox({account, chatBox, setMode}:Props){
     }
 
     useEffect(()=>{
-        fetchData();
-        chat.current = chatBox;
+        fetchData(); chat.current = chatBox;
     }, [chatBox])
 
     useEffect(() => {
-        
         if(socket===null && account._id!=="" && chat.current){
-            // const newSocket = io('http://localhost:3001', {
-            const newSocket = io('https://nckh-project.onrender.com', {
+            const newSocket = io(apiInstance.getUri(), {
                 query: {userId: account._id}
             });
         
-            newSocket.on('connect', () => {
-                console.log('Connected to WebSocket server');
-            });
+            newSocket.on('connect', () => { console.log('Connected to WebSocket server');});
             setSocket(newSocket);
 
-            newSocket.emit('join-room', chat.current._id);
+            newSocket.emit('join-room', listRoom.roomChats);
 
             newSocket.on("receive", (data)=>{
                 if(data.roomId === chat.current!._id){
-                    fetchData();
-                    fetchData();
+                    fetchData(); fetchData();
                 }
                 dispatch(setListRoom(data));
             })
@@ -75,21 +73,32 @@ export default function ChatBox({account, chatBox, setMode}:Props){
     function handleSend(){
         const time = dayjs().format("HH:mm, DD/MM");
         const message :Message = {_id: "", senderId: account._id, roomId: chatBox!._id, content: content, type: "message", time:time};
+        let messImage :Message = {...message};
+        if(image!=="") messImage = {...message, content: image, type: "image"};
 
-        const send = async () =>{
+        const send = async (mess: Message) =>{
             try {
-                dispatch(sendMessage(message));
+                dispatch(sendMessage(mess));
             } catch (error) {
                 console.log(error);
             }
         }
         if(content!==""){
-            send();
-            socket?.emit('send', message)
+            send(message);
+            socket?.emit('send', message);
+        }
+        if(image!=="" && messImage.type === "image"){
+            send(messImage);
+            socket?.emit('send', message);
         }
         setContent("");
+        setImage("");
         inputRef.current?.focus();
     }
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     useEffect(() => {
         scrollToBottom();
@@ -127,6 +136,39 @@ export default function ChatBox({account, chatBox, setMode}:Props){
         deleteRoom();
     }
 
+    function handleUpload(e: React.ChangeEvent<HTMLInputElement>){
+        let file;
+        if(e.target.files) file = e.target.files[0];
+        if(file){
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", 'qwertyu');
+            axios.post('https://api.cloudinary.com/v1_1/df7mhs6xj/image/upload', formData).then((res) => {
+                const url = res.data.secure_url;
+                setImage(url);
+            })
+        }
+    }
+
+    function divMess(type: string, index: Message){
+        if(type === "message"){
+            return(
+                <div className="text">
+                    <p className="time">{index.time}</p>
+                    <p className="content">{index.content}</p>
+                </div>
+            )
+        }
+        if(type === "image"){
+            return(
+                <div className="text img">
+                    <p className="time">{index.time}</p>
+                    <figure className="text-img"><img src={index.content} alt="" /></figure>
+                </div>
+            )
+        }
+    }
+
     return(
         (chatBox) ? <div className="chat-box-main">
             <div className="title">
@@ -142,32 +184,40 @@ export default function ChatBox({account, chatBox, setMode}:Props){
                     </div>
                     }
                 </div>
-                <figure className="setting" onClick={() => handleDeleteRoom(chatBox._id)}><img src={setting_icon} alt="" /></figure>
+                <figure className="setting" onClick={() => setSettingBox(!settingBox)}><img src={setting_icon} alt="" /></figure>
+                {settingBox && <div className="setting-box">
+                    <p className="setting-box-title">Cài đặt</p>
+                    <ul>
+                        <li onClick={() => handleDeleteRoom(chatBox._id)}>
+                            <figure><img src={delete_icon} alt="" /></figure>
+                            <p>Xóa đoạn chat này</p>
+                        </li>
+                    </ul>
+                </div>}
             </div>
             <div className="chat-line">
-                <ul >
+                <ul>
                     {listMessages.messages.map(index => {
                         if(index.senderId === account._id) return <li key={index._id} className="mine">
-                           <div className="text">
-                                <p className="time">{index.time}</p>
-                                <p className="content">{index.content}</p>
-                            </div>
+                            {divMess(index.type, index)}
                         </li>
                         else return <li key={index._id} className="orther">
                             <figure className="ava"><img src={chatBox.avatar} alt="" /></figure>
-                            <div className="text">
-                                <p className="time">{index.time}</p>
-                                <p className="content">{index.content}</p>
-                            </div>
+                            {divMess(index.type, index)}
                         </li>
                     })}
                 </ul>
                 <div ref={messagesEndRef}></div>
             </div>
             <div className="footer">
-                <Tooltip title="Gửi hình ảnh!"><figure className="addImage-btn"><img src={addImage_icon} alt="" /></figure></Tooltip>
-                    <input ref={inputRef} onKeyDown={(e) => handleEnter(e)} value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
-                <Tooltip title="Gửi tin nhắn!"><figure className="send-btn" onClick={handleSend}><img src={send_icon} alt="" /></figure></Tooltip>
+                <figure className="addImage-btn" onClick={() => inputImage.current?.click()}><img src={addImage_icon} alt="" /></figure>
+                <input ref={inputImage} onChange={e => handleUpload(e)} type="file" accept=".jpg, .png" style={{display: "none"}}/>
+                <input ref={inputRef} onKeyDown={(e) => handleEnter(e)} value={content} onChange={(e) => setContent(e.target.value)} type="text" placeholder="Nhập tin nhắn tại đây..."/>
+                <figure className="send-btn" onClick={handleSend}><img src={send_icon} alt="" /></figure>
+                {(image!=="") && <div className="image-show">
+                    <figure className="main"><img src={image} alt="" /></figure>
+                    <figure className="remove" onClick={() => setImage("")}><img src={deleteImgae_icon} alt="" /></figure>
+                </div>}
             </div>
         </div>
         : <div className="chat-box-main"></div>

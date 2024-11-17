@@ -10,13 +10,14 @@ import axios from "axios";
 
 
 export default function PersonalPage(){
+    const dispatch = useAppDispatch();
     const account = useAppSelector(state => state.user.user);
+
     const [acc, setAcc] = useState(account);
     const [editInfo, setEditInfo] = useState(false);
     const [editAcc, setEditAcc] = useState(false);
     const [confirmPwd, setConfirmPwd] = useState("");
-    const dispatch = useAppDispatch();
-
+    
     useEffect(() => {
         setConfirmPwd(account.password);
         setAcc({...account});
@@ -74,7 +75,6 @@ export default function PersonalPage(){
         let file;
         if(e.target.files) file = e.target.files[0];
         if(file){
-            console.log(file);
             const formData = new FormData();
             formData.append("file", file);
             formData.append("upload_preset", 'qwertyu');

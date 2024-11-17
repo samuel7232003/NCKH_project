@@ -70,6 +70,64 @@
     font-size: 20px;
 }
 
+.chat-box-main .title .setting{
+    cursor: pointer;
+}
+
+.chat-box-main .title .setting-box{
+    position: absolute;
+    z-index: 1;
+    top: 60px;
+    right: 20px;
+    width: 182px;
+    background-color: #d9d9d9;
+    border-radius: 8px;
+}
+
+.chat-box-main .setting-box .setting-box-title{
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+}
+
+.chat-box-main .setting-box .setting-box-title::after{
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color:#999;
+    display: block;
+}
+
+.chat-box-main .setting-box ul{
+    padding: 10px;
+}
+
+.chat-box-main .setting-box li{
+    height: 32px;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    gap: 5px;
+    transition: background-color ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.chat-box-main .setting-box li:hover{
+    background-color: rgb(233, 233, 233);
+}
+
+.chat-box-main .setting-box figure{
+    height: 20px;
+}
+
+.chat-box-main .setting-box p{
+    font-size: 12px;
+}
+
 .chat-box-main .chat-line{
     flex-grow: 1;
     overflow: auto;
@@ -134,6 +192,16 @@
     background-color: #d9d9d9;
 }
 
+.chat-box-main .chat-line .text.img figure{
+    height: 250px;
+    max-width: 350px;
+    overflow: hidden;
+    border-radius: 8px;
+} 
+
+.chat-box-main .chat-line .text.img figure img{
+    height: 100%;
+}
 
 .chat-box-main .footer{
     display: flex;
@@ -171,6 +239,53 @@
 
 .chat-box-main .footer .send-btn:hover{
     transform: rotate(360deg);
+}
+
+.chat-box-main .footer .image-show{
+    height: 200px;
+    position: absolute;
+    bottom: 82px;
+    right: 27px;
+    animation-name: scroll-down;
+    animation-iteration-count: infinite;
+    animation-duration: 0.25s;
+    animation-direction: alternate-reverse;
+    animation-delay: 1s;
+}
+
+@keyframes scroll-down{
+    from {
+        bottom: 82px;
+    }
+    to {
+        bottom: 90px;
+    }
+}
+
+.chat-box-main .footer .image-show .main{
+    height: 100%;
+    border: #999 solid 2px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chat-box-main .footer .image-show .main img{
+    height: 100%;
+}
+
+.chat-box-main .footer .image-show .remove{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 24px;
+    width: 24px;
+    border-radius: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.chat-box-main .footer .image-show .remove img{
+    height: 100%;
 }
 
 @media screen and (max-width: 430px){

@@ -269,7 +269,9 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
     socketIo.emit("getOnlineUsers", Object.keys(userSocketMap));
 
     socket.on('join-room', (data) =>{
-        socket.join(data);
+        for(let i = 0; i < data.length; i++){
+            socket.join(data[i]._id);
+        }
     })
   
     socket.on("send", (data) => {
@@ -321,7 +323,7 @@ app.post('/addMessage', async(req, res) => {
 app.get('/getMessages/:id', async (req, res) =>{
     const roomId = req.params.id;
     try {
-        const response = await messageModel.find({roomId: roomId, type: "message"});
+        const response = await messageModel.find({roomId: roomId, type: { $in: ["message", "image"]}});
         res.send(response);
     } catch (error) {
         return res.json({message: "Get fail!"});

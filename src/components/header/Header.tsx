@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/builder";
 import { getUser, setOnlineUsers } from "../../redux/user/user.action";
 import { io, Socket } from "socket.io-client";
 import menu_icon from './images/darhboard.png'
+import { apiInstance } from "../../service/api";
 
 export default function Header(){
     const account = useAppSelector(state => state.user.user);
@@ -33,8 +34,7 @@ export default function Header(){
 
     useEffect(() => {
         if(socket===null && account._id!==""){
-            const newSocket = io('https://nckh-project.onrender.com', {
-            // const newSocket = io('http://localhost:3001', {
+            const newSocket = io(apiInstance.getUri(), {
                 query: {userId: account._id}
             });
         

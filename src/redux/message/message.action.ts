@@ -20,10 +20,12 @@ export const getListRoomChat = (id: string):ThunkAction<void, RootState, unknown
             const id = listMess.find((mess: Message) => mess.roomId === index._id).content;
             const user:User = listUser.find((user: User) => user._id === id);
             const lastSender :string = (index.lastSender !== id) ?"Bạn" :user.last_name;
+            let content = index.lastMessage;
+            if(content.startsWith("https")) content = "Đã gửi một ảnh.";
             if(index.name ===""){
-                return {...index, name: `${user.first_name} ${user.last_name}`, avatar: user.avatar, lastSender: lastSender};
+                return {...index, lastMessage: content, name: `${user.first_name} ${user.last_name}`, avatar: user.avatar, lastSender: lastSender};
             }
-            else return {...index, lastSender: lastSender};
+            else return {...index, lastMessage: content, lastSender: lastSender};
         })]
 
         const sortedData = result.sort((a, b) => {
@@ -53,21 +55,28 @@ export const sendMessage = (message: Message) :ThunkAction<void, RootState, unkn
         const respone = await sendMessageMess(message);
         dispatch(messageAction.setListMessage(data));
 
-
         if(message.type !== "join"){
             const res = await getRoom(message.roomId);
             if(res){
                 const newRoom:RoomChat = {...res, time: message.time, lastMessage: message.content, lastSender: message.senderId};
+                const res_ = await updateRoom(newRoom);
                 let lastSender="";
                 if(message.senderId === getState().user.user._id) lastSender = "Bạn";
                 else {
                     const user = getState().user.userConnectList.find((index:User) => index._id === message._id);
                     if(user) lastSender = user.last_name;
                 }
-                const res_ = await updateRoom(newRoom);
+                let content = message.content;
+                if(message.type ==="image") content = "Đã gửi một ảnh";
                 const oldList = getState().message.listRoomChat.roomChats;
                 const newList = [...oldList.map((index:RoomChat) => {
-                    if(index._id === newRoom._id) return {...newRoom, avatar:index.avatar, name: index.name, lastSender: lastSender};
+                    if(index._id === newRoom._id) return {
+                        ...newRoom, 
+                        lastMessage: content, 
+                        avatar:index.avatar, 
+                        name: index.name, 
+                        lastSender: lastSender
+                    };
                     else return index;
                 })]
 
@@ -125,10 +134,12 @@ export const setListRoom = (message:Message):ThunkAction<void, RootState, unknow
     return async(dispatch, getState)=>{
         const user = getState().user.user;
         let lastSender = "";
+        let content = message.content;
         if(user._id === message.senderId) lastSender = "Bạn";
         else lastSender = getState().user.userConnectList.find((index :User)=> index._id === message.senderId)!.last_name;
+        if(message.type === "image") content = "Đã gửi một ảnh."
         const result:RoomChat[] = getState().message.listRoomChat.roomChats.map((index :RoomChat) => {
-            if(index._id === message.roomId) return {...index, lastMessage: message.content, time: message.time, lastSender: lastSender};
+            if(index._id === message.roomId) return {...index, lastMessage: content, time: message.time, lastSender: lastSender};
             else return index;
         })
 

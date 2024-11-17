@@ -4,7 +4,7 @@ import addMode_icon from './images/dell_square.png'
 import { User } from "../../../redux/user/user.state";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
 import { Message, RoomChat } from "../../../redux/message/message.state";
-import { getListRoomChat, openNewChat } from "../../../redux/message/message.action";
+import { getListRoomChat} from "../../../redux/message/message.action";
 import './listroom.css'
 import { Tooltip } from "antd";
 import add_icon from './images/group_add_fill.png'
@@ -21,12 +21,13 @@ interface Props{
 }
 
 export default function ListRoom({account, setChatBox, chatBox}:Props){
-    const [isAddMode, setIsAddMode] = useState(false);
     const dispatch = useAppDispatch();
     const listRoom = useAppSelector(state => state.message.listRoomChat);
-    const [listUser, setListUser] = useState<User[]>([]);
     const listConUser = useAppSelector(state => state.user.userConnectList);
     const listOnl = useAppSelector(state => state.user.onlineUsers);
+
+    const [isAddMode, setIsAddMode] = useState(false);
+    const [listUser, setListUser] = useState<User[]>([]);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -38,10 +39,6 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
         }
         fetchData();
     },[account])
-
-    useEffect(() => {
-        if(listRoom.roomChats.length>0 && !chatBox) setChatBox(listRoom.roomChats[0]);
-    }, [listRoom])
 
     function handleChange(){
         setIsAddMode(true);
@@ -64,7 +61,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
         const message: Message = {_id: "", senderId: account._id, roomId: "", content: id, type: "join", time:time};
         const openChat = async () => {
             try {
-                const res = await sendMessageMess(message);
+                await sendMessageMess(message);
                 await dispatch(getListRoomChat(account._id));
                 setIsAddMode(false);
             } catch (error) {
@@ -72,7 +69,6 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
             }
         }
         openChat();
-        
     }
 
     function checkOnline(ava: string, name: string){
@@ -87,7 +83,6 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
             if(index.avatar === ava && name_acc === name) return true;
             else return false;
         })
-
         if(find) return true;
         else return false;
     }

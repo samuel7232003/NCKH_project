@@ -33,6 +33,7 @@ main.dashboard{
     border: rgba(201, 201, 201, 0.7) solid 1px;
     border-radius: 10px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .main-dashboard .option .sub{
