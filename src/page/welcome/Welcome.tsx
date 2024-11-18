@@ -19,7 +19,7 @@ export default function Welcome(){
         <main className="h-[100vh] flex justify-center items-center px-3 main-wc">
             <div className="min-h-h-[380px] w-[1200px] flex top-wc ">
                 <div className="w-[45%] text-[#fff] pr-[32px] text-wc">
-                    <h1 className="text-[42px] font-bold">Chào mừng bạn đến với...</h1>
+                    <h1 className="text-[42px] font-bold">Chào mừng bạn đến với Hiểu Để Yêu Thương</h1>
                     <p>Một website quan tâm đến sức khỏe tâm thần của bạn ...</p>
                 </div>
                 <Outlet/>
