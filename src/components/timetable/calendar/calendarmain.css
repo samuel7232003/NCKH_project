@@ -84,7 +84,7 @@
 
 .calendarmain .todolist{
     height: 100%;
-    width: 280px;
+    min-width: 280px;
     border-radius: 8px;
     padding: 20px 10px;
     border: #d9d9d9 solid 1px;

@@ -4,7 +4,7 @@
     border-radius: 10px;
     width: 258px;
     padding: 12px 22px;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.459);
 }
 
 .dailybox h2{
@@ -134,12 +134,37 @@
     margin-bottom: 36px;
 }
 
+.dailybox.pending .date{
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
 .dailybox.done .date::after{
     content: "";
     height: 1px;
     width: 40px;
     background-color: #6c6c6c;
     display: block;
+}
+
+.dailybox.pending .date::after{
+    content: "";
+    height: 1px;
+    width: 40px;
+    background-color: white;
+    display: block;
+}
+
+.dailybox.pending figure{
+    display: flex;
+    justify-content: center;
+    margin-top: 75px;
+    cursor: pointer;
 }
 
 .dailybox.done .icon{
