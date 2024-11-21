@@ -18,6 +18,13 @@
     height: 45px;
     display: flex;
     align-items: center;
+    border-radius: 8px;
+    transition: background-color ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.timelinemain .timeline-box .grid li:hover{
+    background-color: rgba(201, 201, 201, 0.434);
 }
 
 .timelinemain .timeline-box .grid .grid-now{

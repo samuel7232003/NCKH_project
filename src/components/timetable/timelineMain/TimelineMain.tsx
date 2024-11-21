@@ -31,7 +31,7 @@ export default function TimelineMain({account}:Props){
     
     useEffect(() => {
         if(account._id!==""){
-            setNewTask({...newTask, idUser: account._id});
+            setNewTask({...newTask, idUser: account._id, start:"07:00", end:"09:00"});
             const fetchData = async () => {
                 await dispatch(getListDailyTask(account._id));
             }
@@ -120,11 +120,18 @@ export default function TimelineMain({account}:Props){
         message.success("Xóa công việc thành công!")
     }
 
+    function handleSetNew(value: number){
+        const start = (value<10) ? "0"+value+":00" : value+":00";
+        let end = (value<8) ? "0"+(value+2)+":00" : (value+2)+":00";
+        if(value>=22) end = "23:45";
+        setNewTask({...newTask, start: start, end: end})
+    }
+
     return(
         <div className="timelinemain">
             <div className="timeline-box">
                 <ul className="grid">
-                    {listHours().map((value, index) => <li key={index}>
+                    {listHours().map((value, index) => <li key={index} onClick={() => handleSetNew(value)}>
                         <p>{value}h</p>
                     </li>)}
                     <li key={24} className="grid-now" style={{top: `${getPositon(now)-20}px`}}><p>{now}</p></li>
@@ -149,7 +156,7 @@ export default function TimelineMain({account}:Props){
                     <p>Thời gian</p> 
                     <TimePicker.RangePicker 
                         format={"HH:mm"} minuteStep={15}
-                        defaultValue={[dayjs("07:00","HH:mm"), dayjs("09:00", "HH:mm")]}
+                        value={[dayjs(newTask.start,"HH:mm"), dayjs(newTask.end, "HH:mm")]}
                         onChange={(dates) => handleTime(dates)}
                         allowClear={false}
                     />

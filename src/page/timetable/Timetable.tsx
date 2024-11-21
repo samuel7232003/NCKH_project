@@ -9,7 +9,7 @@ import time_icon from './images/Alarmclock_light.png'
 
 export default function Timetable(){
     const account = useAppSelector(state => state.user.user);
-    const [calMode, setCalMode] = useState(false);
+    const [calMode, setCalMode] = useState(true);
 
     return(
         account && <main className="timetable">
