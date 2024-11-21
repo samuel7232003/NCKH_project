@@ -39,6 +39,7 @@ export default function DiaryPage(){
     const [openAdd, setOpenAdd] = useState(false);
     const [mode, setMode] = useState(true);
     const [time, setTime] = useState(dayjs());
+    const [dateChoice, setDateChoice] = useState<string>("");
 
     useEffect(()=>{
         setPage("diary");
@@ -102,7 +103,7 @@ export default function DiaryPage(){
         if(find) return <DiaryBox account={account} diary={find}/>
         else return <div className="dailybox pending">
             <p className="date">{date}</p>
-            <figure onClick={() => setOpenAdd(true)}><img src={addDate_icon} alt="" /></figure>
+            <figure onClick={() => {setOpenAdd(true); setDateChoice(date)}}><img src={addDate_icon} alt="" /></figure>
         </div>
     }
 
@@ -143,7 +144,7 @@ export default function DiaryPage(){
             <Tooltip title="Thêm nhật kí mới!">
                 <figure onClick={() => setOpenAdd(!openAdd)} className="add-diary"><img src={add_icon} alt="" /></figure>
             </Tooltip>
-            {openAdd && <AddDiaryBox account={account} listDiary={listDiary} setOpen={setOpenAdd}/>}
+            {openAdd && <AddDiaryBox account={account} listDiary={listDiary} setOpen={setOpenAdd} dateChoice={dateChoice}/>}
         </main>
     )
 }

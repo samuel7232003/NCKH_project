@@ -6,7 +6,7 @@ import veryHappy from '../../image/🦆 emoji _smiling face with heart-shaped ey
 import save_icon from '../../page/diarypage/images/Send_fill.png'
 import { DatePicker, message, Select } from "antd";
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { initalDiaryState } from '../../redux/diary/diary.slice'
 import { User } from '../../redux/user/user.state'
 import { Diary, ListDiary } from '../../redux/diary/diary.state'
@@ -18,13 +18,14 @@ import { getListDiary } from '../../redux/diary/diary.action'
 interface Props{
     account: User,
     listDiary: ListDiary,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    dateChoice: string
 }
 
-export default function AppDiaryBox({account, listDiary, setOpen}:Props){
+export default function AppDiaryBox({account, listDiary, setOpen, dateChoice}:Props){
     const dispatch = useAppDispatch();
     
-    const [diary, setDiary] = useState({...initalDiaryState.diary, survey: 5, idUser: account._id});
+    const [diary, setDiary] = useState({...initalDiaryState.diary, survey: 5, idUser: account._id, date: dateChoice});
     const [errorDate, setErrorDate] = useState(false);
     
     async function saveDiary(dia: Diary) {
@@ -35,6 +36,10 @@ export default function AppDiaryBox({account, listDiary, setOpen}:Props){
             console.log(error);   
         }
     }
+
+    useEffect(() => {
+        setDiary({...diary, date: dateChoice});
+    }, [dateChoice])
 
     function handleSave(){
         const dia = listDiary.diarys.find(index => index.date === diary.date);
@@ -61,7 +66,7 @@ export default function AppDiaryBox({account, listDiary, setOpen}:Props){
             </div>
             <div className="pick-date">
                 <p>Ngày:</p>
-                <DatePicker className={errorDate ?'border-[red]':""} onChange={e => {
+                <DatePicker value={dayjs(diary.date)} className={errorDate ?'border-[red]':""} onChange={e => {
                     if(e) setDiary({...diary, date: e.format("YYYY-MM-DD")})
                     else setDiary({...diary, date: ""})
                 }} maxDate={dayjs()}/>
