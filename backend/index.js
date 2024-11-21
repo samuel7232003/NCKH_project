@@ -7,7 +7,10 @@ const taskModel = require("./models/Task.js");
 const dailyTaskModel = require("./models/DailyTask.js");
 const messageModel = require("./models/Message.js");
 const roomChatModel = require("./models/RoomChat.js");
+require('dotenv').config();
 const app = express();
+
+const port = process.env.PORT || 3001;
 
 app.use(express.json())
 
@@ -368,6 +371,6 @@ app.post('/updateRoom', async(req, res) => {
     }
 })
 
-server.listen(3001, () =>{
+server.listen(port, () =>{
     console.log("App is running2")
 })
