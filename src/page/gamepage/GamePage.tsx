@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './gamepage.css'
 import pacman from './images/pacman.png'
 import tangbong from './images/tangbong.png'
@@ -7,11 +7,18 @@ import xepgach from './images/xepgach.png'
 import xepbai from './images/xepbai.png'
 import back_icon from "./images/Sign_out_squre.png"
 import { Tooltip } from 'antd';
+import { useOutletContext } from 'react-router-dom';
 
 export function GamePage(){
-    const [isPlay, setIsPlay] = useState(false);
     const listGame = ["pacman", "bounce", "snake", "tetris", "spider"];
+
+    const {setPage}:any = useOutletContext();
+    const [isPlay, setIsPlay] = useState(false);
     const [curGame, setCurGame] = useState(0);
+
+    useEffect(() => {
+        setPage("game");
+    },[])
 
     function getiInfor(num: number){
         switch (num){

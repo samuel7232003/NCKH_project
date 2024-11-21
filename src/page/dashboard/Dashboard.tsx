@@ -6,11 +6,17 @@ import FeelingChart from "../../components/dashboard/feelingchart/FeelingChart";
 import Calendarbox from "../../components/dashboard/calendar/Calendarbox";
 import Timeline from "../../components/dashboard/timeline/Timeline";
 import avaChat from "./images/Avatar (1).png"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Dashboard(){
+    const {setPage}:any = useOutletContext();
     const account = useAppSelector(state => state.user.user);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setPage("dashboard");
+    }, [account])
 
     return(
     <>

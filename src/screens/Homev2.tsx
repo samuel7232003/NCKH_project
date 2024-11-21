@@ -4,12 +4,14 @@ import { useState } from "react";
 import { Socket } from "socket.io-client";
 
 function Homev2(){
+    const [page, setPage] = useState("dashboard");
+    const [socket, setSocket] = useState<Socket|null>(null);
     
     return (
         <div className="App">
-            <Header/>
+            <Header page={page} setPage={setPage} socket={socket} setSocket={setSocket}/>
             <div>
-                <Outlet/>
+                <Outlet context={{setPage, socket, setSocket}}/>
             </div>
         </div>
     )

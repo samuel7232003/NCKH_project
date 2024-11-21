@@ -19,11 +19,14 @@ import InforChart from "../../components/infochart/InfoChart";
 import add_icon from './images/Add_round_duotone_fill_line.png'
 import { Tooltip } from "antd";
 import AddDiaryBox from "../../components/diarypage/AddDiaryBox";
+import { useOutletContext } from "react-router-dom";
 
 export default function DiaryPage(){
+    const {setPage}:any = useOutletContext();
+    const dispatch = useAppDispatch();
     const account = useAppSelector(state => state.user.user);
     const listDiary = useAppSelector(state => state.diary.listDiary);
-    const dispatch = useAppDispatch();
+    
     const [nowDiary, setNowDiary] = useState<Diary>(initalDiaryState.diary);
     const [backDiary, setBackDiary] = useState<Diary|null>();
     const [nextDiary, setNextDiary] = useState<Diary|null>();
@@ -32,9 +35,10 @@ export default function DiaryPage(){
     const [openAdd, setOpenAdd] = useState(false);
 
     useEffect(()=>{
+        setPage("diary");
         const fetchData = async ()=>{
             try{
-                const res = await dispatch(getListDiary(account._id));
+                await dispatch(getListDiary(account._id));
             } catch (error){
                 console.log(error);
             }

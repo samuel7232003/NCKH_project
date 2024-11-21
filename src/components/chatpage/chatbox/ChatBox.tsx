@@ -9,12 +9,11 @@ import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
 import { getListMessage, removeRoomChat, sendMessage, setListRoom } from "../../../redux/message/message.action";
-import {io, Socket} from "socket.io-client";
 import back_icon from './images/Expand_left.png';
 import delete_icon from './images/Trash_duotone_line.png'
 import axios from "axios";
 import deleteImgae_icon from './images/Close_square_duotone_broken_line.png'
-import { apiInstance } from "../../../service/api";
+import { useOutletContext } from "react-router-dom";
 
 interface Props{
     account: User;
@@ -30,13 +29,14 @@ export default function ChatBox({account, chatBox, setMode}:Props){
     const listRoom = useAppSelector(state => state.message.listRoomChat);
 
     const [content, setContent] = useState("");
-    const [socket, setSocket] = useState<Socket|null>(null);
     const [settingBox, setSettingBox] = useState(false);
     const [image, setImage] = useState("");
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const inputImage = useRef<HTMLInputElement | null>(null);
     const chat = useRef(chatBox);
+
+    const {socket}:any = useOutletContext();
 
     const fetchData = async () =>{
         try {
@@ -51,17 +51,11 @@ export default function ChatBox({account, chatBox, setMode}:Props){
     }, [chatBox])
 
     useEffect(() => {
-        if(socket===null && account._id!=="" && chat.current){
-            const newSocket = io(apiInstance.getUri(), {
-                query: {userId: account._id}
-            });
-        
-            newSocket.on('connect', () => { console.log('Connected to WebSocket server');});
-            setSocket(newSocket);
+        if(account._id!=="" && chat.current){
 
-            newSocket.emit('join-room', listRoom.roomChats);
+            socket.emit('join-room', listRoom.roomChats);
 
-            newSocket.on("receive", (data)=>{
+            socket.on("receive", (data:any)=>{
                 if(data.roomId === chat.current!._id){
                     fetchData(); fetchData();
                 }

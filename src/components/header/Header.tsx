@@ -16,13 +16,18 @@ import { io, Socket } from "socket.io-client";
 import menu_icon from './images/darhboard.png'
 import { apiInstance } from "../../service/api";
 
-export default function Header(){
+interface Props{
+    page: string;
+    setPage: React.Dispatch<React.SetStateAction<string>>;
+    socket: Socket | null;
+    setSocket: React.Dispatch<React.SetStateAction<Socket | null>>
+}
+
+export default function Header({page, setPage, socket, setSocket}:Props){
     const account = useAppSelector(state => state.user.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [subBox, setSubBox] = useState<"ava"|"noti"|null>(null);
-    const [active, setActive] = useState("home");
-    const [socket, setSocket] = useState<Socket|null>(null);
 
     useEffect(() => {
         const data = localStorage.getItem('email');
@@ -72,31 +77,31 @@ export default function Header(){
                     <p>Menu</p>
                 </div>
                 <ul>
-                    <li className={(active === "home") ? "active":""} onClick={() => setActive("home")}>
+                    <li className={(page === "dashboard") ? "active":""} onClick={() => setPage("dashboard")}>
                         <Link to="/home">
                             <figure><img src={home_icon} alt="" /></figure>
                             <p>Trang chủ</p>
                         </Link>
                     </li>
-                    <li className={(active === "diary") ? "active":""} onClick={() => setActive("diary")}>
+                    <li className={(page === "diary") ? "active":""} onClick={() => setPage("diary")}>
                         <Link to="./diarypage">
                             <figure><img src={note_icon} alt="" /></figure>
                             <p>Nhật ký</p>
                         </Link>
                     </li>
-                    <li>
+                    <li className={(page === "timetable") ? "active":""} onClick={() => setPage("timetable")}>
                         <Link to="./timetable">
                             <figure><img src={calendar_icon} alt="" /></figure>
                             <p>Thời khóa biểu</p>
                         </Link>
                     </li>
-                    <li>
+                    <li className={(page === "chat") ? "active":""} onClick={() => setPage("chat")}>
                         <Link to="./chatpage">
                             <figure><img src={chat_icon} alt="" /></figure>
                             <p>Trò chuyện</p>
                         </Link>
                     </li>
-                    <li>
+                    <li className={(page === "game") ? "active":""} onClick={() => setPage("game")}>
                         <Link to="./gamepage">
                             <figure><img src={game_icon} alt="" /></figure>
                             <p>Giải trí</p>

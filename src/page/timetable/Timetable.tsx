@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CalendarMain from '../../components/timetable/calendar/CalendarMain'
 import TimelineMain from '../../components/timetable/timelineMain/TimelineMain';
 import { useAppSelector } from '../../redux/builder'
@@ -6,10 +6,16 @@ import tree_icon from './images/Beige Blue Simple Illustrated Study Blog Logo (4
 import './timetable.css'
 import cal_icon from './images/Date_range_light (1).png'
 import time_icon from './images/Alarmclock_light.png'
+import { useOutletContext } from 'react-router-dom';
 
 export default function Timetable(){
+    const {setPage}:any = useOutletContext();
     const account = useAppSelector(state => state.user.user);
     const [calMode, setCalMode] = useState(true);
+
+    useEffect(() => {
+        setPage("timetable");
+    },[account])
 
     return(
         account && <main className="timetable">
