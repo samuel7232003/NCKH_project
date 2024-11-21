@@ -2,7 +2,8 @@ import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 
 
 export const apiInstance :AxiosInstance = axios.create({
     // baseURL: "http://localhost:3001"
-    baseURL: "https://nckh-project.onrender.com"
+    // baseURL: "https://nckh-project.onrender.com"
+    baseURL: process.env.REACT_APP_BASE_URL
 })
 
 export const handleError = (error: any) => {

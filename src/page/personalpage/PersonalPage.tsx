@@ -12,6 +12,7 @@ import axios from "axios";
 export default function PersonalPage(){
     const dispatch = useAppDispatch();
     const account = useAppSelector(state => state.user.user);
+    const cloudinary_url = process.env.REACT_APP_CLOUDINARY||"";
 
     const [acc, setAcc] = useState(account);
     const [editInfo, setEditInfo] = useState(false);
@@ -78,7 +79,7 @@ export default function PersonalPage(){
             const formData = new FormData();
             formData.append("file", file);
             formData.append("upload_preset", 'qwertyu');
-            axios.post('https://api.cloudinary.com/v1_1/df7mhs6xj/image/upload', formData).then((res) => {
+            axios.post(cloudinary_url, formData).then((res) => {
                 const url = res.data.secure_url;
                 setAcc({...acc, avatar: url});
             })
