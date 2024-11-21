@@ -14,7 +14,8 @@ import { useEffect, useState } from "react";
 import { DailyTask } from "../../../redux/dailyTask/dailyTask.state";
 import { NoUndefinedRangeValueType } from "rc-picker/lib/PickerInput/RangePicker";
 import { useAppDispatch, useAppSelector } from "../../../redux/builder";
-import { addNewDailyTask, getListDailyTask } from "../../../redux/dailyTask/dailyTask.action";
+import { addNewDailyTask, getListDailyTask, removeDailyTask } from "../../../redux/dailyTask/dailyTask.action";
+import remove_icon from './images/Trash (1).png'
 
 interface Props {
     account: User;
@@ -26,6 +27,7 @@ export default function TimelineMain({account}:Props){
     const dispatch = useAppDispatch();
     const listDailyTask = useAppSelector(state => state.dailyTask.listDailyTask);
     const [newTask, setNewTask] = useState<DailyTask>(iniTask);
+    const [now, setNow] = useState(dayjs().format("HH:mm"));
     
     useEffect(() => {
         if(account._id!==""){
@@ -36,6 +38,16 @@ export default function TimelineMain({account}:Props){
             fetchData();
         }
     },[account])
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+          const currentMinute = dayjs().format("HH:mm");
+          if (currentMinute !== now) {
+            setNow(currentMinute); 
+          }
+        }, 1000);
+        return () => clearInterval(intervalId);
+      }, [now]);
 
     const listHours = () => {
         let list = [];
@@ -56,6 +68,9 @@ export default function TimelineMain({account}:Props){
     function handleSave(){
         if(newTask.content === ""){
             message.error("Không thể thêm công việc trống!");
+        }
+        else if(dayjs(newTask.end, "HH:mm").isBefore(dayjs(newTask.start, 'HH:mm'))){
+            message.error("Giờ bắt đầu không thể sau giờ kết thúc!");
         }
         else{
             const addData = async ()=>{
@@ -93,6 +108,18 @@ export default function TimelineMain({account}:Props){
         return 22.5*(end-start);
     }
 
+    function handleDelete(id: string){
+        const deteleData = async () => {
+            try {
+                await dispatch(removeDailyTask(id, account._id));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        deteleData();
+        message.success("Xóa công việc thành công!")
+    }
+
     return(
         <div className="timelinemain">
             <div className="timeline-box">
@@ -100,14 +127,16 @@ export default function TimelineMain({account}:Props){
                     {listHours().map((value, index) => <li key={index}>
                         <p>{value}h</p>
                     </li>)}
+                    <li key={24} className="grid-now" style={{top: `${getPositon(now)-20}px`}}><p>{now}</p></li>
                 </ul>
                 {listDailyTask.idUser!==""&& <ul className="value">
                     {listDailyTask.dailyTasks.map((index:DailyTask) => <li 
                         key={index._id} 
                         style={{backgroundColor: `${index.color}`, top: `${getPositon(index.start)}px`, height: `${getHeight(index)}px`}}>
-                        <figure><img src={getIcon(index.type)} alt="" /></figure>
+                        <figure className="icon"><img src={getIcon(index.type)} alt="" /></figure>
                         <p className="time">{index.start} - {index.end}</p>
                         <p className="content">{index.content}</p>
+                        <figure className='delete' onClick={() => handleDelete(index._id)}><img src={remove_icon} alt="" /></figure>
                     </li>)}
                 </ul>}
             </div>
@@ -122,6 +151,7 @@ export default function TimelineMain({account}:Props){
                         format={"HH:mm"} minuteStep={15}
                         defaultValue={[dayjs("07:00","HH:mm"), dayjs("09:00", "HH:mm")]}
                         onChange={(dates) => handleTime(dates)}
+                        allowClear={false}
                     />
                 </div>
                 <div className="style">

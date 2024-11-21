@@ -20,6 +20,12 @@
     align-items: center;
 }
 
+.timelinemain .timeline-box .grid .grid-now{
+    position: absolute;
+    left: 20px;
+    right: 20px;
+}
+
 .timelinemain .timeline-box .grid p{
     font-size: 12px;
     font-weight: bold;
@@ -32,12 +38,21 @@
     margin-right: 10px;
 }
 
+.timelinemain .timeline-box .grid .grid-now p{
+    background-color: red;
+    color: white;
+}
+
 .timelinemain .timeline-box .grid li::after{
     content: "";
     height: 1px;
     border-top: rgba(201, 201, 201, 0.7) dashed 1px;
     width: 100%;
     display: block;
+}
+
+.timelinemain .timeline-box .grid .grid-now::after{
+    border-top: red dashed 1px;
 }
 
 .timelinemain .timeline-box .value{
@@ -54,12 +69,16 @@
     position: absolute;
     align-items: center;
     display: flex;
-    width: 200px;
+    width: 250px;
     padding: 5px;
     border-radius: 5px;
     color: white;
     gap: 5px;
     overflow: auto;
+}
+
+.timelinemain .timeline-box .value li:hover{
+    outline: #707070 solid 2px;
 }
 
 .timelinemain .timeline-box .value li::-webkit-scrollbar{
@@ -73,14 +92,34 @@
     min-width: 72px;
 }
 
-.timelinemain .timeline-box .value li figure{
+.timelinemain .timeline-box .value li .icon{
     height: 20px;
     min-width: 20px;
 }
 
-.timelinemain .timeline-box .value li figure img{
+.timelinemain .timeline-box .value li .icon img{
     height: 100%;
     width: auto;
+}
+
+.timelinemain .timeline-box .value li .delete{
+    height: 20px;
+    background-color: white;
+    padding: 2px;
+    border-radius: 5px;
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    display: none;
+    cursor: pointer;
+}
+
+.timelinemain .timeline-box .value li .delete img{
+    height: 100%;
+}
+
+.timelinemain .timeline-box .value li:hover .delete{
+    display: block;
 }
 
 .timelinemain .add-dailyTask{
@@ -222,11 +261,20 @@
     }
 
     .timelinemain .add-dailyTask fieldset input{
-        width: 224px;
+        width: 210px;
     }
 
     .calendarmain .addTask{
         right: 5px;
         bottom: 5px;
+    }
+
+    .timelinemain .timeline-box .value li {
+        width: 168px;
+    }
+
+    .timelinemain .timeline-box .value li .time {
+        min-width: auto;
+        max-width: 40px;
     }
 }
