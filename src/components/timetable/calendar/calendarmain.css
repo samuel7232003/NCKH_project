@@ -2,17 +2,16 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
 }
 
 .calendarmain .calendarCpn{
     height: 100%;
-    width: 610px;
     border-radius: 8px;
     border: #d9d9d9 solid 1px;
     overflow: hidden;
     padding: 0 5px;
-    background-color: white;
+    background-color: rgba(255,255,255,0.9);
 }
 
 .calendarmain .calendarCpn thead th{
@@ -46,12 +45,12 @@
 }
 
 .calendarmain .calendarCpn .ant-picker-cell-inner{
-    height: 58px;
+    height: 87px;
 }
 
 .calendarmain .calendarCpn .events{
     overflow: auto;
-    max-height: 26px;
+    max-height: calc(100% - 30px);
 }
 
 .calendarmain .calendarCpn .events::-webkit-scrollbar {
@@ -68,8 +67,15 @@
     margin-bottom: 2px;
 }
 
+.calendarmain .calendarCpn .events li p{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 14px);
+    overflow: hidden;
+}
+
 .calendarmain .calendarCpn .events figure{
-    height: 11px;
+    height: 12px;
 }
 
 .calendarmain .calendarCpn .events figure img{
@@ -78,12 +84,12 @@
 
 .calendarmain .todolist{
     height: 100%;
-    width: 362px;
+    width: 280px;
     border-radius: 8px;
     padding: 20px 10px;
     border: #d9d9d9 solid 1px;
     position: relative;
-    background-color: white;
+    background-color: rgba(255,255,255,0.9);
 }
 
 .calendarmain .todolist .todo-title{
@@ -109,7 +115,6 @@
 }
 
 .calendarmain .todo-list{
-    height: 290px;
     overflow-y: auto;
 }
 
@@ -178,6 +183,8 @@
 
 .calendarmain .todo-list li .content{
     font-weight: bold;
+    white-space: nowrap;
+    max-width: 180px;
 }
 
 .calendarmain .todo-list li .removeTask{
@@ -201,64 +208,40 @@
 }
 
 .calendarmain .addTask{
-    height: 70px;
     background-color: #d9d9d9;
     border-radius: 8px;
-    width: 100%;
-    padding: 5px 10px;
-    overflow: hidden;
+    width: calc(100% - 20px);
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
 }
 
-.calendarmain .addTask .li-top{
+.calendarmain .addTask .li-top .task-type{
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
     gap: 5px;
-}
-
-.calendarmain .addTask .li-top .ant-select{
-    height: 24px;
-    width: 104px;
-}
-
-.calendarmain .addTask .ant-select .task-type{
-    display: flex;
     align-items: center;
 }
 
-.calendarmain .addTask .ant-select .task-type p{
-    font-size: 10px;
-}
-
-.calendarmain .addTask .ant-picker{
-    height: 24px;
-    width: 110px;
-    margin-right: 5px;
-}
-
-.calendarmain .addTask .ant-picker input{
-    font-size: 12px;
-}
-
-.calendarmain .addTask .ant-picker:first-child{
-    width: 90px;
+.calendarmain .addTask .li-top .time{
+    display: flex;
+    gap: 5px;
+    margin: 5px 0;
 }
 
 .calendarmain .addTask .li-bot{
     display: flex;
-    justify-content: space-between;
     gap: 5px;
+    flex-flow: column;
 }
 
 .calendarmain .addTask .addContent{
     border-radius: 6px;
-    padding: 0 10px;
-    width: 266px;
+    padding: 5px 10px;
 }
 
 .calendarmain .addTask .addContent::placeholder{
-    font-size: 12px;
-    font-style: italic;
+    font-size: 14px;
+    color: #cfd0d3;
 }
 
 .calendarmain .addTask .addBtn{
@@ -268,18 +251,29 @@
     gap: 5px;
     border: #16c0e8 solid 2px;
     border-radius: 6px;
-    width: 24px;
     background-color: white;
     cursor: pointer;
     transition: background-color ease-in-out 0.25s;
+    padding: 5px 0;
+}
+
+.calendarmain .addTask .addBtn p{
+    color:#16c0e8;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .calendarmain .addTask .addBtn:hover{
     background-color: #92d7e7;
 }
 
-.calendarmain .addTask .addBtn:last-child{
+.calendarmain .addTask .addBtn.remove{
+    position: absolute;
     border: red solid 2px;
+    top: 5px;
+    right: 5px;
+    width: 24px;
+    padding: 2px 0;
 }
 
 .calendarmain .addTask .addBtn:last-child:hover{

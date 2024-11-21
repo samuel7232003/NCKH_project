@@ -17,7 +17,7 @@ export function GamePage(){
         switch (num){
             case 0: return {img: pacman, name: "Pac-man",  height: "630", width: "540"};
             case 1: return {img: tangbong, name: "Tâng bóng", height: "540", width: "375"};
-            case 2: return {img: ransanmoi, name: "Rắng săn mồi", height: "486", width: "591"};
+            case 2: return {img: ransanmoi, name: "Rắn săn mồi", height: "486", width: "591"};
             case 3: return {img: xepgach, name: "Xếp gạch", height: "642", width: "474"};
             default: return {img: xepbai, name: "Xếp bài", height: "700", width: "1000"};
         }

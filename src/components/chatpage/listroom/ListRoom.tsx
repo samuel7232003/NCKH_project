@@ -72,13 +72,13 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
     }
 
     function handleOpenChat(id: string){
+        setIsAddMode(false);
         const time = dayjs().format("HH:mm, DD/MM");
         const message: Message = {_id: "", senderId: account._id, roomId: "", content: id, type: "join", time:time};
         const openChat = async () => {
             try {
                 await sendMessageMess(message);
                 await dispatch(getListRoomChat(account._id));
-                setIsAddMode(false);
             } catch (error) {
                 console.log(error);
             }

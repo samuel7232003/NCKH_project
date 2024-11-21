@@ -33,7 +33,7 @@ export default function Calendarbox({account}:Props){
         switch (type){
             case "home": return {icon: home_icon, content: "Nhà", color: "#7AB2D3"};
             case "school": return {icon: school_icon, content: "Trường", color: "#FFBF61"};
-            default: return {icon: ousside_icon, content: "Bên ngoài", color: "#9B7EBD"};
+            default: return {icon: ousside_icon, content: "Ngoài", color: "#9B7EBD"};
         }
     }
 

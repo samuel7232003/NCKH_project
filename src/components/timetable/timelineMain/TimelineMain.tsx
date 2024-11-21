@@ -13,21 +13,36 @@ import add_icon from "./images/Chat_alt_add.png"
 import { useEffect, useState } from "react";
 import { DailyTask } from "../../../redux/dailyTask/dailyTask.state";
 import { NoUndefinedRangeValueType } from "rc-picker/lib/PickerInput/RangePicker";
-import { useAppDispatch } from "../../../redux/builder";
-import { addNewDailyTask } from "../../../redux/dailyTask/dailyTask.action";
+import { useAppDispatch, useAppSelector } from "../../../redux/builder";
+import { addNewDailyTask, getListDailyTask } from "../../../redux/dailyTask/dailyTask.action";
 
 interface Props {
     account: User;
 }
 
 export default function TimelineMain({account}:Props){
-    const iniTask:DailyTask = {_id:"", idUser:"", content: "", start:"07:00", end:"09:00", type:"study", color:"#16c0e8"}
-    const [newTask, setNewTask] = useState<DailyTask>(iniTask);
-    const dispatch = useAppDispatch();
+    const iniTask:DailyTask = {_id:"", idUser:"", content: "", start:"07:00", end:"09:00", type:"study", color:"#16c0e8"};
 
+    const dispatch = useAppDispatch();
+    const listDailyTask = useAppSelector(state => state.dailyTask.listDailyTask);
+    const [newTask, setNewTask] = useState<DailyTask>(iniTask);
+    
     useEffect(() => {
-        setNewTask({...newTask, idUser: account._id});
+        if(account._id!==""){
+            setNewTask({...newTask, idUser: account._id});
+            const fetchData = async () => {
+                await dispatch(getListDailyTask(account._id));
+            }
+            fetchData();
+        }
     },[account])
+
+    const listHours = () => {
+        let list = [];
+        for(let i = 0; i< 24; i=i+2) list.push(i);
+        list.push(0);
+        return list;
+    } 
 
     function handleTime(dates: NoUndefinedRangeValueType<dayjs.Dayjs>|null){
         if(dates && dates[0] && dates[1]){
@@ -56,9 +71,46 @@ export default function TimelineMain({account}:Props){
         }
     }
 
+    function getIcon(type: string){
+        switch (type){
+            case "sleep": return sleep_icon;
+            case "study": return study_icon;
+            case "work": return work_icon;
+            case "eat": return eat_icon;
+            case "play": return play_icon;
+            default: return study_icon;
+        }
+    }
+
+    function getPositon(time: string){
+        const num = parseInt(time.slice(0, 2)) + parseInt(time.slice(-2))/60;
+        return 20 +22.5+ 22.5*num;
+    }
+
+    function getHeight(index:DailyTask){
+        const start = parseInt(index.start.slice(0, 2)) + parseInt(index.start.slice(-2))/60;
+        const end = parseInt(index.end.slice(0, 2)) + parseInt(index.end.slice(-2))/60;
+        return 22.5*(end-start);
+    }
+
     return(
         <div className="timelinemain">
-            <Timeline account={account}/>
+            <div className="timeline-box">
+                <ul className="grid">
+                    {listHours().map((value, index) => <li key={index}>
+                        <p>{value}h</p>
+                    </li>)}
+                </ul>
+                {listDailyTask.idUser!==""&& <ul className="value">
+                    {listDailyTask.dailyTasks.map((index:DailyTask) => <li 
+                        key={index._id} 
+                        style={{backgroundColor: `${index.color}`, top: `${getPositon(index.start)}px`, height: `${getHeight(index)}px`}}>
+                        <figure><img src={getIcon(index.type)} alt="" /></figure>
+                        <p className="time">{index.start} - {index.end}</p>
+                        <p className="content">{index.content}</p>
+                    </li>)}
+                </ul>}
+            </div>
             <div className="add-dailyTask">
                 <div className="title">
                     <figure><img src={timeline_icon} alt="" /></figure>

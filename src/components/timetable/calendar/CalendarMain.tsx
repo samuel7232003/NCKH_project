@@ -1,6 +1,6 @@
-import { Calendar, CalendarProps, DatePicker, message, Select, TimePicker, Tooltip } from 'antd'
+import { Calendar, CalendarProps, ConfigProvider, DatePicker, message, Select, TimePicker, Tooltip } from 'antd'
 import './calendarmain.css'
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import list_icon from './images/Arhives_alt.png'
 import { User } from '../../../redux/user/user.state';
 import { useEffect, useState } from 'react';
@@ -30,23 +30,22 @@ export default function CalendarMain({account}:Props){
             if(account._id!=="") dispatch(getListTask(account._id));
         }
         fetchData();
-        setNewTask({...newTask, idUser: account._id, type: "home"});
+        setNewTask({...newTask, idUser: account._id, type: "home", time: dayjs().format("HH:mm"), date: dayjs().format("YYYY-MM-DD")});
     }, [account])
 
     const getListData = (value: Dayjs) => {
-        let listData_:Task[] = listTask.tasks.filter(index => index.date === value.format("YYYY-MM-DD"));
-        let listData:string[] = listData_.map(index => index.type);
+        let listData:Task[] = listTask.tasks.filter(index => index.date === value.format("YYYY-MM-DD"));
         return listData || [];
-      };
+    };
     
     const dateCellRender = (value: Dayjs) => {
         const listData = getListData(value);
         return (
             <ul className="events">
                 {listData.map((item, index) => (
-                    <li key={index} style={{border: `${getTypeStyle(item).color} solid 2px`}}>
-                        <figure><img src={getTypeStyle(item).icon} alt="" /></figure>
-                        <p>{getTypeStyle(item).content}</p>
+                    <li key={index} style={{border: `${getTypeStyle(item.type).color} solid 2px`}}>
+                        <figure><img src={getTypeStyle(item.type).icon} alt="" /></figure>
+                        <p>{item.content}</p>
                     </li>
                 ))}
             </ul>
@@ -62,17 +61,22 @@ export default function CalendarMain({account}:Props){
         switch (type){
             case "home": return {icon: home_icon, content: "Nhà", color: "#7AB2D3"};
             case "school": return {icon: school_icon, content: "Trường", color: "#FFBF61"};
-            default: return {icon: ousside_icon, content: "Bên ngoài", color: "#9B7EBD"};
+            default: return {icon: ousside_icon, content: "Ngoài", color: "#9B7EBD"};
         }
     }
 
     function handleSave(){
-        const add = async () =>{
-            const res = await dispatch(addNewTask(newTask));
+        if(newTask.content === ""){
+            message.error("Nội dung công việc không được để trống!");
         }
-        add();
-        setOpenAddBox(false);
-        message.success("Thêm công việc mới thành công!")
+        else{
+            const add = async () =>{
+                const res = await dispatch(addNewTask(newTask));
+            }
+            add();
+            setOpenAddBox(false);
+            message.success("Thêm công việc mới thành công!");
+        }
     }
 
     function handleRemove(id: string){
@@ -83,10 +87,23 @@ export default function CalendarMain({account}:Props){
         message.success("Xóa công việc thành công!")
     }
 
+    function handleEnter(e:React.KeyboardEvent<HTMLInputElement>){
+        if(e.key === "Enter"){
+            handleSave();
+        }
+    }
+
+    function handleSelect(newValue: Dayjs){
+        setNewTask({...newTask, date: newValue.format("YYYY-MM-DD")});
+        setOpenAddBox(true);
+    }
+
     return(
         <div className='calendarmain'>
             <div className="calendarCpn">
-                <Calendar style={{height: "100%", overflow: "auto"}} cellRender={cellRender}/>
+                <ConfigProvider theme={{components:{Calendar:{fullBg:"none"}}}}>
+                    <Calendar style={{height: "100%", overflow: "auto"}} cellRender={cellRender} onSelect={handleSelect}/>
+                </ConfigProvider>
             </div>
             <div className="todolist">
                 <div className='todo-title'>
@@ -126,16 +143,22 @@ export default function CalendarMain({account}:Props){
                             onChange={(e) => setNewTask({...newTask, type: e})}
                         />
                         <div className='time'>
-                            <TimePicker format={"HH:mm"} onChange={e => setNewTask({...newTask, time: e.format("HH:mm")})}/>
-                            <DatePicker onChange={e => setNewTask({...newTask, date: e.format("YYYY-MM-DD")})}/>
+                            <TimePicker allowClear={false} defaultValue={dayjs()} format={"HH:mm"} onChange={e => setNewTask({...newTask, time: e.format("HH:mm")})}/>
+                            <DatePicker allowClear={false} value={dayjs(newTask.date)} onChange={e => setNewTask({...newTask, date: e.format("YYYY-MM-DD")})}/>
                         </div>
                     </div>
                     <div className='li-bot'>
-                        <input onChange={e => setNewTask({...newTask, content: e.target.value.trim()})} className='addContent' type='text' placeholder='Nhập việc cần làm...'/>
-                        <div className='addBtn'>
-                            <figure onClick={handleSave}><img src={add_icon} alt="" /></figure>
+                        <input onChange={e => setNewTask({...newTask, content: e.target.value.trim()})} 
+                            className='addContent' 
+                            type='text' 
+                            placeholder='Nhập việc cần làm...'
+                            onKeyDown={(e) => handleEnter(e)}
+                        />
+                        <div className='addBtn' onClick={handleSave}>
+                            <figure><img src={add_icon} alt="" /></figure>
+                            <p>Thêm ngay</p>
                         </div>
-                        <div className='addBtn'>
+                        <div className='addBtn remove'>
                             <figure onClick={() => setOpenAddBox(false)}><img src={remove_icon} alt="" /></figure>
                         </div>
                     </div>

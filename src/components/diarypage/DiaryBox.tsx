@@ -15,6 +15,8 @@ import { removeDiary } from "../../service/diaryService";
 import remove_icon from '../dashboard/dailynote/images/Trash.png'
 import { initalDiaryState } from "../../redux/diary/diary.slice";
 import './diarybox.css'
+import { useAppDispatch } from "../../redux/builder";
+import { getListDiary } from "../../redux/diary/diary.action";
 
 interface Props{
     diary: Diary;
@@ -22,6 +24,7 @@ interface Props{
 }
 
 export default function DiaryBox({diary, account}:Props){
+    const dispatch = useAppDispatch();
     const [nowDiary, setNowDiary] = useState<Diary>(diary);
 
     useEffect(() => {
@@ -43,7 +46,8 @@ export default function DiaryBox({diary, account}:Props){
         e.stopPropagation();
         const remove = async () => {
             try{
-                const res = await removeDiary(account._id, nowDiary.date!);
+                await removeDiary(account._id, nowDiary.date!);
+                await dispatch(getListDiary(account._id));
             } catch (error){
                 console.log(error);
             }
@@ -54,11 +58,11 @@ export default function DiaryBox({diary, account}:Props){
 
     return (
         <div className="dailybox done" style={{backgroundImage: `url(${getIcon(nowDiary.survey).bg})`}}>
-                <p className='date' style={getIcon(nowDiary.survey).theme === "white" ? {color: `#fff`}:undefined}>{nowDiary.date}</p>
-                <figure className='icon'><img src={getIcon(nowDiary.survey).icon} alt="" /></figure>
-                <p className='emo' style={getIcon(nowDiary.survey).theme === "white" ? {color: `#fff`}:undefined}>{getIcon(nowDiary.survey).title}</p>
-                {nowDiary.message !=="" && <p className='message'>{nowDiary.message}</p>}
-                <figure onClick={(e) => handleRemove(e)} className='remove'><img src={remove_icon} alt="" /></figure>
+            <p className='date' style={getIcon(nowDiary.survey).theme === "white" ? {color: `#fff`}:undefined}>{nowDiary.date}</p>
+            <figure className='icon'><img src={getIcon(nowDiary.survey).icon} alt="" /></figure>
+            <p className='emo' style={getIcon(nowDiary.survey).theme === "white" ? {color: `#fff`}:undefined}>{getIcon(nowDiary.survey).title}</p>
+            {nowDiary.message !=="" && <p className='message'>{nowDiary.message}</p>}
+            <figure onClick={(e) => handleRemove(e)} className='remove'><img src={remove_icon} alt="" /></figure>
         </div>
     )
 }

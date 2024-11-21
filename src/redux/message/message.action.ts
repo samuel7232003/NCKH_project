@@ -113,7 +113,10 @@ export const removeRoomChat = (roomId :string, id: string):ThunkAction<void, Roo
             if(index.name ===""){
                 const id = listMess.find((mess: Message) => mess.roomId === index._id).content;
                 const user:User = listUser.find((user: User) => user._id === id);
-                return {...index, name: `${user.first_name} ${user.last_name}`, avatar: user.avatar};
+                const lastSender :string = (index.lastSender !== id) ?"Bạn" :user.last_name;
+                let content = index.lastMessage;
+                if(content.startsWith("https")) content = "Đã gửi một ảnh.";
+                return {...index, name: `${user.first_name} ${user.last_name}`, avatar: user.avatar, lastSender: lastSender, lastMessage: content};
             }
             else return index;
         })]

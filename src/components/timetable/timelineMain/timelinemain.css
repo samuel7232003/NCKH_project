@@ -1,51 +1,94 @@
 .timelinemain{
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
 }
 
-.timelinemain .timeline{
+.timelinemain .timeline-box{
+    background-color: rgba(255,255,255,0.9);
+    flex-grow: 1;
+    border-radius: 10px;
     height: 100%;
-    width: 612px;
-    background-color: white;
+    padding: 20px;
+    position: relative;
 }
 
-.timelinemain .timeline .grid{
-    margin: 10px 20px;
-    width: 532px;
-    padding: 0 10px;
+.timelinemain .timeline-box .grid li{
+    height: 45px;
+    display: flex;
+    align-items: center;
 }
 
-.timelinemain .timeline .grid p{
-    font-size: 10px;
+.timelinemain .timeline-box .grid p{
+    font-size: 12px;
+    font-weight: bold;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d9d9d9;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
-.timelinemain .timeline .grid p::after{
-    height: 100px;
-}
-
-.timelinemain .timeline .value{
-    margin-left: 38px;
-}
-
-.timelinemain .timeline .value li{
-    height: 36px;
-}
-
-.timelinemain .timeline .value li:hover figure.delete{
+.timelinemain .timeline-box .grid li::after{
+    content: "";
+    height: 1px;
+    border-top: rgba(201, 201, 201, 0.7) dashed 1px;
+    width: 100%;
     display: block;
 }
 
-.timelinemain .timeline .edit{
-    display: none;
+.timelinemain .timeline-box .value{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.timelinemain .timeline-box .value li{
+    position: absolute;
+    align-items: center;
+    display: flex;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    gap: 5px;
+    overflow: auto;
+}
+
+.timelinemain .timeline-box .value li::-webkit-scrollbar{
+    height: 3px;
+    width: 3px;
+}
+
+.timelinemain .timeline-box .value li .time{
+    font-size: 12px;
+    font-style: italic;
+    min-width: 72px;
+}
+
+.timelinemain .timeline-box .value li figure{
+    height: 20px;
+    min-width: 20px;
+}
+
+.timelinemain .timeline-box .value li figure img{
+    height: 100%;
+    width: auto;
 }
 
 .timelinemain .add-dailyTask{
     width: 362px;
-    height: 100%;
+    height: fit-content;
     border: #d9d9d9 solid 1px;
     border-radius: 10px;
-    background-color: white;
+    background-color: rgba(255,255,255,0.9);
     padding: 10px;
 }
 

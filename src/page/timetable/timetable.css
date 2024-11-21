@@ -1,6 +1,5 @@
 .timetable{
     height: 100%;
-    min-height: calc(100vh - 70px);
     background-image: url('../../image/background.png');
     background-size: cover;
     background-position: center;
@@ -10,11 +9,10 @@
 }
 
 .timetable > div {
-    width: 1024px;
-    height: 680px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 16px;
+    display: flex;
     padding: 18px;
+    flex-flow: column;
+    height: calc(100vh - 70px);
 }
 
 .timetable .title {
@@ -23,21 +21,47 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .timetable .title h2{
     font-weight: bold;
     font-size: 22px;
+    color: white;
+}
+
+.timetable .title .change-mode{
+    position: absolute;
+    left: 0;
+    background-color: rgba(217, 217, 217, 0.8);
+    display: flex;
+    height: 36px;
+    width: 96px;
+    border-radius: 36px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.timetable .title .change-mode figure{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color ease-in-out 0.25s;
+}
+
+.timetable .title .change-mode figure img{
+    height: 20px;
 }
 
 .timetable .calendar{
     width: 100%;
-    height: 435px;
-    margin-bottom: 15px;
+    flex-grow: 1;
 }
 
 .timetable .timeline-main{
-    height: 145px;
+    width: calc(100vw - 36px);
 }
 
 @media screen and (max-width: 1024px){
@@ -60,5 +84,13 @@
 
     .timetable .calendar{
         height: auto;
+    }
+
+    .timetable .title{
+        margin-bottom: 50px;
+    }
+
+    .timetable .title .change-mode{
+        top: 46px;
     }
 }

@@ -12,6 +12,8 @@ import { User } from '../../redux/user/user.state'
 import { Diary, ListDiary } from '../../redux/diary/diary.state'
 import { addDiary } from '../../service/diaryService'
 import diary_icon from '../../page/diarypage/images/notebook.png'
+import { useAppDispatch } from '../../redux/builder'
+import { getListDiary } from '../../redux/diary/diary.action'
 
 interface Props{
     account: User,
@@ -20,12 +22,15 @@ interface Props{
 }
 
 export default function AppDiaryBox({account, listDiary, setOpen}:Props){
+    const dispatch = useAppDispatch();
+    
     const [diary, setDiary] = useState({...initalDiaryState.diary, survey: 5, idUser: account._id});
     const [errorDate, setErrorDate] = useState(false);
     
     async function saveDiary(dia: Diary) {
         try {
-            const res = await addDiary(dia);
+            await addDiary(dia);
+            await dispatch(getListDiary(account._id));
         } catch (error) {
             console.log(error);   
         }
