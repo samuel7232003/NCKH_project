@@ -43,7 +43,6 @@ export default function Header({page, setPage, socket, setSocket}:Props){
             });
         
             newSocket.on('connect', () => {
-                console.log('Connected to WebSocket server');
             });
 
             newSocket.on("getOnlineUsers", (users) => {

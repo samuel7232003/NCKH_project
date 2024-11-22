@@ -36,8 +36,6 @@ app.use('/api/v1', apiRoutes);
 const userSocketMap = {}
 
 socketIo.on("connection", (socket) => { ///Handle khi có connect từ client tới
-    console.log("New client connected " + socket.id);
-
     const userId = socket.handshake.query.userId;
 
     if (userId !== "undefined") userSocketMap[userId] = socket.id;
