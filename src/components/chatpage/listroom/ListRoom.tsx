@@ -34,6 +34,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
     const [viewList, setViewList] = useState(listRoom.roomChats);
     const [viewListUser, setViewListUser] = useState(listUser);
     
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -43,6 +44,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
             }
         }
         fetchData();
+        // eslint-disable-next-line
     },[account])
 
     useEffect(() => {

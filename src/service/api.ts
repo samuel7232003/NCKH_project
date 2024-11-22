@@ -1,37 +1,30 @@
-import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosInstance } from "axios";
 
 export const apiInstance :AxiosInstance = axios.create({
     // baseURL: "http://localhost:3001"
     // baseURL: "https://nckh-project.onrender.com"
-    baseURL: process.env.REACT_APP_BASE_URL
+    baseURL: `${process.env.REACT_APP_BASE_URL}/api/v1`
 })
 
-export const handleError = (error: any) => {
-    if (error.response) {
-        switch(error.response.status){
-            case 401: { console.log(error.response); break; }
-            case 409: { console.log(error.response); break; }
-            case 404: { console.log(error.response); break; }
-            case 500: { console.log(error.response); break; }
-            default: console.log(error.response);
-        }
-    } else {
-        console.error('Lỗi không có response:', error.message || error);
-    }
-};
+// Add a request interceptor
+apiInstance.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
 
-apiInstance.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {
-        const token = localStorage.getItem('userData')?.replaceAll('"','');
-        if(token){
-            config.headers.Authorization = token;
-        }
-        return config;
-    },
-    handleError
-)
-
-apiInstance.interceptors.response.use(
-    (respone: AxiosResponse) => respone,
-    handleError
-);
+// Add a response interceptor
+apiInstance.interceptors.response.use(function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    if(response && response.data) return response.data;
+    return response;
+  }, function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    if(error?.respone?.data) return error?.respone?.data;
+    return Promise.reject(error);
+  });

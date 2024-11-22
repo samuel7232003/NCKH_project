@@ -11,10 +11,9 @@ import logout_icon from "./images/Sign_in_squre.png"
 import './header.css'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/builder";
-import { getUser, setOnlineUsers } from "../../redux/user/user.action";
+import { getProfile, setOnlineUsers } from "../../redux/user/user.action";
 import { io, Socket } from "socket.io-client";
-import menu_icon from './images/darhboard.png'
-import { apiInstance } from "../../service/api";
+import menu_icon from './images/darhboard.png';
 
 interface Props{
     page: string;
@@ -30,16 +29,16 @@ export default function Header({page, setPage, socket, setSocket}:Props){
     const [subBox, setSubBox] = useState<"ava"|"noti"|null>(null);
 
     useEffect(() => {
-        const data = localStorage.getItem('email');
         const fectchData = async () => {
-            if(data) await dispatch(getUser(data));
+            await dispatch(getProfile());
         }
         fectchData()
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         if(socket===null && account._id!==""){
-            const newSocket = io(apiInstance.getUri(), {
+            const newSocket = io(process.env.REACT_APP_BASE_URL, {
                 query: {userId: account._id}
             });
         
@@ -53,6 +52,7 @@ export default function Header({page, setPage, socket, setSocket}:Props){
 
             setSocket(newSocket);
         }
+        // eslint-disable-next-line
     }, [account])
 
     function handleLogout(){

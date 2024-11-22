@@ -16,6 +16,7 @@ export default function Dashboard(){
 
     useEffect(() => {
         setPage("dashboard");
+        // eslint-disable-next-line
     }, [account])
 
     return(

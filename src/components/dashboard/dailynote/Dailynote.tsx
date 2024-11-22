@@ -35,14 +35,16 @@ export default function Dailynote({account, type}: Props){
 
     useEffect(() =>{
         const fectchData = async () =>{
-            if(account._id !== "") await dispatch(getListDiary(account._id))
+            if(account._id !== "") await dispatch(getListDiary(account._id));
         }
         fectchData()
+        // eslint-disable-next-line
     }, [account]);
 
     useEffect(() => {
-        const todayNoteData = listDiary.diarys.find(index => index.date === moment(new Date).format("YYYY-MM-DD"));
+        const todayNoteData = listDiary.diarys.find(index => index.date === moment(new Date()).format("YYYY-MM-DD"));
         if(todayNoteData) dispatch(setDiary(todayNoteData));
+        // eslint-disable-next-line
     }, [listDiary])
 
     function handleSelect(type: string){
@@ -77,7 +79,7 @@ export default function Dailynote({account, type}: Props){
 
     const saveDiary = async (diary: Diary) =>{
         try{
-            const res = await addDiary(diary);
+            await addDiary(diary);
         }
         catch(error){
             console.log(error);
@@ -89,7 +91,7 @@ export default function Dailynote({account, type}: Props){
             const diary:Diary ={
                 _id:"",
                 idUser: account._id,
-                date: moment(new Date).format("YYYY-MM-DD"),
+                date: moment(new Date()).format("YYYY-MM-DD"),
                 survey: getSurvey(dailyEmotion),
                 message: message
             }
@@ -102,7 +104,7 @@ export default function Dailynote({account, type}: Props){
         e.stopPropagation();
         const remove = async () => {
             try{
-                const res = await removeDiary(account._id, diary.date!);
+                await removeDiary(account._id, diary.date!);
             } catch (error){
                 console.log(error);
             }

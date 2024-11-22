@@ -16,14 +16,14 @@ export const getListRoomChat = (id: string):ThunkAction<void, RootState, unknown
         const listMess = respone.listMessage;
         const listRooms = respone.listRoom;
         const listUser = respone.listUser;
-        let result = [... listRooms.map((index: RoomChat) => {
-            const id = listMess.find((mess: Message) => mess.roomId === index._id).content;
-            const user:User = listUser.find((user: User) => user._id === id);
-            const lastSender :string = (index.lastSender !== id) ?"Bạn" :user.last_name;
+        let result = [...listRooms.map((index: RoomChat) => {
+            const id = listMess.find((mess: Message) => mess.roomId === index._id)!.content;
+            const user = listUser.find((user: User) => user._id === id);
+            const lastSender :string = (index.lastSender !== id) ?"Bạn" :user!.last_name;
             let content = index.lastMessage;
             if(content.startsWith("https")) content = "Đã gửi một ảnh.";
             if(index.name ===""){
-                return {...index, lastMessage: content, name: `${user.first_name} ${user.last_name}`, avatar: user.avatar, lastSender: lastSender};
+                return {...index, lastMessage: content, name: `${user!.first_name} ${user!.last_name}`, avatar: user!.avatar, lastSender: lastSender};
             }
             else return {...index, lastMessage: content, lastSender: lastSender};
         })]
@@ -52,14 +52,14 @@ export const sendMessage = (message: Message) :ThunkAction<void, RootState, unkn
     return async(dispatch, getState)=>{
         const respone_ = [...getState().message.listMessage.messages, message];
         const data:ListMessage = {idRoom: message.roomId, messages: respone_};
-        const respone = await sendMessageMess(message);
+        await sendMessageMess(message);
         dispatch(messageAction.setListMessage(data));
 
         if(message.type !== "join"){
             const res = await getRoom(message.roomId);
             if(res){
                 const newRoom:RoomChat = {...res, time: message.time, lastMessage: message.content, lastSender: message.senderId};
-                const res_ = await updateRoom(newRoom);
+                await updateRoom(newRoom);
                 let lastSender="";
                 if(message.senderId === getState().user.user._id) lastSender = "Bạn";
                 else {
@@ -97,26 +97,26 @@ export const openNewChat = (senderId: string, roomId: string) :ThunkAction<void,
     return async(dispatch, getState)=>{
         const time = dayjs().format("HH:mm, DD/MM");
         const message: Message = {_id: "", senderId: senderId, roomId: "", content: roomId, type: "join", time:time};
-        const respone = await sendMessageMess(message);
+        await sendMessageMess(message);
     }
 }
 
 export const removeRoomChat = (roomId :string, id: string):ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) => {
-        const res = await deleteRoom(roomId);
+        await deleteRoom(roomId);
 
         const respone = await getRoomChat(id);
         const listMess = respone.listMessage;
         const listRooms = respone.listRoom;
         const listUser = respone.listUser;
-        let result = [... listRooms.map((index: RoomChat) => {
+        let result = [...listRooms.map((index: RoomChat) => {
             if(index.name ===""){
-                const id = listMess.find((mess: Message) => mess.roomId === index._id).content;
-                const user:User = listUser.find((user: User) => user._id === id);
-                const lastSender :string = (index.lastSender !== id) ?"Bạn" :user.last_name;
+                const id = listMess.find((mess: Message) => mess.roomId === index._id)!.content;
+                const user = listUser.find((user: User) => user._id === id);
+                const lastSender :string = (index.lastSender !== id) ?"Bạn" :user!.last_name;
                 let content = index.lastMessage;
                 if(content.startsWith("https")) content = "Đã gửi một ảnh.";
-                return {...index, name: `${user.first_name} ${user.last_name}`, avatar: user.avatar, lastSender: lastSender, lastMessage: content};
+                return {...index, name: `${user!.first_name} ${user!.last_name}`, avatar: user!.avatar, lastSender: lastSender, lastMessage: content};
             }
             else return index;
         })]

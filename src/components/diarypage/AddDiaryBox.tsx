@@ -39,6 +39,7 @@ export default function AppDiaryBox({account, listDiary, setOpen, dateChoice}:Pr
 
     useEffect(() => {
         setDiary({...diary, date: dateChoice});
+        // eslint-disable-next-line
     }, [dateChoice])
 
     function handleSave(){

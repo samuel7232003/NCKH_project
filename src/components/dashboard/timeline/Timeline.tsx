@@ -43,6 +43,7 @@ export default function Timeline({account}:Props){
             }
         }
         fetchData();
+        // eslint-disable-next-line
     },[account])
 
     function getIcon(type: string){

@@ -17,7 +17,7 @@ export const getListDailyTask = (id: string): ThunkAction<void, RootState, unkno
 
 export const addNewDailyTask = (dailyTask: DailyTask): ThunkAction<void, RootState, unknown, AnyAction> => {
     return async (dispatch, getState) =>{
-        const respone = await addDailyTask(dailyTask);
+        await addDailyTask(dailyTask);
         const res :DailyTask[] = await getDailyTasks(dailyTask.idUser);
         const data:ListDailyTask = {idUser: dailyTask.idUser, dailyTasks: res};
         dispatch(dailyTaskAction.setListDailyTask(data));
@@ -26,7 +26,7 @@ export const addNewDailyTask = (dailyTask: DailyTask): ThunkAction<void, RootSta
 
 export const removeDailyTask = (id: string, idUser: string): ThunkAction<void, RootState, unknown, AnyAction> => {
     return async (dispatch, getState) => {
-        const respone = await deleteDailyTask(id);
+        await deleteDailyTask(id);
         const res :DailyTask[] = await getDailyTasks(idUser);
         const data:ListDailyTask = {idUser: idUser, dailyTasks: res};
         dispatch(dailyTaskAction.setListDailyTask(data));

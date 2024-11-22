@@ -31,12 +31,13 @@ export default function Login(){
     const checklogin = async() =>{
         try {
             const res = await login(email, password);
-            localStorage.setItem('userData', res.token);
-            localStorage.setItem('email', res.email);
+            localStorage.setItem('access_token', res.access_token);
+            localStorage.setItem('email', res.user.email);
             message.success("Đăng nhập thành công!");
             setTimeout(() => navigate('/home'), 1000);
 
         } catch (error) {
+            console.log(error);
             setError("Sai tên đăng nhập hoặc mật khẩu!");
         }
     }

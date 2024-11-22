@@ -15,6 +15,7 @@ export default function Timetable(){
 
     useEffect(() => {
         setPage("timetable");
+        // eslint-disable-next-line
     },[account])
 
     return(

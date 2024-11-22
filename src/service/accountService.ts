@@ -6,37 +6,41 @@ export interface accountLogin {
     password: string;
 }
 
-interface loginRes {
-    token: string,
-    email: string
-}
-
-export async function login(email: string, password: string):Promise<loginRes> {
+export async function login(email: string, password: string):Promise<any> {
     try{
         const data = {
             email: email,
             password: password
         };
-        const respone = await apiInstance.post<loginRes>("/login", data);
-        return respone.data;
+        const respone = await apiInstance.post("/login", data);
+        return respone;
     } catch (error) {
         throw error;
     }
 }
 
-export async function signup(user:User) {
+export async function signup(user:User) :Promise<any>{
     try{
         const respone = await apiInstance.post("/signup", user);
-        return respone.data;
+        return respone;
     } catch (error){
         throw(error);
     }
 }
 
-export async function getAccount(id: string) {
+export async function getProfileService() :Promise<any>{
     try{
-        const respone = await apiInstance.get(`/account/${id}`);
-        return respone.data;
+        const res = await apiInstance.get('/profile');
+        return res;
+    } catch(error){
+        throw(error);
+    }
+}
+
+export async function getAccount(id: string, email: string):Promise<any> {
+    try{
+        const respone:User|null = await apiInstance.get(`/account?id=${id}&email=${email}`);
+        return respone;
     } catch (error){
         throw(error);
     }
@@ -51,10 +55,10 @@ export async function editAccount(user:User) {
     }
 }
 
-export async function getAllUser() {
+export async function getAllUser():Promise<any> {
     try {
         const respone = await apiInstance.get("/getAllUser");
-        return respone.data;
+        return respone;
     } catch (error) {
         
     }

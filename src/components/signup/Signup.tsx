@@ -1,10 +1,10 @@
-import { Switch } from 'antd'
+import { message, Switch } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import './signup.css'
 import { useState } from 'react'
 import { User } from '../../redux/user/user.state'
 import { initialUserState } from '../../redux/user/user.slice'
-import { signup } from '../../service/accountService'
+import { login, signup } from '../../service/accountService'
 import see_pwd from "../../image/View_light.png"
 
 export default function Signup(){
@@ -20,15 +20,19 @@ export default function Signup(){
     }
 
     const checkSignup = async () =>{
+        message.loading("Đang tạo tài khoản mới!");
         try {
             const res = await signup(user);
-            if(res.message === "Email exited!") setError("Email đăng kí đã tồn tại!");
+            console.log(res);
+            if(!res) setError("Email đăng kí đã tồn tại!");
             else{
-                localStorage.setItem('userData', res.token);
-                localStorage.setItem('email', res.email);
+                message.success("Đăng kí thành công!");
+                const res_ = await login(user.email, user.password);
+                localStorage.setItem('access_token', res_.access_token);
                 setTimeout(() => naviagte('/home'), 1000);
             }
         } catch (error) {
+            console.log(error);
             setError("Đăng kí thất bại!");
         }
     }

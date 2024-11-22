@@ -31,16 +31,18 @@ export default function PersonalPage(){
             birth: account.birth,
             gender: account.gender
         })
+        // eslint-disable-next-line
     }, [editInfo])
 
     useEffect(() => {
         setAcc({...acc, email: account.email, password: account.password});
         setConfirmPwd("");
+        // eslint-disable-next-line
     }, [editAcc])
 
     async function changeUser(acc:User) {
         try {
-            const res = await dispatch(editUser(acc));
+            await dispatch(editUser(acc));
         } catch (error) {
             console.log(error);
         }
