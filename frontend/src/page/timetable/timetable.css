@@ -13,6 +13,7 @@
     padding: 18px;
     flex-flow: column;
     height: calc(100vh - 70px);
+    max-width: 1024px;
 }
 
 .timetable .title {
@@ -61,7 +62,7 @@
 }
 
 .timetable .timeline-main{
-    width: calc(100vw - 36px);
+    width: 988px;
 }
 
 @media screen and (max-width: 1024px){
@@ -92,5 +93,9 @@
 
     .timetable .title .change-mode{
         top: 46px;
+    }
+
+    .timetable .timeline-main {
+        width: 100%;
     }
 }

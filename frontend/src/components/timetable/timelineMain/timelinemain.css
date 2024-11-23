@@ -245,11 +245,10 @@
 
 @media screen and (max-width: 1024px){
     .timelinemain{
-        flex-flow: column;
+        width: 732px;
     }
 
     .timelinemain .add-dailyTask{
-        height: auto;
         width: 370px;
     }
 
@@ -260,9 +259,18 @@
     .timelinemain .timeline .grid {
         margin: 10px auto;
     }
+
+    .timelinemain .timeline-box .value li{
+        width: 150px;
+    }
 }
 
 @media screen and (max-width: 430px){
+    .timelinemain {
+        flex-flow: column;
+        width: 100%;
+    }
+
     .timelinemain .add-dailyTask{
         width: auto;
     }

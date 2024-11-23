@@ -53,7 +53,6 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
     });
 
     socket.on("disconnect", () => {
-        console.log("Client disconnected");
         delete userSocketMap[userId];
 	    socketIo.emit("getOnlineUsers", Object.keys(userSocketMap));
     });
