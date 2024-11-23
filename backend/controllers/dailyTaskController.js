@@ -1,6 +1,6 @@
-const { removeDailyTaskService } = require("../services/dailyTaskService");
-const { addDailyTasksService } = require("../services/dailyTaskService");
-const { getDailyTasks } = require("../services/dailyTaskService");
+const { removeDailyTaskService } = require("../services/dailyTaskService.js");
+const { addDailyTasksService } = require("../services/dailyTaskService.js");
+const { getDailyTasks } = require("../services/dailyTaskService.js");
 
 const getDailyTask = async(req, res) =>{
     const {id} = req.query;
