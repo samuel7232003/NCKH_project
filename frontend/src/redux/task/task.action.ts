@@ -24,7 +24,7 @@ export const addNewTask = (task: Task): ThunkAction<void, RootState, unknown, An
         return (new Date(a.date)).getTime() - (new Date(b.date)).getTime();
     }
     return async (dispatch, getState) =>{
-        const respone = await addTask(task);
+        await addTask(task);
         const res :Task[] = await getTasks(task.idUser);
         const data:ListTask = {idUser: task.idUser, tasks: res};
         const sortData:ListTask = {...data, tasks: data.tasks.sort(compareDates)};
@@ -37,7 +37,7 @@ export const removeTask = (id: string, idUser: string): ThunkAction<void, RootSt
         return (new Date(a.date)).getTime() - (new Date(b.date)).getTime();
     }
     return async (dispatch, getState) => {
-        const respone = await deleteTask(id);
+        await deleteTask(id);
         const res :Task[] = await getTasks(idUser);
         const data:ListTask = {idUser: idUser, tasks: res};
         const sortData:ListTask = {...data, tasks: data.tasks.sort(compareDates)};

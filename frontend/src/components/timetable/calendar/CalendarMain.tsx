@@ -31,6 +31,7 @@ export default function CalendarMain({account}:Props){
         }
         fetchData();
         setNewTask({...newTask, idUser: account._id, type: "home", time: dayjs().format("HH:mm"), date: dayjs().format("YYYY-MM-DD")});
+        // eslint-disable-next-line
     }, [account])
 
     const getListData = (value: Dayjs) => {
@@ -71,7 +72,7 @@ export default function CalendarMain({account}:Props){
         }
         else{
             const add = async () =>{
-                const res = await dispatch(addNewTask(newTask));
+                await dispatch(addNewTask(newTask));
             }
             add();
             setOpenAddBox(false);
@@ -81,7 +82,7 @@ export default function CalendarMain({account}:Props){
 
     function handleRemove(id: string){
         const remove = async () =>{
-            const res = await dispatch(removeTask(id, account._id));
+            await dispatch(removeTask(id, account._id));
         }
         remove();
         message.success("Xóa công việc thành công!")

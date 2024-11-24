@@ -51,6 +51,7 @@ export default function DiaryPage(){
             }
         }
         if(account._id!=="") fetchData();
+        // eslint-disable-next-line
     }, [account])
 
     useEffect(() => {
@@ -74,6 +75,7 @@ export default function DiaryPage(){
         const next = listDiary.diarys[index + 1];
         if(next) setNextDiary(next);
         else setNextDiary(null);
+        // eslint-disable-next-line
     }, [index])
 
     function getBackground(num:number){

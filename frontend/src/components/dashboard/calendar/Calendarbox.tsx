@@ -10,7 +10,6 @@ import home_icon from './images/Home_duotone.png'
 import school_icon from './images/Basket.png'
 import ousside_icon from './images/Map.png'
 import { useNavigate } from 'react-router-dom';
-import { Message } from '../../../redux/message/message.state';
 
 interface Props{
     account: User;
@@ -26,7 +25,7 @@ export default function Calendarbox({account}:Props){
             if(account._id!=="") dispatch(getListTask(account._id));
         }
         fetchData();
-        
+        // eslint-disable-next-line
     }, [account])
 
     function getTypeStyle(type: string){

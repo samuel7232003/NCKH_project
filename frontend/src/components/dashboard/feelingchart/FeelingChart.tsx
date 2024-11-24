@@ -29,17 +29,18 @@ export default function FeelingChart({account}:Props){
     useEffect(()=>{
         const fetchData = async ()=>{
             try{
-                const res = await dispatch(getListDiary(account._id));
+                await dispatch(getListDiary(account._id));
             } catch (error){
                 console.log(error);
             }
         }
         fetchData();
+        // eslint-disable-next-line
     },[account])
 
     useEffect(()=>{
         if(listDiary.idUser!==""){
-            let today = new Date;
+            let today = new Date();
             let listDate = [moment(today).format("YYYY-MM-DD")];
             const oneDay = 24 * 60 * 60 * 1000;
             for(let i = 0; i<7; i++){
@@ -56,6 +57,7 @@ export default function FeelingChart({account}:Props){
             const todayDiary = listDiary.diarys.find(index => index.date === moment(new Date()).format("YYYY-MM-DD"));
             if(todayDiary) dispatch(setDiary(todayDiary));
         }
+        // eslint-disable-next-line
     },[listDiary])
 
     function getVal(num: number|null):React.CSSProperties{
@@ -67,7 +69,7 @@ export default function FeelingChart({account}:Props){
     }
 
     function getDay(num: number){
-        const today = (new Date).getDay();
+        const today = (new Date()).getDay();
         const nameDay = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
         let index = today-num-1;
         if(index<0) index+=7;

@@ -14,6 +14,7 @@ export default function ChatPage(){
 
     useEffect(() => {
         setPage("chat");
+        // eslint-disable-next-line
     },[account])
 
     function setCurChat(chatRoom : RoomChat){

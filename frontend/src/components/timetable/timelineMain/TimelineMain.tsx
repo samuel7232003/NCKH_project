@@ -1,5 +1,4 @@
 import { User } from "../../../redux/user/user.state";
-import Timeline from "../../dashboard/timeline/Timeline";
 import './timelinemain.css'
 import timeline_icon from "./images/Clock.png"
 import { ColorPicker, message, Select, TimePicker } from "antd";
@@ -37,6 +36,7 @@ export default function TimelineMain({account}:Props){
             }
             fetchData();
         }
+        // eslint-disable-next-line
     },[account])
 
     useEffect(() => {

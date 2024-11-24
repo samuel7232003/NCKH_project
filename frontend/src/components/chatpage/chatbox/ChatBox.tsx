@@ -48,6 +48,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
 
     useEffect(()=>{
         fetchData(); chat.current = chatBox;
+        // eslint-disable-next-line
     }, [chatBox])
 
     useEffect(() => {
@@ -62,6 +63,7 @@ export default function ChatBox({account, chatBox, setMode}:Props){
                 dispatch(setListRoom(data));
             })
         }
+        // eslint-disable-next-line
     }, [chatBox, account])
 
     function handleSend(){

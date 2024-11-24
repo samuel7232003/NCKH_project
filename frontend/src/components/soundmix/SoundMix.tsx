@@ -37,6 +37,7 @@ export default function SoundMix(){
         const localVol = localStorage.getItem("listVol");
         if(localVol) setListVol(JSON.parse(localVol));
         else localStorage.setItem("listVol", JSON.stringify(listVol));
+        // eslint-disable-next-line
     },[])
 
     useEffect(() => {
@@ -54,6 +55,7 @@ export default function SoundMix(){
                 }
             }
         }
+        // eslint-disable-next-line
     }, [isPlay])
 
     function handleChangeVol (event: React.ChangeEvent<HTMLInputElement>, name:string) {

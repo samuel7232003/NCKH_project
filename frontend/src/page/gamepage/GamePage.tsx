@@ -18,6 +18,7 @@ export function GamePage(){
 
     useEffect(() => {
         setPage("game");
+        // eslint-disable-next-line
     },[])
 
     function getiInfor(num: number){

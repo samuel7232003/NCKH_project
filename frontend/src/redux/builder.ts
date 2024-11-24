@@ -9,13 +9,13 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export const appDispatchWithoutPayloadBuilder = (actions: ActionCreatorWithoutPayload) => {
     return () => {
         const dispatch = useAppDispatch()
-        return useCallback(() => dispatch(actions()),[])
+        return useCallback(() => dispatch(actions()),[dispatch])
     }
 }
 
 export const appDispatchWithHigherPayloadBuilder = <T>(actions: ActionCreatorWithPayload<T>) =>{
     return (payload: T) => {
         const dispatch = useAppDispatch()
-        return useCallback(() => dispatch(actions(payload)), [payload])
+        return useCallback(() => dispatch(actions(payload)), [dispatch, payload])
     }
 }

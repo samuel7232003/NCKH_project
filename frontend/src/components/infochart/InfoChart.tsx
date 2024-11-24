@@ -24,7 +24,7 @@ export default function InforChart({account, isOpen, listDiary}:Props){
     const [cost, setCost] = useState(0);
 
     function getList(listDiary:ListDiary){
-        let today = new Date;
+        let today = new Date();
         let listDate = [moment(today).format("YYYY-MM-DD")];
         const oneDay = 24 * 60 * 60 * 1000;
         for(let i = 0; i<7; i++){

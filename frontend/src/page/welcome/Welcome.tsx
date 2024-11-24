@@ -11,6 +11,7 @@ export default function Welcome(){
     useEffect(()=>{
         const saveLogin = localStorage.getItem("saveLogin");
         if(saveLogin) navigate("/home");
+        // eslint-disable-next-line
     }, [])
 
     return (
