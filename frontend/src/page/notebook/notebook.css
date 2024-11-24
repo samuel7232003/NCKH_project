@@ -1,0 +1,51 @@
+.notebook{
+    height: calc(100vh - 70px);
+    background-image: url('../../image/background.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notebook .notebook-main{
+    display: flex;
+    padding: 20px;
+    height: 100%;
+    align-items: center;
+    gap: 5px;
+}
+
+.notebook .notebook-main .back,
+.notebook .notebook-main .next{
+    height: 56px;
+    width: 56px;
+    transition: transform ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.notebook .notebook-main .back:hover,
+.notebook .notebook-main .next:hover{
+    transform: scale(1.2);
+}
+
+.notebook .notebook-main .back{
+    margin-right: 30px;
+}
+
+.notebook .notebook-main .next{
+    margin-left: 30px;
+}
+
+.notebook .notebook-main .back img,
+.notebook .notebook-main .next img{
+    height: 100%
+}
+
+.notebook .notebook-main .page{
+    height: 100%;
+}
+
+.notebook .notebook-main .page img{
+    height: 100%;
+}
