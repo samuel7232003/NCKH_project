@@ -39,7 +39,7 @@ export default function DiaryPage(){
     const [openAdd, setOpenAdd] = useState(false);
     const [mode, setMode] = useState(true);
     const [time, setTime] = useState(dayjs());
-    const [dateChoice, setDateChoice] = useState<string>("");
+    const [dateChoice, setDateChoice] = useState<string>(dayjs().format("YYYY-MM-DD"));
 
     useEffect(()=>{
         setPage("diary");
