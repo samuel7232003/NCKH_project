@@ -1,0 +1,105 @@
+.soundmix{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+}
+
+.soundmix:hover ul{
+    display: flex;
+}
+
+.soundmix .main{
+    height: 70px;
+    width: 70px;
+    background-color: white;
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.soundmix .main .hover{
+    display: none;
+}
+
+.soundmix .main .noneHover.ani{
+    animation: rotateAnimation 6s linear infinite; 
+}
+
+@keyframes rotateAnimation{
+    0% {
+      transform: rotate(0deg); 
+    }
+    100% {
+      transform: rotate(360deg); 
+    }
+}
+
+.soundmix:hover .main .noneHover{
+    display: none;
+}
+
+.soundmix:hover .main .hover{
+    display: block;
+}
+
+
+.soundmix .main figure{
+    height: 40px;
+}
+
+.soundmix .main figure img{
+    height: 100%;
+}
+
+.soundmix ul{
+    display: none;
+    flex-flow: column-reverse;
+    align-items: center;
+    gap: 10px;
+    transition: gap ease-in-out 0.25s;
+}
+
+.soundmix ul li{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    width: 200px;
+}
+
+.soundmix ul li .icon{
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.soundmix ul li:hover input{
+    display: inline;
+}
+
+.soundmix ul li figure{
+    height: 24px;
+}
+
+.soundmix ul li figure img{
+    height: 100%;
+}
+
+.soundmix ul li input{
+    display: none;
+}
+
+@media screen and (max-width: 430px){
+    .soundmix{
+        display: none;
+    }
+}

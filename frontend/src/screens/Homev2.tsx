@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/header/Header";
 import { useState } from "react";
 import { Socket } from "socket.io-client";
+import SoundMix from "../components/soundmix/SoundMix";
 
 function Homev2(){
     const [page, setPage] = useState("dashboard");
@@ -13,6 +14,7 @@ function Homev2(){
             <div>
                 <Outlet context={{setPage, socket, setSocket}}/>
             </div>
+            <SoundMix/>
         </div>
     )
 }
