@@ -33,7 +33,7 @@ export default function Welcome(){
         </main>
         <div id="infor" className="h-[100vh] bg-cover flex px-[86px] py-[52px] flex-col">
             <div className="text-white mb-5 mt-[40px]">
-                <h1 className="font-bold text-[42px]">Chào mừng bạn đến với...</h1>
+                <h1 className="font-bold text-[42px]">Chào mừng bạn đến với Hiểu Để Yêu Thương</h1>
                 <p className="text-[18px]">Một website quan tâm đến sức khỏe tâm thần của bạn ...</p>
             </div>
             <div className="bg-[rgba(0,0,0,0.66)] rounded-[10px] h-[540px] px-[38px] py-[32px] overflow-scroll overflow-x-hidden">

@@ -33,19 +33,6 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
     const [search, setSearch] = useState("");
     const [viewList, setViewList] = useState(listRoom.roomChats);
     const [viewListUser, setViewListUser] = useState(listUser);
-    
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                dispatch(getListRoomChat(account._id));
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchData();
-        // eslint-disable-next-line
-    },[account])
 
     useEffect(() => {
         setViewList(listRoom.roomChats);

@@ -48,7 +48,6 @@ main.dashboard{
 }
 
 .main-dashboard .chat{
-    background-image: url('./images/Avatar\ \(1\).png');
     background-position: center;
     background-size: cover;
 }
@@ -58,6 +57,7 @@ main.dashboard{
     height: 82px;
     width: 82px;
     overflow: hidden;
+    background-color: white;
 }
 
 .main-dashboard .chat figure img{

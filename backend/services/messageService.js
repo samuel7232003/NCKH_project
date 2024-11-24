@@ -58,7 +58,7 @@ const deleteRoomService = async(id)=>{
 const updateRoomService = async (newRoom)=>{
     try {
         const response = await roomChatModel.replaceOne(
-            {_id: newRoom.id},
+            {_id: newRoom._id},
             {
                 name: newRoom.name,
                 time: newRoom.time,
@@ -68,7 +68,6 @@ const updateRoomService = async (newRoom)=>{
                 lastSender: newRoom.lastSender
             }
         )
-
         return response;
     } catch (error) {
         return null;

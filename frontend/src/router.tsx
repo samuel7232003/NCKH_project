@@ -11,6 +11,7 @@ import PersonalPage from "./page/personalpage/PersonalPage";
 import Timetable from "./page/timetable/Timetable";
 import ChatPage from "./page/chatpage/ChatPage";
 import { GamePage } from "./page/gamepage/GamePage";
+import Notebook from "./page/notebook/Notebook";
 
 export const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
             {
                 path: 'gamepage',
                 element: <GamePage/>
+            },
+            {
+                path: 'notebook',
+                element: <Notebook/>
             }
         ]
     }

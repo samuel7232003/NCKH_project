@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/builder";
 import { getProfile, setOnlineUsers } from "../../redux/user/user.action";
 import { io, Socket } from "socket.io-client";
 import menu_icon from './images/darhboard.png';
+import { getListRoomChat } from "../../redux/message/message.action";
 
 interface Props{
     page: string;
@@ -51,6 +52,14 @@ export default function Header({page, setPage, socket, setSocket}:Props){
 
             setSocket(newSocket);
         }
+        const fetchData = async () => {
+            try {
+                await dispatch(getListRoomChat(account._id));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if(account._id!=="") fetchData();
         // eslint-disable-next-line
     }, [account])
 
@@ -125,7 +134,7 @@ export default function Header({page, setPage, socket, setSocket}:Props){
                             <figure className="edit"><img src={edit_icon} alt="" /></figure>
                         </div>
                         <ul>
-                            <li>
+                            <li onClick={() => {navigate('./notebook'); setSubBox(null)}}>
                                 <figure><img src={moreinfo_icon} alt="" /></figure>
                                 <p>Xem thông tin SKTT</p>
                             </li>
