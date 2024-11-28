@@ -7,9 +7,9 @@ jobs:
   build_dev:
     runs-on: linux_runner
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_DEV }}
+      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
     steps:
       - uses: benjlevesque/short-sha@v3.0
         id: short-sha
@@ -35,4 +35,3 @@ jobs:
           aws s3api get-object --bucket ${{ env.AWS_S3_BUCKET }} --key ${{ env.BRANCH }}/.env ${{ env.BRANCH }}/.env
           cd ${{ env.BRANCH }}
           docker compose up -d frontend backend
-
