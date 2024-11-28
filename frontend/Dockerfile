@@ -19,6 +19,6 @@ RUN npm install -g http-server
 
 COPY --from=build /app/build ./build
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD [ "http-server", "./build" ]
