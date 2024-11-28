@@ -62,9 +62,9 @@ socketIo.on("connection", (socket) => { ///Handle khi có connect từ client t�
     try {
         await connection();
 
-        server.listen(port, () => {
-            console.log(`Backend Nodejs App listening on port ${port}`)
-        })
+        // server.listen(port, () => {
+        //     console.log(`Backend Nodejs App listening on port ${port}`)
+        // })
     } catch (error) {
         console.log(">>> Error connect tp DB: ", error)
     }
