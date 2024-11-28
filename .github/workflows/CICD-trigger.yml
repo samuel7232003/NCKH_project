@@ -1,0 +1,18 @@
+name: CI Phase
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  prod-build:
+    if: github.ref == 'refs/heads/main'
+    uses: samuel7232003/NCKH_project/.github/workflows/CI.yml@CICD-script
+    secrets: inherit
+
+  prod-deploy:
+    if: github.ref == 'refs/heads/main'
+    uses: samuel7232003/NCKH_project/.github/workflows/CD.yml@CICD-script
+    secrets: inherit

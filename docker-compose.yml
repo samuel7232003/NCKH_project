@@ -1,0 +1,18 @@
+services:
+  frontend:
+    image: "${ECR_CLIENT_URL}:${BRANCH}-${SHA}"
+    container_name: frontend_${BRANCH}
+    working_dir: /app
+    ports:
+      - "5573:80"
+    env_file:
+      - .env
+
+  backend:
+    image: "${ECR_SERVER_URL}:${BRANCH}-${SHA}"
+    container_name: backend_${BRANCH}
+    working_dir: /run
+    ports:
+      - "${BACKEND_PORT}:3001"
+    env_file:
+      - .env

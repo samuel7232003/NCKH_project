@@ -1,0 +1,39 @@
+# Ignore node_modules (they will be installed inside the container)
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore temp files
+tmp
+*.swp
+*.tmp
+*.bak
+
+# Ignore build artifacts
+build
+dist
+
+# Ignore Docker files
+Dockerfile*
+.dockerignore
+
+# Ignore editor and IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore git-related files
+.git
+.gitignore
+.gitattributes
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
