@@ -1,5 +1,5 @@
 services:
-  frontend:
+  frontend_hdyt:
     image: "${ECR_CLIENT_URL}:${BRANCH}-${SHA}"
     container_name: frontend_${BRANCH}_hdyt
     working_dir: /app
@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
 
-  backend:
+  backend_hdyt:
     image: "${ECR_SERVER_URL}:${BRANCH}-${SHA}"
     container_name: backend_${BRANCH}_hdyt
     working_dir: /run
