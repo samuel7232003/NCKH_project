@@ -4,7 +4,7 @@ services:
     container_name: frontend_${BRANCH}_hdyt
     working_dir: /app
     ports:
-      - "5573:80"
+      - "5573:8080"
     env_file:
       - .env
 
