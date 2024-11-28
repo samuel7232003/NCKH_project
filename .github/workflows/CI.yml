@@ -1,0 +1,145 @@
+name: CI Phase
+
+on:
+  workflow_call:
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      ECR_URL:
+        required: true
+      ECR_CLIENT_URL:
+        required: true
+      PORT:
+        required: true
+      MONGO_URI:
+        required: true
+      JWT_SECRET:
+        required: true
+      JWT_EXPIRE:
+        required: true
+      AWS_S3_BUCKET:
+        required: true
+      NODE_ENV:
+        required: true
+      REACT_APP_BASE_URL:
+        required: true
+      REACT_APP_CLOUDINARY:
+        required: true
+
+jobs:
+  build_artifact:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      ECR_URL: ${{ secrets.ECR_URL }}
+      ECR_CLIENT_URL: ${{ secrets.ECR_CLIENT_URL }}
+      ECR_SERVER_URL: ${{ secrets.ECR_SERVER_URL }}
+      PORT: ${{ secrets.PORT }}
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+      NODE_ENV: ${{ secrets.NODE_ENV }}
+      REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+      REACT_APP_CLOUDINARY: ${{ secrets.REACT_APP_CLOUDINARY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: benjlevesque/short-sha@v3.0
+        id: short-sha
+        with:
+          length: 6
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Check Docker version
+        run: docker --version
+
+      - name: Pre-build Client
+        run: |
+          cd frontend
+          envsubst < .env.example > .env
+          cat .env
+          cd ..
+
+        # Pre-build server
+      - name: Pre-build server
+        run: |
+          cd backend
+          touch .env
+          envsubst < .env.example > .env
+          cat .env
+          npm install
+          cd ..
+
+      - name: Build artifact server
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+        run: |
+          touch .env
+          echo "ECR_SERVER_URL=${{ env.ECR_SERVER_URL }}" >> .env
+          echo "ECR_CLIENT_URL=${{ env.ECR_CLIENT_URL }}" >> .env
+          echo "BRANCH=${{ env.BRANCH }}" >> .env
+          echo "SHA=${{ env.SHA }}" >> .env
+          echo "BACKEND_PORT=${{ env.PORT }}" >> .env
+        continue-on-error: false
+
+      - name: Build Front-end Client
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+        run: |
+          cd frontend
+          pwd
+          ls -la 
+          docker build -t hdyt-client:"${{ env.BRANCH }}-${{ env.SHA }}" .
+          docker tag hdyt-client:"${{ env.BRANCH }}-${{ env.SHA }}" "${{ env.ECR_CLIENT_URL }}":"${{ env.BRANCH }}-${{ env.SHA }}"
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.ECR_URL }}
+          docker push "${{ env.ECR_CLIENT_URL }}:${{ env.BRANCH }}-${{ env.SHA }}"
+        continue-on-error: false
+
+      - name: Build Back-end Server
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+        run: |
+          cd backend
+          pwd
+          ls -la 
+          docker build -t hdyt-server:"${{ env.BRANCH }}-${{ env.SHA }}" .
+          docker tag hdyt-server:"${{ env.BRANCH }}-${{ env.SHA }}" "${{ env.ECR_SERVER_URL }}":"${{ env.BRANCH }}-${{ env.SHA }}"
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.ECR_URL }}
+          docker push "${{ env.ECR_SERVER_URL }}:${{ env.BRANCH }}-${{ env.SHA }}"
+        continue-on-error: false
+
+      - uses: hkusu/s3-upload-action@v2
+        env:
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "ap-southeast-1"
+          aws-bucket: ${{ env.AWS_S3_BUCKET }}
+          file-path: ".env"
+          destination-dir: "${{ env.BRANCH }}/"
+          bucket-root: "/"
+
+      - uses: hkusu/s3-upload-action@v2
+        env:
+          BRANCH: ${{ steps.extract_branch.outputs.branch }}
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "ap-southeast-1"
+          aws-bucket: ${{ env.AWS_S3_BUCKET }}
+          file-path: "docker-compose.yml"
+          destination-dir: "${{ env.BRANCH }}/"
+          bucket-root: "/"
