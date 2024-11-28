@@ -53,7 +53,7 @@ export function GamePage(){
                 <div>
                     <iframe
                         title="Pac-Man Game"
-                        src={`${process.env.PUBLIC_URL}/games-gh-pages/${listGame[curGame]}/index.html`}
+                        src={`../games-gh-pages/${listGame[curGame]}/index.html`}
                         width={getiInfor(curGame).width}
                         height={getiInfor(curGame).height}
                         style={{ border: 'none' }}
