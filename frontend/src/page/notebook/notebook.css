@@ -49,3 +49,14 @@
 .notebook .notebook-main .page img{
     height: 100%;
 }
+
+@media screen and (max-width: 430px){
+    .notebook{
+        height: auto;
+    }
+
+
+    .notebook-main{
+        flex-flow: column;
+    }
+}
