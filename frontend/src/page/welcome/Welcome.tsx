@@ -37,7 +37,7 @@ export default function Welcome(){
                 <h1 className="font-bold text-[42px]">Chào mừng bạn đến với Hiểu Để Yêu Thương</h1>
                 <p className="text-[18px]">Một website quan tâm đến sức khỏe tâm thần của bạn ...</p>
             </div>
-            <div className="bg-[rgba(0,0,0,0.66)] rounded-[10px] h-[540px] px-[38px] py-[32px] overflow-scroll overflow-x-hidden">
+            <div className="content bg-[rgba(0,0,0,0.66)] rounded-[10px] h-[540px] px-[38px] py-[32px] overflow-scroll overflow-x-hidden">
                 <div className="flex gap-[30px] mb-[50px]">
                     <div>
                         <h2 className="text-white font-bold mb-[20px] text-[18px]">Sức khỏe tâm thần là gì?</h2>
