@@ -17,8 +17,8 @@ WORKDIR /app
 # Install `serve` package
 RUN npm install -g serve
 
-COPY --from=build /app/dist ./dist
+COPY --from=build /app/build ./build
 
 EXPOSE 80
 
-CMD [ "serve", "-s", "dist", "-l", "80" ]
+CMD [ "serve", "-s", "build", "-l", "80" ]
