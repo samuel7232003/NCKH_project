@@ -13,63 +13,68 @@ import ChatPage from "./page/chatpage/ChatPage";
 import { GamePage } from "./page/gamepage/GamePage";
 import Notebook from "./page/notebook/Notebook";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
     {
-        path:"/",
-        element: <Home/>,
-        children:[
+      path: "/",
+      element: <Home />,
+      children: [
+        {
+          path: "",
+          element: <Welcome />,
+          children: [
             {
-                path: "",
-                element: <Welcome/>,
-                children:[
-                    {
-                        path: "",
-                        element: <WelcomeChat/>,
-                    },
-                    {
-                        path:"login",
-                        element: <Login/>
-                    },
-                    {
-                        path:"signup",
-                        element: <Signup/>
-                    }
-                ]
-            }   
-        ]
+              path: "",
+              element: <WelcomeChat />,
+            },
+            {
+              path: "login",
+              element: <Login />,
+            },
+            {
+              path: "signup",
+              element: <Signup />,
+            },
+          ],
+        },
+      ],
     },
     {
-        path:"/home",
-        element: <Homev2/>,
-        children:[
-            {
-                path:"",
-                element: <Dashboard/>
-            },
-            {
-                path:"diarypage",
-                element: <DiaryPage/>
-            },
-            {
-                path:"personal",
-                element: <PersonalPage/>
-            },
-            {
-                path:"timetable",
-                element: <Timetable/>
-            },
-            {
-                path: "chatpage",
-                element: <ChatPage/>
-            },
-            {
-                path: 'gamepage',
-                element: <GamePage/>
-            },
-            {
-                path: 'notebook',
-                element: <Notebook/>
-            }
-        ]
-    }
-])
+      path: "/home",
+      element: <Homev2 />,
+      children: [
+        {
+          path: "",
+          element: <Dashboard />,
+        },
+        {
+          path: "diarypage",
+          element: <DiaryPage />,
+        },
+        {
+          path: "personal",
+          element: <PersonalPage />,
+        },
+        {
+          path: "timetable",
+          element: <Timetable />,
+        },
+        {
+          path: "chatpage",
+          element: <ChatPage />,
+        },
+        {
+          path: "gamepage",
+          element: <GamePage />,
+        },
+        {
+          path: "notebook",
+          element: <Notebook />,
+        },
+      ],
+    },
+  ],
+  {
+    basename: "",
+  }
+);
