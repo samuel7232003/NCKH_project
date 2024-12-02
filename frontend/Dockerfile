@@ -21,4 +21,4 @@ COPY --from=build /app/build ./build
 
 EXPOSE 8080
 
-CMD [ "http-server", "./build" ]
+CMD [ "serve", "-s", "dist", "-l", "8080" ]
