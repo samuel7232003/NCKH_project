@@ -12,6 +12,7 @@ import Timetable from "./page/timetable/Timetable";
 import ChatPage from "./page/chatpage/ChatPage";
 import { GamePage } from "./page/gamepage/GamePage";
 import Notebook from "./page/notebook/Notebook";
+import NotDefound from "./screens/NotFound";
 
 export const router = createBrowserRouter(
   [
@@ -72,6 +73,10 @@ export const router = createBrowserRouter(
           element: <Notebook />,
         },
       ],
+    },
+    {
+      path: "*",
+      element: <NotDefound/>
     },
   ],
   {

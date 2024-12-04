@@ -1,0 +1,44 @@
+.notfound{
+    height: 100%;
+    min-height: 100vh;
+    background-image: url('../image/background.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.notfound .inner{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.notfound p{
+    color: rgba(255, 255, 255, 0.642);
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.notfound p.num{
+    font-size: 200px;
+}
+
+.notfound p.button{
+    font-size: 16px;
+    height: 40px;
+    width: 100px;
+    background-color: #16c2e897;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color ease-in-out 0.25s;
+    cursor: pointer;
+}
+
+.notfound p.button:hover{
+    background-color: #16c2e8;
+}
