@@ -87,6 +87,11 @@ export default function PersonalPage(){
             })
         }
     }
+
+    function handleEditAcc(){
+        if(account.role === "guest") message.error("Vì đang ở chế độ trải nghiệm nên bạn không thể thay đổi thông tin đăng nhập!");
+        else setEditAcc(!editAcc);
+    }
     
     return(
         <main className="main-personal">
@@ -144,7 +149,7 @@ export default function PersonalPage(){
                         :<p className="val">**********</p>
                         }
                     </div>
-                    <figure onClick={() => setEditAcc(!editAcc)}><img src={edit_icon} alt="" /></figure>
+                    <figure onClick={handleEditAcc}><img src={edit_icon} alt="" /></figure>
                 </div>
                 <Popconfirm 
                     title="Xác nhận thay đổi" description="Bạn có chắc chắn lưu những thay đổi này chứ?"

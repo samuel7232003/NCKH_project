@@ -10,7 +10,8 @@ export const initialUserState:UserListModel = {
         last_name: '',
         avatar: '',
         birth: '',
-        gender: ''
+        gender: '',
+        role:'',
     },
     userList: [],
     userConnectList: [],

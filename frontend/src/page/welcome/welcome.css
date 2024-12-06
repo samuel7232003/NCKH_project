@@ -41,6 +41,10 @@ main .scroll-down{
         padding: 10px;
     }
 
+    #infor h1{
+        font-size: 30px;
+    }
+
     #infor .content{
         padding: 20px 10px;
     }

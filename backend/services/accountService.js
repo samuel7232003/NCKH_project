@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const accountModel = require("../models/Account");
 const saltRounds = 10;
 
-const createAccountService = async(email, password, first_name, last_name) => {
+const createAccountService = async(email, password, first_name, last_name, role) => {
     try {
         //check user exist
         const user = await accountModel.findOne({email});
@@ -22,7 +22,7 @@ const createAccountService = async(email, password, first_name, last_name) => {
             password: hashPassword,
             first_name: first_name,
             last_name: last_name,
-            role: "user",
+            role: role,
             avatar: 'https://res.cloudinary.com/df7mhs6xj/image/upload/v1730885237/gvh57hvea5d1e5sjqjrx.png',
         })
         return result;

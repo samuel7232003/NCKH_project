@@ -6,7 +6,8 @@ export interface User{
     last_name: string,
     avatar: string,
     birth: string,
-    gender: string
+    gender: string,
+    role: string,
 }
 
 export interface UserListModel{

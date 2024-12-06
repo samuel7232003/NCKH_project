@@ -48,7 +48,7 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
         const fetchData = async () => {
             const res:User[] = await getAllUser();
             const data:User[] = res.filter(index => {
-                if(index._id === account._id) return false;
+                if(index._id === account._id || index.role==="guest") return false;
                 for(let i = 0; i< listConUser.length; i++){
                     if(index._id === listConUser[i]._id) return false;
                 }
@@ -140,7 +140,10 @@ export default function ListRoom({account, setChatBox, chatBox}:Props){
                         </div>
                     </li>
                 ):
-                <p className="noti-non">Bạn chưa có kết nối nào, hãy thêm kết nối mới ngay!</p>
+                <p className="noti-non">
+                    Bạn chưa có kết nối nào, hãy thêm kết nối mới ngay!<br/><br/>
+                    {(account.role === "guest") && "Vì bạn đang ở chế độ trải nghiệm nên những người dùng khác không thể tìm thấy bạn."}
+                </p>
                 }
             </ul>
         </div>

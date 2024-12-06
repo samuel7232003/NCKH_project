@@ -22,8 +22,7 @@ export default function Signup(){
     const checkSignup = async () =>{
         message.loading("Đang tạo tài khoản mới!");
         try {
-            const res = await signup(user);
-            console.log(res);
+            const res = await signup({...user, role: "user"});
             if(!res) setError("Email đăng kí đã tồn tại!");
             else{
                 message.success("Đăng kí thành công!");

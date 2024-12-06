@@ -42,3 +42,13 @@
 .notfound p.button:hover{
     background-color: #16c2e8;
 }
+
+@media screen and (max-width: 430px){
+    .notfound p{
+        font-size: 30px;
+    }
+    
+    .notfound p.num{
+        font-size: 100px;
+    }
+}
