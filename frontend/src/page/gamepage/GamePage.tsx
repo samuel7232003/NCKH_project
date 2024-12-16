@@ -8,6 +8,8 @@ import xepbai from './images/xepbai.png'
 import back_icon from "./images/Sign_out_squre.png"
 import { Tooltip } from 'antd';
 import { useOutletContext } from 'react-router-dom';
+import NncGame from '../../components/nncgame/NncGame';
+import nnc from './images/image9.png'
 
 export function GamePage(){
     const listGame = ["pacman", "bounce", "snake", "tetris", "spider"];
@@ -15,6 +17,7 @@ export function GamePage(){
     const {setPage}:any = useOutletContext();
     const [isPlay, setIsPlay] = useState(false);
     const [curGame, setCurGame] = useState(0);
+    const [isNnc, setIsNnc] = useState(false);
 
     useEffect(() => {
         setPage("game");
@@ -32,7 +35,8 @@ export function GamePage(){
     }
 
     function handleChoice(num: number){
-        setCurGame(num);
+        if(num!==0) setCurGame(num);
+        else setIsNnc(true);
         setIsPlay(true);
     }
 
@@ -40,6 +44,15 @@ export function GamePage(){
         <main className='gamepage'>
             <div className='inner'>
                 {(!isPlay) ? <div>
+                    <h2>Trò chơi kiến thức</h2>
+                    <ul>
+                        <li style={{backgroundImage: `url(${nnc})`}} onClick={() => handleChoice(0)}>
+                            <div>
+                                <p className='name'>Nhanh như chớp</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <h2>Trò chơi giải trí</h2>
                     <ul>
                         {listGame.map((value, index) => 
                             <li style={{backgroundImage: `url(${getiInfor(index).img})`}} key={index} onClick={() => handleChoice(index)}>
@@ -51,14 +64,17 @@ export function GamePage(){
                     </ul>
                 </div> :
                 <div>
-                    <iframe
+                    {!isNnc?<iframe
                         title="Pac-Man Game"
                         src={`../games-gh-pages/${listGame[curGame]}/index.html`}
                         width={getiInfor(curGame).width}
                         height={getiInfor(curGame).height}
                         style={{ border: 'none' }}
                     />
-                    <Tooltip title="Trở lại"><figure className='back' onClick={() => setIsPlay(false)}><img src={back_icon} alt="" /></figure></Tooltip>
+                    :<NncGame/>}
+                    <Tooltip title="Trở lại">
+                        <figure className='back' onClick={() => {setIsPlay(false); setIsNnc(false)}}><img src={back_icon} alt="" /></figure>
+                    </Tooltip>
                 </div>
                 }
             </div>

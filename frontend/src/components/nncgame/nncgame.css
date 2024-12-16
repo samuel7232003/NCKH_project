@@ -1,0 +1,286 @@
+.nncgame{
+    background-color: rgba(255,255,255,0.9);
+    height: 590px;
+    max-width: 980px;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.nncgame .logo{
+    height: 112px;
+    margin-bottom: 20px;
+}
+
+.nncgame .logo img{
+    height: 100%;
+}
+
+.nncgame h3{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 100px;
+}
+
+.nncgame .rule{
+    font-size: 20px;
+    max-width: 537px;
+    margin-bottom: 50px;
+}
+
+.nncgame .start{
+    height: 68px;
+    width: 174px;
+    border-radius: 8px;
+    background-color: #16C0E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nncgame.ingame{
+    flex-flow: row;
+    padding: 10px;
+    gap: 10px;
+    align-items: start;
+    background-image: url("./images/image 9.png");
+    background-size: cover;
+    background-position: center;
+    border: #d9d9d9 2px solid;
+}
+
+.nncgame .ques{
+    flex-grow: 1;
+}
+
+.nncgame .ques .content{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: white;
+    padding: 0 100px;
+    height: 235px;
+    margin-bottom: 10px;
+}
+
+.nncgame .ques .content figure{
+    height: 56px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.nncgame .ques .content figure img{
+    height: 100%;
+}
+
+.nncgame .ques .content p{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nncgame .ques .ans{
+    gap: 10px;
+}
+
+.nncgame .ques .ans.des{
+    border-radius: 8px;
+    background-color: white;
+    height: 325px;
+    padding: 30px 40px;
+    position: relative;
+}
+
+.nncgame .ques .ans.des div{
+    position: absolute;
+    bottom: 10px;
+    left: 350px;
+    display: flex;
+    gap: 10px;
+}
+
+.nncgame .ques .ans.des .stop,
+.nncgame .ques .ans.des .cont{
+    height: 40px;
+    width: 100px;
+    color:  #16C0E8;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: #16C0E8 1px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color ease-in-out 0.25s;
+}
+
+.nncgame .ques .ans.des .stop{
+    border: #FF3B30 1px solid;
+    color:  #FF3B30;
+}
+
+.nncgame .ques .ans.des .cont:hover{
+    background-color: #16c2e88c;
+}
+
+.nncgame .ques .ans.des .stop:hover{
+    background-color: #ff3a3056;
+}
+
+.nncgame .ques .ans li{
+    width: calc(50% - 5px);
+    height: 159px;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 70px;
+}
+
+.nncgame .ques .ans li .title{
+    position: absolute;
+    height: 45px;
+    width: 45px;
+    border-radius: 45px;
+    background-color: #16C0E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    top: 10px;
+    left: 10px;
+}
+
+.nncgame .prog{
+    min-width: 100px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.nncgame .prog .time,
+.nncgame .prog .total,
+.nncgame .prog .cur{
+    height: 52px;
+    width: 100%;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF3B30;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nncgame .prog .time{
+    background-color: #FF3B30;
+}
+
+.nncgame .prog .total{
+    background-color: #16C0E8;
+}
+
+.nncgame .prog .prog-main{
+    height: 450px;
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-flow: column-reverse;
+    align-items: center;
+}
+
+.nncgame .prog .prog-main p{
+    height: 41px;
+    line-height: 41px;
+    font-size: 20px;
+    color: #d9d9d9;
+}
+
+.nncgame .prog .prog-main .cur{
+    background-color: #2CBA00;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    transition: bottom ease-in-out 0.25s;
+    border: white 2px solid;
+}
+
+@media screen and (max-width: 768px){
+    .nncgame.ingame {
+        height: auto;
+        width: 100%;
+    }
+    .nncgame .prog {
+        width: 58px;
+        min-width: auto;
+    }
+
+    .nncgame .ques .content {
+        padding: 10px 20px ;
+    }
+
+    .nncgame .ques .ans li {
+        width: 100%;
+        padding: 0 20px;
+        font-size: 14px;
+        height: 109px;
+    }
+
+    .nncgame .ques .content figure {
+        height: 20px;
+    }
+
+    .nncgame .ques .content p{
+        font-size: 15px;
+    }
+
+    .nncgame .ques .content {
+        height: 196px;
+    }
+
+    .nncgame .ques .ans li .title{
+        height: 30px;
+        width: 30px;
+        top: 3px;
+        left: 3px;
+    }
+
+    .nncgame .ques .ans.des {
+        font-size: 14px;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .nncgame .ques .ans.des .des{
+        margin-bottom: 20px;
+    }
+
+    .nncgame .ques .ans.des div {
+        position: relative;
+        bottom: 0px;
+        left: 0px;
+    }
+
+    .nncgame .prog .time{
+        padding: 0 5px;
+        font-size: 14px;
+    }
+}
