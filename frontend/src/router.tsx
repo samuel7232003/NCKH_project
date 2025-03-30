@@ -13,6 +13,7 @@ import ChatPage from "./page/chatpage/ChatPage";
 import { GamePage } from "./page/gamepage/GamePage";
 import Notebook from "./page/notebook/Notebook";
 import NotDefound from "./screens/NotFound";
+import VideoPage from "./page/videopage/VideoPage";
 
 export const router = createBrowserRouter(
   [
@@ -71,6 +72,10 @@ export const router = createBrowserRouter(
         {
           path: "notebook",
           element: <Notebook />,
+        },
+        {
+          path: "videopage",
+          element: <VideoPage/>,
         },
       ],
     },

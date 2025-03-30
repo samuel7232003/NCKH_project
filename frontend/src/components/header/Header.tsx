@@ -8,6 +8,7 @@ import noti_icon from "./images/Bell.png"
 import edit_icon from "./images/Setting_alt_line_light.png"
 import moreinfo_icon from "./images/File_dock_search.png"
 import logout_icon from "./images/Sign_in_squre.png"
+import video_icon from "./images/youtube (1).png"
 import './header.css'
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/builder";
@@ -112,6 +113,12 @@ export default function Header({page, setPage, socket, setSocket}:Props){
                     <li className={(page === "game") ? "active":""} onClick={() => setPage("game")}>
                         <Link to="./gamepage">
                             <figure><img src={game_icon} alt="" /></figure>
+                            <p>Giải trí</p>
+                        </Link>
+                    </li>
+                    <li className={(page === "video") ? "active":""} onClick={() => setPage("video")}>
+                        <Link to="./videopage">
+                            <figure><img src={video_icon} alt="" /></figure>
                             <p>Giải trí</p>
                         </Link>
                     </li>

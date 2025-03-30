@@ -40,6 +40,15 @@ header.main nav ul{
     gap: 20px;
 }
 
+header.main nav ul figure{
+    height: 24px;
+}
+
+header.main nav ul figure img{
+    height: 100%;
+    width: auto;
+}
+
 header.main nav ul a{
     display: flex;
     gap: 5px;

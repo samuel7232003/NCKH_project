@@ -1,0 +1,48 @@
+.video-detail{
+  display: flex;
+  gap: 20px;
+}
+
+.video-detail .video-list{
+  border-radius: 10px;
+  background-color: #ffffff41;
+  backdrop-filter: blur(5px);
+  width: 100%;
+  padding: 20px 10px;
+}
+
+.video-detail .video-list ul{
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+.video-detail .video-list ul li{
+  display: flex;
+  gap: 10px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.video-detail .video-list ul li:hover img{
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.video-detail .video-list ul li figure{
+  height: 100%;
+  min-width: 100px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.video-detail .video-list ul li figure img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
+}
+
+.video-detail .video-list ul li p{
+  color: #fff;
+}

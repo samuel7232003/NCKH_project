@@ -1,0 +1,114 @@
+.video-page{
+  min-height: calc(100vh-70px);
+  background-image: url('../../image/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.video-page .inner{
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 30px 10px 0;
+  max-height: calc(100vh - 70px);
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.video-page .video-page-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.video-page .video-page-title p{
+  max-width: 578px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.video-page .video-page-main{
+  width: 100%;
+}
+
+.video-page .main-part{
+  margin-bottom: 50px;
+}
+
+.video-page .main-part .main-part-title{
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.video-page .main-part .main-part-title img{
+  height: 16px;
+  width: auto;
+}
+
+.video-page .main-part .main-part-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;  
+}
+
+.video-page .main-part .main-part-list li{
+  width: calc((100% - 60px)/4);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #00000036;
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  transition: transform 0.25s ease-in-out;
+}
+
+.video-page .main-part-list li:hover{
+  transform: scale(1.1);
+}
+
+.video-page .main-part-list li figure{
+  width: 100%;
+  aspect-ratio: 16 / 9; 
+} 
+
+.video-page .main-part-list li figure img{
+  height: 100%;
+  width: auto
+}
+
+.video-page .main-part-list li div{
+  padding: 10px 20px;
+  overflow: hidden;
+}
+
+.video-page .main-part-list li p{
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-page .main-part-list li:hover p{
+  text-overflow: unset;
+  animation: slideText 2.5s ease-in-out forwards;
+  overflow: visible;
+}
+
+@keyframes slideText {
+  from {
+    transform: translateX(0);
+  }
+  to{
+    transform: translateX(-100%);
+  }
+}
+
