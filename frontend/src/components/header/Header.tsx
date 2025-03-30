@@ -119,7 +119,7 @@ export default function Header({page, setPage, socket, setSocket}:Props){
                     <li className={(page === "video") ? "active":""} onClick={() => setPage("video")}>
                         <Link to="./videopage">
                             <figure><img src={video_icon} alt="" /></figure>
-                            <p>Giải trí</p>
+                            <p>Channel</p>
                         </Link>
                     </li>
                 </ul>
