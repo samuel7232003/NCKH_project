@@ -1,6 +1,6 @@
 import tree_icon from "./images/Beige Blue Simple Illustrated Study Blog Logo (4) 1 (1).png";
 import podcast_icon from "./images/Books.png";
-import { listPodcast } from "./data/data";
+import { listPodcast, listCartoon } from "./data/data";
 import "./videopage.css";
 import { useEffect, useState } from "react";
 import VideoDetail from "../../components/videopage/VideoDetail";
@@ -21,6 +21,9 @@ export default function VideoPage() {
     setCurVideo(video);
     if (numPlaylist === 1) {
       setCurPlaylist(listPodcast);
+    }
+    else if (numPlaylist === 2) {
+      setCurPlaylist(listCartoon);
     }
   }
 
@@ -46,6 +49,25 @@ export default function VideoPage() {
               <ul className="main-part-list">
                 {listPodcast.map((item: any) => (
                   <li onClick={() => handleChoice(item, 1)} key={item.id}>
+                    <figure>
+                      <img src={item.urlImage} alt="" />
+                    </figure>
+                    <div>
+                      <p>{item.name}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="main-part">
+              <p className="main-part-title">
+                <img src={podcast_icon} alt="" />
+                Phim hoạt hình
+              </p>
+              <ul className="main-part-list">
+                {listCartoon.map((item: any) => (
+                  <li onClick={() => handleChoice(item, 2)} key={item.id}>
                     <figure>
                       <img src={item.urlImage} alt="" />
                     </figure>

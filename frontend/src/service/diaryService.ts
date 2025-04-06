@@ -6,7 +6,7 @@ export async function getDiarys(id: string) :Promise<any>{
         const respone = await apiInstance.get(`/listDiary?id=${id}`);
         return respone;
     } catch (error){
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -15,7 +15,7 @@ export async function addDiary(diary: Diary) {
         const respone = await apiInstance.post('/addDiary', diary);
         return respone;
     } catch (error){
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -25,6 +25,6 @@ export async function removeDiary(idUser: string, date: string):Promise<any> {
         const respone = await apiInstance.post('/removeDiary', data);
         return respone;
     } catch (error){
-        throw(error);
+        console.log(error);
     }
 }

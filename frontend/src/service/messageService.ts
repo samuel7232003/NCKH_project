@@ -7,7 +7,7 @@ async function getIdRoom(id:string) :Promise<any>{
         const respone = await apiInstance.get(`/getIdRoom?id=${id}`);
         return respone;
     } catch (error) {
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -16,7 +16,7 @@ async function getRoomsByListId(listIdRoom:string[]) :Promise<any>{
         const res = await apiInstance.post('/getRoomsByListId/', listIdRoom);
         return res;
     } catch (error) {
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -25,7 +25,7 @@ async function getUsersById(listIdUser:string[]) :Promise<any>{
         const res_ = await apiInstance.post('/getUsersById', listIdUser);
         return res_;
     } catch (error) {
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -38,7 +38,7 @@ export async function getRoomChat(id:string) {
         const res_:User[] = await getUsersById(listIdUser);
         return {listRoom: res, listUser: res_, listMessage: listMessage};
     } catch (error) {
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -47,7 +47,7 @@ export async function getMessages(id:string) :Promise<any>{
         const respone= await apiInstance.get(`/getMessages?id=${id}`);
         return respone;
     } catch (error) {
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -56,7 +56,7 @@ export async function sendMessageMess(message:Message) {
         const respone = await apiInstance.post("/addMessage", message);
         return respone;
     } catch (error) {
-        throw(error);
+        console.log(error);
     }
 }
 
@@ -65,7 +65,7 @@ export async function deleteRoom(id:string):Promise<any> {
         const res = await apiInstance.get(`/deleteRoom?id=${id}`);
         return res;
     } catch (error) {
-        throw(error);
+        console.log(error);
     }
 }
 

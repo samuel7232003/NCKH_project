@@ -1,5 +1,5 @@
 .video-page{
-  min-height: calc(100vh-70px);
+  min-height: calc(100vh - 70px);
   background-image: url('../../image/background.png');
   background-size: cover;
   background-position: center;

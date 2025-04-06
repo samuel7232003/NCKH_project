@@ -60,3 +60,30 @@ export const listPodcast = [
       "https://res.cloudinary.com/df7mhs6xj/image/upload/v1743337597/Screenshot_2025-03-30_185739_tqtntc.png",
   },
 ];
+
+export const listCartoon = [
+  {
+    id: "BFC93ZlwaOg",
+    name: "[Phim Hoạt Hình] - Tập 1:Trầm cảm",
+    urlImage:
+      "https://res.cloudinary.com/df7mhs6xj/image/upload/v1743669936/Screenshot_2025-04-03_151035_g4zniz.png",
+  },
+  {
+    id: "1uOr0Cygz_g",
+    name: '[Phim Hoạt Hình] - Tập 2: Con mệt lắm',
+    urlImage:
+      "https://res.cloudinary.com/df7mhs6xj/image/upload/v1743669936/Screenshot_2025-04-03_151216_nzvlgo.png",
+  },
+  {
+    id: "whzlS8ekDGE",
+    name: "[Phim Hoạt Hình] - Tập 3: Stress",
+    urlImage:
+      "https://res.cloudinary.com/df7mhs6xj/image/upload/v1743669937/Screenshot_2025-04-03_151352_cxjy60.png",
+  },
+  {
+    id: "y4v8RH70-w8",
+    name: "[Phim Hoat Hình] - Tập 4: Sức khỏe Tâm thần",
+    urlImage:
+      "https://res.cloudinary.com/df7mhs6xj/image/upload/v1743669937/Screenshot_2025-04-03_152046_xrpmym.png",
+  },
+];

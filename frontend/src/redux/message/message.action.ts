@@ -12,7 +12,7 @@ export const messageAction = messageSlice.actions;
 
 export const getListRoomChat = (id: string):ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) =>{
-        const respone = await getRoomChat(id);
+        const respone:any = await getRoomChat(id);
         const listMess = respone.listMessage;
         const listRooms = respone.listRoom;
         const listUser = respone.listUser;
@@ -105,7 +105,7 @@ export const removeRoomChat = (roomId :string, id: string):ThunkAction<void, Roo
     return async(dispatch, getState) => {
         await deleteRoom(roomId);
 
-        const respone = await getRoomChat(id);
+        const respone:any = await getRoomChat(id);
         const listMess = respone.listMessage;
         const listRooms = respone.listRoom;
         const listUser = respone.listUser;

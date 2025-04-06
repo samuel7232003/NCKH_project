@@ -23,12 +23,20 @@ export default function ChatPage(){
     }
 
     return(
+        // <main className="chatpage">
+        //     <div className={mode?"hide list-room":"show list-room"}>
+        //         {account._id!=="" && <ListRoom account={account} setChatBox={setCurChat} chatBox={curChatBox} />}
+        //     </div>
+        //     <div className={mode?"show chat-box":"hide chat-box"}>
+        //         {account._id!=="" && <ChatBox account={account} chatBox={curChatBox} setMode={setMode} />}
+        //     </div>
+        // </main>
         <main className="chatpage">
             <div className={mode?"hide list-room":"show list-room"}>
-                {account._id!=="" && <ListRoom account={account} setChatBox={setCurChat} chatBox={curChatBox} />}
+                <ListRoom account={account} setChatBox={setCurChat} chatBox={curChatBox} />
             </div>
             <div className={mode?"show chat-box":"hide chat-box"}>
-                {account._id!=="" && <ChatBox account={account} chatBox={curChatBox} setMode={setMode} />}
+                <ChatBox account={account} chatBox={curChatBox} setMode={setMode} />
             </div>
         </main>
     )

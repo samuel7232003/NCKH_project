@@ -87,7 +87,7 @@ export default function FeelingChart({account}:Props){
     return(
         <>
         {
-            (listDiary.idUser!=="") &&
+            // (listDiary.idUser!=="") &&
             <div className="feelingchart">
                 <div className="title">
                     <figure><img src={tree_icon} alt="" /></figure>

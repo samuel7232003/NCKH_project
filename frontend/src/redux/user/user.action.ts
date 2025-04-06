@@ -9,7 +9,7 @@ export const userActions = userSlice.actions;
 
 export const getProfile = ():ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) => {
-        const {email}:any = await getProfileService();
+        const email = await getProfileService();
         if(email){
             const respone:User = await getAccount("", email);
             dispatch(userActions.setUser(respone));

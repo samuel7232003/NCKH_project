@@ -31,10 +31,14 @@ export default function Header({page, setPage, socket, setSocket}:Props){
     const [subBox, setSubBox] = useState<"ava"|"noti"|null>(null);
 
     useEffect(() => {
-        const fectchData = async () => {
-            await dispatch(getProfile());
+        try {
+            const fectchData = async () => {
+                await dispatch(getProfile());
+            }
+            fectchData()
+        } catch (error) {
+            console.log("Khách bắt mình làm vậy, xin lỗi!")
         }
-        fectchData()
         // eslint-disable-next-line
     }, []);
 

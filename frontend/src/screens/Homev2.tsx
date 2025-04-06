@@ -12,23 +12,30 @@ function Homev2(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        const check = localStorage.getItem("access_token");
-        if(check) setIsLogin(true);
-        else {
-            setIsLogin(false);
-            navigate("/");
-        }
+        // const check = localStorage.getItem("access_token");
+        // if(check) setIsLogin(true);
+        // else {
+        //     setIsLogin(false);
+        //     navigate("/");
+        // }
         // eslint-disable-next-line
     }, [])
     
     return (
-        isLogin ? <div className="App">
+        // isLogin ? <div className="App">
+        //     <Header page={page} setPage={setPage} socket={socket} setSocket={setSocket}/>
+        //     <div>
+        //         <Outlet context={{setPage, socket, setSocket}}/>
+        //     </div>
+        //     <SoundMix/>
+        // </div> : <div className="App"></div>
+        <div className="App">
             <Header page={page} setPage={setPage} socket={socket} setSocket={setSocket}/>
             <div>
                 <Outlet context={{setPage, socket, setSocket}}/>
             </div>
             <SoundMix/>
-        </div> : <div className="App"></div>
+        </div>
     )
 }
 

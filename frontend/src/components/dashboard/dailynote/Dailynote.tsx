@@ -37,7 +37,12 @@ export default function Dailynote({account, type}: Props){
         const fectchData = async () =>{
             if(account._id !== "") await dispatch(getListDiary(account._id));
         }
-        fectchData()
+        try {
+            fectchData()
+        } catch (error) {
+            console.log(error)
+        }
+        
         // eslint-disable-next-line
     }, [account]);
 

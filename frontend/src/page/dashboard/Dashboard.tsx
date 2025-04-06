@@ -45,7 +45,7 @@ export default function Dashboard(){
 
     return(
     <>
-        { (account._id !== "") &&
+        {/* { (account._id !== "") && */}
         <main className="dashboard">
             <main className="main-dashboard">
                 <div className="main-left">
@@ -67,7 +67,7 @@ export default function Dashboard(){
                 <Calendarbox account={account}/>
             </main>
         </main>
-        }
+        {/* } */}
     </>
     )
 }

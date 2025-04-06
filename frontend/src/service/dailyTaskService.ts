@@ -6,7 +6,7 @@ export async function addDailyTask(dailyTask: DailyTask):Promise<any> {
         const respone = await apiInstance.post('/addDailyTask', dailyTask);
         return respone;
     } catch (error) {
-        throw(error)
+       console.log(error);
     }
 }
 
@@ -15,7 +15,7 @@ export async function getDailyTasks(id: string):Promise<any> {
         const respone = await apiInstance.get(`/listDailyTask?id=${id}`);
         return respone;
     } catch (error) {
-        throw(error)
+       console.log(error);
     }
 }
 
@@ -24,6 +24,6 @@ export async function deleteDailyTask(id: string){
         const respone = await apiInstance.get(`/removeDailyTask?id=${id}`);
         return respone;
     } catch (error) {
-        throw(error)
+       console.log(error);
     }
 }
